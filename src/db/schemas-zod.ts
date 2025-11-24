@@ -36,7 +36,7 @@ export const insertCategorySchema = createInsertSchema(categories, {
 		.min(1)
 		.max(50)
 		.regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
-	description: z.string().max(200).optional(),
+	description: z.string().max(200).nullable().optional(),
 });
 export const selectCategorySchema = createSelectSchema(categories);
 export const updateCategorySchema = insertCategorySchema
@@ -56,8 +56,8 @@ export const insertArticleSchema = createInsertSchema(articles, {
 		.max(200)
 		.regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
 	content: z.string().min(1),
-	excerpt: z.string().max(500).optional(),
-	coverImage: z.string().url().optional(),
+	excerpt: z.string().max(500).nullable().optional(),
+	coverImage: z.string().url().nullable().optional(),
 	status: z.enum(["draft", "published", "archived"]),
 	viewCount: z.number().int().nonnegative(),
 	authorId: z.number().int().positive(),
@@ -105,7 +105,7 @@ export const insertCommentSchema = createInsertSchema(comments, {
 	content: z.string().min(1).max(2000),
 	articleId: z.number().int().positive(),
 	authorId: z.number().int().positive(),
-	parentId: z.number().int().positive().optional(),
+	parentId: z.number().int().positive().nullable().optional(),
 });
 export const selectCommentSchema = createSelectSchema(comments);
 export const updateCommentSchema = insertCommentSchema.partial().omit({

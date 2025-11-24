@@ -7,7 +7,7 @@ import {
 	updateUser,
 } from "@/api/sync/users.sync";
 import { queryClient } from "@/lib/query-client";
-import { selectUserSchema, type SelectUser } from "../schemas-zod";
+import { type SelectUser, selectUserSchema } from "../schemas-zod";
 
 export const usersCollection = createCollection(
 	queryCollectionOptions({

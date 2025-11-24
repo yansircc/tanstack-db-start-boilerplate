@@ -1,4 +1,8 @@
-import type { SelectArticle, SelectCategory, SelectUser } from "@/db/schemas-zod";
+import type {
+	SelectArticle,
+	SelectCategory,
+	SelectUser,
+} from "@/db/schemas-zod";
 
 // Article with joined relations for display
 export type ArticleWithRelations = Pick<

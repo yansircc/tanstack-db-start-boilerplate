@@ -1,26 +1,26 @@
 import { ConfirmDialog } from "@/components/shared";
-import { usersCollection } from "@/db/collections/users.collection";
-import type { SelectUser } from "@/db/schemas-zod";
+import { tagsCollection } from "@/db/collections/tags.collection";
+import type { SelectTag } from "@/db/schemas-zod";
 
-interface DeleteUserDialogProps {
-	user: SelectUser;
+interface DeleteTagDialogProps {
+	tag: SelectTag;
 	trigger: React.ReactNode;
 }
 
-export function DeleteUserDialog({ user, trigger }: DeleteUserDialogProps) {
+export function DeleteTagDialog({ tag, trigger }: DeleteTagDialogProps) {
 	const handleDelete = () => {
 		// Delete with optimistic updates - UI updates immediately!
-		usersCollection.delete(user.id);
+		tagsCollection.delete(tag.id);
 		// If mutation fails, TanStack DB will automatically rollback
 	};
 
 	return (
 		<ConfirmDialog
 			trigger={trigger}
-			title="删除用户"
+			title="删除标签"
 			description={
 				<>
-					确定要删除用户 <strong>{user.displayName}</strong> (@{user.username})
+					确定要删除标签 <strong>{tag.name}</strong> ({tag.slug})
 					吗？此操作无法撤销。
 				</>
 			}
