@@ -4,6 +4,8 @@ import { UserDraftArticles } from "./-components/UserDraftArticles";
 import { UserProfileCard } from "./-components/UserProfileCard";
 import { UserPublishedArticles } from "./-components/UserPublishedArticles";
 import { UserStatsCards } from "./-components/UserStatsCards";
+import { UserLikedArticles } from "./-components/UserLikedArticles";
+import { UserBookmarkedArticles } from "./-components/UserBookmarkedArticles";
 
 export const Route = createFileRoute("/users/$userId/")({
 	ssr: false,
@@ -21,6 +23,8 @@ function RouteComponent() {
 			<UserPublishedArticles userId={userIdNum} />
 			<UserDraftArticles userId={userIdNum} />
 			<UserArchivedArticles userId={userIdNum} />
+			<UserLikedArticles userId={userIdNum} />
+			<UserBookmarkedArticles userId={userIdNum} />
 		</div>
 	);
 }

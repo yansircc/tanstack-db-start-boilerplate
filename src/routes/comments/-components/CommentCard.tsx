@@ -1,11 +1,18 @@
 import { Link } from "@tanstack/react-router";
+import { Button } from "@/components/ui/button";
+import { useCurrentUser } from "@/hooks/useCurrentUser";
 import type { CommentWithRelations } from "./types";
+import { EditCommentDialog } from "./EditCommentDialog";
+import { DeleteCommentDialog } from "./DeleteCommentDialog";
 
 interface CommentCardProps {
 	comment: CommentWithRelations;
 }
 
 export function CommentCard({ comment }: CommentCardProps) {
+	const { userId } = useCurrentUser();
+	const isAuthor = userId === comment.author?.id;
+
 	return (
 		<div className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition">
 			<div className="flex items-start gap-3 mb-3">
@@ -40,6 +47,27 @@ export function CommentCard({ comment }: CommentCardProps) {
 					</div>
 					<p className="text-gray-700">{comment.content}</p>
 				</div>
+
+				{isAuthor && (
+					<div className="flex gap-2 shrink-0">
+						<EditCommentDialog
+							commentId={comment.id}
+							trigger={
+								<Button size="sm" variant="outline">
+									编辑
+								</Button>
+							}
+						/>
+						<DeleteCommentDialog
+							commentId={comment.id}
+							trigger={
+								<Button size="sm" variant="destructive">
+									删除
+								</Button>
+							}
+						/>
+					</div>
+				)}
 			</div>
 
 			{comment.article && (
