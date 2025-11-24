@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { useCategoryStatsQuery } from "../-hooks/useCategoryStatsQuery";
 
 export function CategoryDistributionCard() {
@@ -11,7 +12,12 @@ export function CategoryDistributionCard() {
 			) : (
 				<div className="space-y-2">
 					{categories.map((cat) => (
-						<div key={cat.categoryId} className="flex items-center gap-2">
+						<Link
+							key={cat.categoryId}
+							to="/categories/$categoryId"
+							params={{ categoryId: String(cat.categoryId) }}
+							className="flex items-center gap-2 hover:bg-gray-50 rounded p-1"
+						>
 							<div className="flex-1 flex items-center gap-2">
 								<span className="text-sm font-medium">{cat.categoryName}</span>
 								<div className="flex-1 bg-gray-200 rounded-full h-2">
@@ -26,7 +32,7 @@ export function CategoryDistributionCard() {
 							<span className="text-sm text-gray-600 w-12 text-right">
 								{cat.articleCount}
 							</span>
-						</div>
+						</Link>
 					))}
 				</div>
 			)}

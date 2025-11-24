@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { useTagArticlesQuery } from "../../-hooks/useTagArticlesQuery";
 import { useTagQuery } from "../../-hooks/useTagQuery";
 
@@ -38,9 +39,14 @@ export function TagArticles({ tagId }: TagArticlesProps) {
 								)}
 
 								<div className="flex-1">
-									<h3 className="text-xl font-semibold text-gray-900 mb-2">
-										{article.title}
-									</h3>
+									<Link
+										to="/posts/$postId"
+										params={{ postId: String(article.id) }}
+									>
+										<h3 className="text-xl font-semibold text-gray-900 mb-2 hover:text-blue-600">
+											{article.title}
+										</h3>
+									</Link>
 
 									{article.excerpt && (
 										<p className="text-gray-600 text-sm mb-3">
@@ -50,7 +56,11 @@ export function TagArticles({ tagId }: TagArticlesProps) {
 
 									<div className="flex items-center gap-4 text-sm text-gray-500">
 										{article.author && (
-											<div className="flex items-center gap-2">
+											<Link
+												to="/users/$userId"
+												params={{ userId: String(article.author.id) }}
+												className="flex items-center gap-2 hover:text-blue-600"
+											>
 												{article.author.avatar ? (
 													<img
 														src={article.author.avatar}
@@ -65,13 +75,17 @@ export function TagArticles({ tagId }: TagArticlesProps) {
 													</div>
 												)}
 												<span>{article.author.displayName}</span>
-											</div>
+											</Link>
 										)}
 
 										{article.category && (
-											<span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">
+											<Link
+												to="/categories/$categoryId"
+												params={{ categoryId: String(article.category.id) }}
+												className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs hover:bg-blue-200"
+											>
 												{article.category.name}
-											</span>
+											</Link>
 										)}
 
 										<span>阅读 {article.viewCount}</span>

@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { useTopAuthorsQuery } from "../-hooks/useTopAuthorsQuery";
 
 export function TopAuthorsCard() {
@@ -11,8 +12,10 @@ export function TopAuthorsCard() {
 			) : (
 				<div className="space-y-3">
 					{authors.map((author, index) => (
-						<div
+						<Link
 							key={author.authorId}
+							to="/users/$userId"
+							params={{ userId: String(author.authorId) }}
 							className="flex items-center gap-3 p-2 hover:bg-gray-50 rounded"
 						>
 							<span className="text-lg font-bold text-gray-400 w-6">
@@ -21,7 +24,7 @@ export function TopAuthorsCard() {
 							{author.avatar ? (
 								<img
 									src={author.avatar}
-									alt={author.authorName}
+									alt={author.authorName || ""}
 									className="w-10 h-10 rounded-full"
 								/>
 							) : (
@@ -32,12 +35,12 @@ export function TopAuthorsCard() {
 								</div>
 							)}
 							<div className="flex-1">
-								<div className="font-medium">{author.authorName}</div>
+								<div className="font-medium">{author.authorName || "未知"}</div>
 								<div className="text-sm text-gray-500">
 									{author.articleCount} 篇文章
 								</div>
 							</div>
-						</div>
+						</Link>
 					))}
 				</div>
 			)}

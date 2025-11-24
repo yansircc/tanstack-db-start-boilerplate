@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { useUserArticlesQuery } from "../../-hooks/useUserArticlesQuery";
 
 interface UserDraftArticlesProps {
@@ -27,9 +28,14 @@ export function UserDraftArticles({ userId }: UserDraftArticlesProps) {
 								草稿
 							</span>
 							<div className="flex-1">
-								<h3 className="text-lg font-semibold text-gray-900">
-									{article.title}
-								</h3>
+								<Link
+									to="/posts/$postId"
+									params={{ postId: String(article.id) }}
+								>
+									<h3 className="text-lg font-semibold text-gray-900 hover:text-blue-600">
+										{article.title}
+									</h3>
+								</Link>
 								{article.excerpt && (
 									<p className="text-gray-600 text-sm mt-1">{article.excerpt}</p>
 								)}

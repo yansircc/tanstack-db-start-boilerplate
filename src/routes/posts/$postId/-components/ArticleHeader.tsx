@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { useArticleDetailQuery } from "../../-hooks/useArticleDetailQuery";
 
 interface ArticleHeaderProps {
@@ -21,7 +22,11 @@ export function ArticleHeader({ postId }: ArticleHeaderProps) {
 
 			<div className="flex items-center gap-4 text-sm text-gray-600">
 				{article.author && (
-					<div className="flex items-center gap-2">
+					<Link
+						to="/users/$userId"
+						params={{ userId: String(article.author.id) }}
+						className="flex items-center gap-2 hover:text-blue-600"
+					>
 						{article.author.avatar ? (
 							<img
 								src={article.author.avatar}
@@ -43,14 +48,18 @@ export function ArticleHeader({ postId }: ArticleHeaderProps) {
 								@{article.author.username}
 							</div>
 						</div>
-					</div>
+					</Link>
 				)}
 
 				<div className="flex items-center gap-3 ml-auto">
 					{article.category && (
-						<span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+						<Link
+							to="/categories/$categoryId"
+							params={{ categoryId: String(article.category.id) }}
+							className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium hover:bg-blue-200"
+						>
 							{article.category.name}
-						</span>
+						</Link>
 					)}
 					<span className="text-gray-500">阅读 {article.viewCount}</span>
 				</div>

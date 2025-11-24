@@ -21,7 +21,13 @@ export function useArticleCommentsQuery(articleId: number) {
 					content: comment.content,
 					createdAt: comment.createdAt,
 					parentId: comment.parentId,
-					author: user,
+					author: user
+						? {
+								id: user.id,
+								displayName: user.displayName,
+								avatar: user.avatar,
+							}
+						: undefined,
 				})),
 		[articleId],
 	);

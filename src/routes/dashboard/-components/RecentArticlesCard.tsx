@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { useRecentArticlesQuery } from "../-hooks/useRecentArticlesQuery";
 
 export function RecentArticlesCard() {
@@ -11,12 +12,16 @@ export function RecentArticlesCard() {
 			) : (
 				<div className="space-y-2">
 					{articles.map((article) => (
-						<div
+						<Link
 							key={article.id}
+							to="/posts/$postId"
+							params={{ postId: String(article.id) }}
 							className="flex items-center justify-between p-2 hover:bg-gray-50 rounded"
 						>
 							<div className="flex-1">
-								<div className="font-medium">{article.title}</div>
+								<div className="font-medium hover:text-blue-600">
+									{article.title}
+								</div>
 								<div className="text-sm text-gray-500">
 									{article.authorName} ·{" "}
 									{article.createdAt.toLocaleDateString("zh-CN")}
@@ -25,7 +30,7 @@ export function RecentArticlesCard() {
 							<div className="text-sm text-gray-500">
 								阅读 {article.viewCount}
 							</div>
-						</div>
+						</Link>
 					))}
 				</div>
 			)}

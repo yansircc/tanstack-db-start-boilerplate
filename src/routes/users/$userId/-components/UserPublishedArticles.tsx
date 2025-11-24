@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { useUserArticlesQuery } from "../../-hooks/useUserArticlesQuery";
 
 interface UserPublishedArticlesProps {
@@ -25,9 +26,14 @@ export function UserPublishedArticles({
 							key={article.id}
 							className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition"
 						>
-							<h3 className="text-lg font-semibold text-gray-900 mb-2">
-								{article.title}
-							</h3>
+							<Link
+								to="/posts/$postId"
+								params={{ postId: String(article.id) }}
+							>
+								<h3 className="text-lg font-semibold text-gray-900 mb-2 hover:text-blue-600">
+									{article.title}
+								</h3>
+							</Link>
 
 							{article.excerpt && (
 								<p className="text-gray-600 text-sm mb-3">{article.excerpt}</p>
@@ -35,9 +41,13 @@ export function UserPublishedArticles({
 
 							<div className="flex items-center gap-4 text-sm text-gray-500">
 								{article.category && (
-									<span className="bg-gray-100 px-2 py-1 rounded">
+									<Link
+										to="/categories/$categoryId"
+										params={{ categoryId: String(article.category.id) }}
+										className="bg-gray-100 px-2 py-1 rounded hover:bg-gray-200"
+									>
 										{article.category.name}
-									</span>
+									</Link>
 								)}
 								<span>阅读 {article.viewCount}</span>
 								<time className="ml-auto">
