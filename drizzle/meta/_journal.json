@@ -8,6 +8,13 @@
       "when": 1763959429644,
       "tag": "0000_spicy_golden_guardian",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1763960188820,
+      "tag": "0001_cute_bedlam",
+      "breakpoints": true
     }
   ]
 }
