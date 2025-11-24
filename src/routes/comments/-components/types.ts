@@ -8,6 +8,8 @@ export type CommentWithRelations = Pick<
 	SelectComment,
 	"id" | "content" | "createdAt"
 > & {
-	author: Pick<SelectUser, "displayName" | "avatar"> | undefined;
-	article: Pick<SelectArticle, "title"> | undefined;
+	author:
+		| (Pick<SelectUser, "id" | "displayName" | "avatar"> & { id: number })
+		| undefined;
+	article: (Pick<SelectArticle, "id" | "title"> & { id: number }) | undefined;
 };

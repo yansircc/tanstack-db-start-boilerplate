@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import type { CommentWithRelations } from "./types";
 
 interface CommentCardProps {
@@ -17,16 +18,22 @@ export function CommentCard({ comment }: CommentCardProps) {
 				) : (
 					<div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
 						<span className="text-lg text-gray-500">
-							{comment.author?.displayName?.[0]?.toUpperCase() || "?"}
+							{comment.author?.displayName[0].toUpperCase()}
 						</span>
 					</div>
 				)}
 
 				<div className="flex-1">
 					<div className="flex items-center gap-2 mb-1">
-						<span className="font-semibold">
-							{comment.author?.displayName}
-						</span>
+						{comment.author && (
+							<Link
+								to="/users/$userId"
+								params={{ userId: String(comment.author.id) }}
+								className="font-semibold hover:text-blue-600"
+							>
+								{comment.author.displayName}
+							</Link>
+						)}
 						<span className="text-sm text-gray-400">
 							{comment.createdAt.toLocaleDateString("zh-CN")}
 						</span>
@@ -37,7 +44,14 @@ export function CommentCard({ comment }: CommentCardProps) {
 
 			{comment.article && (
 				<div className="text-sm text-gray-500 pl-13 border-l-2 border-gray-200 ml-13">
-					评论文章: <span className="font-medium">{comment.article.title}</span>
+					评论文章:{" "}
+					<Link
+						to="/posts/$postId"
+						params={{ postId: String(comment.article.id) }}
+						className="font-medium hover:text-blue-600"
+					>
+						{comment.article.title}
+					</Link>
 				</div>
 			)}
 		</div>

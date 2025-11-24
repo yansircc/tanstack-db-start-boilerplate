@@ -7,21 +7,29 @@ interface ArticleCardProps {
 
 export function ArticleCard({ article }: ArticleCardProps) {
 	return (
-		<Link
-			to="/posts/$postId"
-			params={{ postId: String(article.id) }}
-			className="block"
-		>
-			<article className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition">
-			<h2 className="text-xl font-semibold mb-2">{article.title}</h2>
+		<article className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition">
+			<Link
+				to="/posts/$postId"
+				params={{ postId: String(article.id) }}
+				className="block"
+			>
+				<h2 className="text-xl font-semibold mb-2 hover:text-blue-600">
+					{article.title}
+				</h2>
 
-			{article.excerpt && (
-				<p className="text-gray-600 mb-3">{article.excerpt}</p>
-			)}
+				{article.excerpt && (
+					<p className="text-gray-600 mb-3">{article.excerpt}</p>
+				)}
+			</Link>
 
 			<div className="flex items-center gap-4 text-sm text-gray-500">
 				{article.author && (
-					<div className="flex items-center gap-2">
+					<Link
+						to="/users/$userId"
+						params={{ userId: String(article.author.id) }}
+						className="flex items-center gap-2 hover:text-blue-600"
+						onClick={(e) => e.stopPropagation()}
+					>
 						{article.author.avatar && (
 							<img
 								src={article.author.avatar}
@@ -30,13 +38,18 @@ export function ArticleCard({ article }: ArticleCardProps) {
 							/>
 						)}
 						<span>{article.author.displayName}</span>
-					</div>
+					</Link>
 				)}
 
 				{article.category && (
-					<span className="bg-gray-100 px-2 py-1 rounded">
+					<Link
+						to="/categories/$categoryId"
+						params={{ categoryId: String(article.category.id) }}
+						className="bg-gray-100 px-2 py-1 rounded hover:bg-gray-200"
+						onClick={(e) => e.stopPropagation()}
+					>
 						{article.category.name}
-					</span>
+					</Link>
 				)}
 
 				<span>阅读 {article.viewCount}</span>
@@ -46,6 +59,5 @@ export function ArticleCard({ article }: ArticleCardProps) {
 				</time>
 			</div>
 		</article>
-		</Link>
 	);
 }

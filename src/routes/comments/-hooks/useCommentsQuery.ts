@@ -24,8 +24,19 @@ export function useCommentsQuery() {
 				id: comment.id,
 				content: comment.content,
 				createdAt: comment.createdAt,
-				author: user,
-				article: article,
+				author: user
+					? {
+							id: user.id,
+							displayName: user.displayName,
+							avatar: user.avatar,
+						}
+					: undefined,
+				article: article
+					? {
+							id: article.id,
+							title: article.title,
+						}
+					: undefined,
 			})),
 	);
 }
