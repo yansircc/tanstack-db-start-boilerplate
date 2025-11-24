@@ -10,10 +10,13 @@ export const Route = createFileRoute("/tags/")({
 
 function RouteComponent() {
 	return (
-		<div className="max-w-4xl mx-auto p-6 space-y-6">
-			<div className="flex items-center justify-between">
-				<h1 className="text-3xl font-bold">标签列表</h1>
-				<CreateTagDialog trigger={<Button>创建标签</Button>} />
+		<div className="max-w-[1280px] mx-auto p-8 space-y-8">
+			<div className="flex items-end justify-between border-b-2 border-foreground pb-4">
+				<div>
+					<h1 className="text-6xl font-bold tracking-tight uppercase font-mono">Tags</h1>
+					<p className="text-lg text-muted-foreground font-mono mt-2">Manage and view all content tags.</p>
+				</div>
+				<CreateTagDialog trigger={<Button>Create Tag</Button>} />
 			</div>
 			<TagList />
 		</div>

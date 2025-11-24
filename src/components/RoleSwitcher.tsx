@@ -70,27 +70,27 @@ export function RoleSwitcher() {
 	};
 
 	// 当前显示的名称
-	const displayName = currentUser?.displayName || "未登录";
+	const displayName = currentUser?.displayName || "Guest";
 
 	return (
-		<div className="relative" ref={dropdownRef}>
+		<div className="relative z-50" ref={dropdownRef}>
 			<button
 				type="button"
 				onClick={() => setIsOpen(!isOpen)}
-				className="flex items-center gap-2 px-3 py-1.5 text-sm rounded-lg hover:bg-gray-100 transition-colors"
+				className="flex items-center gap-2 px-3 py-2 text-sm rounded-sm border-2 border-transparent hover:border-foreground hover:bg-muted transition-all active:translate-y-0.5"
 			>
 				{currentUser?.avatar ? (
 					<img
 						src={currentUser.avatar}
 						alt={displayName}
-						className="w-6 h-6 rounded-full object-cover"
+						className="w-6 h-6 rounded-sm border border-foreground object-cover"
 					/>
 				) : (
-					<div className="w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center text-xs text-gray-600">
+					<div className="w-6 h-6 rounded-sm bg-secondary border border-foreground flex items-center justify-center text-xs font-bold font-mono">
 						{displayName.charAt(0).toUpperCase()}
 					</div>
 				)}
-				<span className="font-medium">当前: {displayName}</span>
+				<span className="font-mono font-bold uppercase text-xs">Role: {displayName}</span>
 				<svg aria-hidden="true"
 					className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
 					fill="none"
@@ -107,20 +107,20 @@ export function RoleSwitcher() {
 			</button>
 
 			{isOpen && (
-				<div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50 max-h-96 overflow-y-auto">
-					<div className="px-3 py-2 text-xs text-gray-500 font-semibold uppercase border-b border-gray-100">
-						切换角色
+				<div className="absolute right-0 mt-2 w-72 bg-white rounded-sm border-2 border-foreground shadow-[4px_4px_0px_0px_var(--foreground)] py-0 z-50 max-h-96 overflow-y-auto">
+					<div className="px-4 py-3 text-xs font-mono font-bold uppercase border-b-2 border-foreground bg-muted/50">
+						Switch Role
 					</div>
 
 					{/* 未登录选项 */}
 					<button
 						type="button"
 						onClick={() => switchUser(null)}
-						className={`w-full flex items-center gap-3 px-3 py-2 hover:bg-gray-50 transition-colors text-left ${
-							!currentUser?.userId ? "bg-blue-50" : ""
+						className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-muted transition-colors text-left border-b border-foreground/10 ${
+							!currentUser?.userId ? "bg-secondary/30" : ""
 						}`}
 					>
-						<div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-gray-600">
+						<div className="w-8 h-8 rounded-sm bg-muted border border-foreground flex items-center justify-center text-foreground">
 							<svg aria-hidden="true"
 								className="w-5 h-5"
 								fill="none"
@@ -136,25 +136,13 @@ export function RoleSwitcher() {
 							</svg>
 						</div>
 						<div className="flex-1 min-w-0">
-							<div className="font-medium text-sm text-gray-900">未登录</div>
-							<div className="text-xs text-gray-500">游客模式</div>
+							<div className="font-bold text-sm text-foreground font-mono">Guest Mode</div>
+							<div className="text-xs text-muted-foreground">Read-only access</div>
 						</div>
 						{!currentUser?.userId && (
-							<svg aria-hidden="true"
-								className="w-5 h-5 text-blue-600"
-								fill="currentColor"
-								viewBox="0 0 20 20"
-							>
-								<path
-									fillRule="evenodd"
-									d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-									clipRule="evenodd"
-								/>
-							</svg>
+							<div className="w-2 h-2 rounded-full bg-green-500 border border-foreground"></div>
 						)}
 					</button>
-
-					<div className="border-t border-gray-100 my-1" />
 
 					{/* 用户列表 */}
 					{users?.map((user) => (
@@ -162,48 +150,38 @@ export function RoleSwitcher() {
 							key={user.id}
 							type="button"
 							onClick={() => switchUser(user.id)}
-							className={`w-full flex items-center gap-3 px-3 py-2 hover:bg-gray-50 transition-colors text-left ${
-								currentUser?.userId === user.id ? "bg-blue-50" : ""
+							className={`w-full flex items-center gap-3 px-4 py-3 hover:bg-muted transition-colors text-left border-b border-foreground/10 last:border-b-0 ${
+								currentUser?.userId === user.id ? "bg-secondary/30" : ""
 							}`}
 						>
 							{user.avatar ? (
 								<img
 									src={user.avatar}
 									alt={user.displayName}
-									className="w-8 h-8 rounded-full object-cover"
+									className="w-8 h-8 rounded-sm border border-foreground object-cover"
 								/>
 							) : (
-								<div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-sm text-gray-600">
+								<div className="w-8 h-8 rounded-sm bg-accent border border-foreground flex items-center justify-center text-sm font-bold font-mono">
 									{user.displayName.charAt(0).toUpperCase()}
 								</div>
 							)}
 							<div className="flex-1 min-w-0">
-								<div className="font-medium text-sm text-gray-900 truncate">
+								<div className="font-bold text-sm text-foreground truncate">
 									{user.displayName}
 								</div>
-								<div className="text-xs text-gray-500 truncate">
+								<div className="text-xs text-muted-foreground truncate font-mono">
 									@{user.username}
 								</div>
 							</div>
 							{currentUser?.userId === user.id && (
-								<svg aria-hidden="true"
-									className="w-5 h-5 text-blue-600 flex-shrink-0"
-									fill="currentColor"
-									viewBox="0 0 20 20"
-								>
-									<path
-										fillRule="evenodd"
-										d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-										clipRule="evenodd"
-									/>
-								</svg>
+								<div className="w-2 h-2 rounded-full bg-green-500 border border-foreground"></div>
 							)}
 						</button>
 					))}
 
 					{(!users || users.length === 0) && (
-						<div className="px-3 py-4 text-sm text-gray-500 text-center">
-							暂无用户
+						<div className="px-4 py-4 text-sm text-muted-foreground text-center font-mono">
+							NO USERS FOUND
 						</div>
 					)}
 				</div>

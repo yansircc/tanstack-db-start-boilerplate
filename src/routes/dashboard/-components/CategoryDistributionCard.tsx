@@ -5,33 +5,40 @@ export function CategoryDistributionCard() {
 	const { data: categories } = useCategoryStatsQuery();
 
 	return (
-		<div className="border border-gray-200 rounded-lg p-4">
-			<h2 className="text-xl font-semibold mb-4">分类分布</h2>
+		<div className="border-2 border-foreground rounded-sm bg-white p-0 overflow-hidden flex flex-col h-full">
+			<div className="bg-muted/50 p-4 border-b-2 border-foreground flex items-center justify-between">
+				<h2 className="text-lg font-mono font-bold uppercase">Distribution</h2>
+				<div className="w-3 h-3 border-2 border-foreground bg-accent"></div>
+			</div>
+			
 			{!categories || categories.length === 0 ? (
-				<p className="text-gray-500">暂无数据</p>
+				<div className="p-8 text-center text-muted-foreground font-mono">NO DATA FOUND</div>
 			) : (
-				<div className="space-y-2">
-					{categories.map((cat) => (
+				<div className="p-4 space-y-3 flex-1">
+					{categories.map((cat, i) => (
 						<Link
 							key={cat.categoryId}
 							to="/categories/$categoryId"
 							params={{ categoryId: String(cat.categoryId) }}
-							className="flex items-center gap-2 hover:bg-gray-50 rounded p-1"
+							className="block group"
 						>
-							<div className="flex-1 flex items-center gap-2">
-								<span className="text-sm font-medium">{cat.categoryName}</span>
-								<div className="flex-1 bg-gray-200 rounded-full h-2">
-									<div
-										className="bg-blue-500 h-2 rounded-full"
-										style={{
-											width: `${Math.min((cat.articleCount / (categories[0]?.articleCount || 1)) * 100, 100)}%`,
-										}}
-									/>
-								</div>
+							<div className="flex items-end justify-between mb-1">
+								<span className="text-sm font-bold font-mono group-hover:text-primary transition-colors">
+									{cat.categoryName}
+								</span>
+								<span className="text-xs font-mono text-foreground">
+									{cat.articleCount}
+								</span>
 							</div>
-							<span className="text-sm text-gray-600 w-12 text-right">
-								{cat.articleCount}
-							</span>
+							<div className="h-3 w-full border-2 border-foreground bg-muted rounded-sm overflow-hidden relative">
+								<div
+									className="h-full absolute top-0 left-0 border-r-2 border-foreground transition-all duration-500 ease-out"
+									style={{
+										width: `${Math.min((cat.articleCount / (categories[0]?.articleCount || 1)) * 100, 100)}%`,
+										backgroundColor: i % 3 === 0 ? 'var(--primary)' : i % 3 === 1 ? 'var(--secondary)' : 'var(--accent)'
+									}}
+								/>
+							</div>
 						</Link>
 					))}
 				</div>

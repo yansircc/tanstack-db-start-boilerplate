@@ -6,43 +6,57 @@ export function StatsCards() {
 
 	return (
 		<div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-			<Link to="/articles" className="bg-blue-50 rounded-lg p-4 text-center">
-				<div className="text-3xl font-bold text-blue-600">
-					{stats?.totalArticles ?? 0}
-				</div>
-				<div className="text-sm text-gray-600">文章总数</div>
-			</Link>
-
-			<Link to="/users" className="bg-green-50 rounded-lg p-4 text-center">
-				<div className="text-3xl font-bold text-green-600">
-					{stats?.totalUsers ?? 0}
-				</div>
-				<div className="text-sm text-gray-600">用户总数</div>
-			</Link>
-
-			<Link
+			<StatCard
+				to="/articles"
+				label="Articles"
+				value={stats?.totalArticles ?? 0}
+				color="bg-primary"
+			/>
+			<StatCard
+				to="/users"
+				label="Users"
+				value={stats?.totalUsers ?? 0}
+				color="bg-secondary"
+			/>
+			<StatCard
 				to="/categories"
-				className="bg-purple-50 rounded-lg p-4 text-center"
-			>
-				<div className="text-3xl font-bold text-purple-600">
-					{stats?.totalCategories ?? 0}
-				</div>
-				<div className="text-sm text-gray-600">分类总数</div>
-			</Link>
-
-			<Link to="/tags" className="bg-orange-50 rounded-lg p-4 text-center">
-				<div className="text-3xl font-bold text-orange-600">
-					{stats?.totalTags ?? 0}
-				</div>
-				<div className="text-sm text-gray-600">标签总数</div>
-			</Link>
-
-			<Link to="/comments" className="bg-pink-50 rounded-lg p-4 text-center">
-				<div className="text-3xl font-bold text-pink-600">
-					{stats?.totalComments ?? 0}
-				</div>
-				<div className="text-sm text-gray-600">评论总数</div>
-			</Link>
+				label="Categories"
+				value={stats?.totalCategories ?? 0}
+				color="bg-accent"
+			/>
+			<StatCard
+				to="/tags"
+				label="Tags"
+				value={stats?.totalTags ?? 0}
+				color="bg-[#FFDE00]" // Explicit yellow if secondary is different or reuse secondary
+			/>
+			<StatCard
+				to="/comments"
+				label="Comments"
+				value={stats?.totalComments ?? 0}
+				color="bg-[#FF7169]" // Red/Pinkish
+			/>
 		</div>
+	);
+}
+
+function StatCard({
+	to,
+	label,
+	value,
+	color,
+}: { to: string; label: string; value: number; color: string }) {
+	return (
+		<Link
+			to={to}
+			className={`${color} border-2 border-foreground rounded-sm p-4 flex flex-col justify-between h-32 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_var(--foreground)] transition-all duration-200 group`}
+		>
+			<div className="text-xs font-mono font-bold uppercase tracking-widest border-b-2 border-foreground/20 pb-1 mb-2 group-hover:border-foreground/50 transition-colors">
+				{label}
+			</div>
+			<div className="text-4xl font-mono font-bold text-foreground">
+				{value}
+			</div>
+		</Link>
 	);
 }

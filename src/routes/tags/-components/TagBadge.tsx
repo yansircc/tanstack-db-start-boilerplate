@@ -10,9 +10,9 @@ export function TagBadge({ tag }: TagBadgeProps) {
 		<Link
 			to="/tags/$tagId"
 			params={{ tagId: String(tag.id) }}
-			className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 text-blue-800 hover:bg-blue-200 transition"
+			className="inline-flex items-center px-4 py-2 rounded-sm border-2 border-foreground bg-white hover:bg-secondary transition-all duration-200 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_var(--foreground)] active:translate-y-0 active:shadow-none group"
 		>
-			<span className="font-medium">#{tag.name}</span>
+			<span className="font-mono font-bold text-foreground group-hover:text-foreground">#{tag.name}</span>
 		</Link>
 	);
 }

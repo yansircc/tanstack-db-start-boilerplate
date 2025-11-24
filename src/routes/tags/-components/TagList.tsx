@@ -5,11 +5,16 @@ export function TagList() {
 	const { data: tags } = useTagsQuery();
 
 	if (!tags || tags.length === 0) {
-		return <p className="text-gray-500">暂无标签</p>;
+		return (
+			<div className="border-2 border-foreground border-dashed rounded-sm p-12 text-center">
+				<p className="text-muted-foreground font-mono text-lg uppercase">No tags found.</p>
+				<p className="text-sm text-muted-foreground mt-2">Create a new tag to get started.</p>
+			</div>
+		);
 	}
 
 	return (
-		<div className="flex flex-wrap gap-3">
+		<div className="flex flex-wrap gap-4">
 			{tags.map((tag) => (
 				<TagBadge key={tag.id} tag={tag} />
 			))}
