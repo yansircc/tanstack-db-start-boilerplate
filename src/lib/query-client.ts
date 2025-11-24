@@ -1,11 +1,11 @@
 import { QueryClient } from '@tanstack/react-query'
 
-// Shared QueryClient instance for collections
+// 全局 QueryClient 实例，供 collections 使用
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 60 * 5, // 5 minutes
-      retry: 1,
+      staleTime: 60 * 1000, // 1 分钟
+      refetchOnWindowFocus: false,
     },
   },
 })

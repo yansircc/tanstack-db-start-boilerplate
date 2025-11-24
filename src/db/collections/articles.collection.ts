@@ -1,21 +1,29 @@
 import { queryCollectionOptions } from "@tanstack/query-db-collection";
 import { createCollection } from "@tanstack/react-db";
-import { db } from "../index";
-import { articles } from "../schema";
-import { queryClient } from "./query-client";
+import { selectArticleSchema } from "@/db/schemas-zod";
+import { getArticles } from "../../api/sync/articles.sync";
+import { queryClient } from "../../lib/query-client";
 
-// Collection = 数据库表的客户端镜像
-// 使用 queryCollectionOptions 来获得完整的功能（包括 writeBatch 等）
+/**
+ * Articles Collection
+ *
+ * Syncs article data from the server via serverFn and validates
+ * all client-side mutations (insert/update) against the schema.
+ *
+ * Schema validation ensures:
+ * - Title and content are not empty
+ * - Slug follows the correct format
+ * - Status is one of: draft, published, archived
+ * - All required fields are present
+ */
 export const articlesCollection = createCollection(
 	queryCollectionOptions({
-		id: "articles",
+		schema: selectArticleSchema,
 		queryKey: ["articles"],
+		queryFn: async () => {
+			return await getArticles();
+		},
 		queryClient,
 		getKey: (item) => item.id,
-		queryFn: async () => {
-			// 从本地数据库查询所有文章
-			const data = await db.select().from(articles);
-			return data;
-		},
 	}),
 );

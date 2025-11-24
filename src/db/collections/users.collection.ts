@@ -1,18 +1,17 @@
 import { queryCollectionOptions } from "@tanstack/query-db-collection";
 import { createCollection } from "@tanstack/react-db";
-import { db } from "../index";
-import { users } from "../schema";
-import { queryClient } from "./query-client";
+import { getUsers } from "../../api/sync/users.sync";
+import { queryClient } from "../../lib/query-client";
+import { selectUserSchema } from "../schemas-zod";
 
 export const usersCollection = createCollection(
 	queryCollectionOptions({
-		id: "users",
+		schema: selectUserSchema,
 		queryKey: ["users"],
+		queryFn: async () => {
+			return await getUsers();
+		},
 		queryClient,
 		getKey: (item) => item.id,
-		queryFn: async () => {
-			const data = await db.select().from(users);
-			return data;
-		},
 	}),
 );

@@ -1,18 +1,17 @@
 import { queryCollectionOptions } from "@tanstack/query-db-collection";
 import { createCollection } from "@tanstack/react-db";
-import { db } from "../index";
-import { tags } from "../schema";
-import { queryClient } from "./query-client";
+import { getTags } from "../../api/sync/tags.sync";
+import { queryClient } from "../../lib/query-client";
+import { selectTagSchema } from "../schemas-zod";
 
 export const tagsCollection = createCollection(
 	queryCollectionOptions({
-		id: "tags",
+		schema: selectTagSchema,
 		queryKey: ["tags"],
+		queryFn: async () => {
+			return await getTags();
+		},
 		queryClient,
 		getKey: (item) => item.id,
-		queryFn: async () => {
-			const data = await db.select().from(tags);
-			return data;
-		},
 	}),
 );

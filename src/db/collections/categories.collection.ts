@@ -1,18 +1,17 @@
 import { queryCollectionOptions } from "@tanstack/query-db-collection";
 import { createCollection } from "@tanstack/react-db";
-import { db } from "../index";
-import { categories } from "../schema";
-import { queryClient } from "./query-client";
+import { getCategories } from "../../api/sync/categories.sync";
+import { queryClient } from "../../lib/query-client";
+import { selectCategorySchema } from "../schemas-zod";
 
 export const categoriesCollection = createCollection(
 	queryCollectionOptions({
-		id: "categories",
+		schema: selectCategorySchema,
 		queryKey: ["categories"],
+		queryFn: async () => {
+			return await getCategories();
+		},
 		queryClient,
 		getKey: (item) => item.id,
-		queryFn: async () => {
-			const data = await db.select().from(categories);
-			return data;
-		},
 	}),
 );

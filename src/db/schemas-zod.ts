@@ -13,7 +13,7 @@ import {
 
 // Users schemas
 export const insertUserSchema = createInsertSchema(users, {
-	email: z.string().email(),
+	email: z.email(),
 	username: z.string().min(3).max(50),
 	displayName: z.string().min(1).max(100),
 	bio: z.string().max(500).optional(),

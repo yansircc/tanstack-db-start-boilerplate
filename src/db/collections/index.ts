@@ -1,5 +1,4 @@
 // 导出 queryClient 供其他地方使用
-export { queryClient } from "./query-client";
 
 // 导出 collections
 export { articlesCollection } from "./articles.collection";

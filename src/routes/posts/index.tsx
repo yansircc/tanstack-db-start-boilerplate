@@ -1,21 +1,45 @@
+import { eq, useLiveQuery } from "@tanstack/react-db";
 import { createFileRoute } from "@tanstack/react-router";
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { getPublishedArticles } from "./api";
+import {
+	articlesCollection,
+	categoriesCollection,
+	usersCollection,
+} from "../../db/collections";
 
 export const Route = createFileRoute("/posts/")({
+	ssr: false,
 	component: RouteComponent,
-	loader: ({ context }) =>
-		context.queryClient.ensureQueryData({
-			queryKey: ["articles", "published"],
-			queryFn: () => getPublishedArticles(),
-		}),
 });
 
 function RouteComponent() {
-	const { data: articles } = useSuspenseQuery({
-		queryKey: ["articles", "published"],
-		queryFn: () => getPublishedArticles(),
-	});
+	// 直接在组件中定义查询
+	const { data: articles } = useLiveQuery((q) =>
+		q
+			.from({ article: articlesCollection })
+			.join(
+				{ user: usersCollection },
+				({ article, user }) => eq(article.authorId, user.id),
+				"left",
+			)
+			.join(
+				{ category: categoriesCollection },
+				({ article, category }) => eq(article.categoryId, category.id),
+				"left",
+			)
+			.where(({ article }) => eq(article.status, "published"))
+			.orderBy(({ article }) => article.createdAt, "desc")
+			.select(({ article, user, category }) => ({
+				id: article.id,
+				title: article.title,
+				slug: article.slug,
+				excerpt: article.excerpt,
+				coverImage: article.coverImage,
+				viewCount: article.viewCount,
+				createdAt: article.createdAt,
+				author: user,
+				category: category,
+			})),
+	);
 
 	return (
 		<div className="max-w-4xl mx-auto p-6 space-y-6">
