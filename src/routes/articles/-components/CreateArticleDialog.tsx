@@ -2,6 +2,7 @@ import { MutationDialog } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { articlesCollection } from "@/db/collections/articles.collection";
 import type { InsertArticle } from "@/db/schemas-zod";
+import { useErrorHandler } from "@/lib/error-handler";
 import { ArticleForm } from "./ArticleForm";
 
 interface CreateArticleDialogProps {
@@ -15,7 +16,9 @@ export function CreateArticleDialog({
 	authorId,
 	categories,
 }: CreateArticleDialogProps) {
-	const handleSubmit = (
+	const { handleError } = useErrorHandler();
+
+	const handleSubmit = async (
 		values: Partial<InsertArticle>,
 		onClose: () => void,
 	) => {
@@ -29,30 +32,37 @@ export function CreateArticleDialog({
 			return;
 		}
 
-		// Use a temporary ID (negative number)
-		const tempId = -Math.floor(Math.random() * 1000000);
+		try {
+			// Use a temporary ID (negative number)
+			const tempId = -Math.floor(Math.random() * 1000000);
 
-		// Insert with optimistic updates - UI updates immediately!
-		articlesCollection.insert({
-			id: tempId,
-			title: values.title,
-			slug: values.slug,
-			content: values.content,
-			excerpt: values.excerpt ?? null,
-			coverImage: values.coverImage ?? null,
-			status: values.status ?? "draft",
-			viewCount: 0,
-			authorId: authorId,
-			categoryId: values.categoryId,
-			createdAt: new Date(),
-			updatedAt: new Date(),
-			publishedAt: values.status === "published" ? new Date() : null,
-			deletedAt: null,
-		});
+			// Insert with optimistic updates - UI updates immediately!
+			const tx = articlesCollection.insert({
+				id: tempId,
+				title: values.title,
+				slug: values.slug,
+				content: values.content,
+				excerpt: values.excerpt ?? null,
+				coverImage: values.coverImage ?? null,
+				status: values.status ?? "draft",
+				viewCount: 0,
+				authorId: authorId,
+				categoryId: values.categoryId,
+				createdAt: new Date(),
+				updatedAt: new Date(),
+				publishedAt: values.status === "published" ? new Date() : null,
+				deletedAt: null,
+			});
 
-		// Close dialog immediately - optimistic update is already shown
-		// If mutation fails, TanStack DB will automatically rollback
-		onClose();
+			// Close dialog immediately - optimistic update is already shown
+			onClose();
+
+			// 等待持久化完成,如果失败会自动回滚
+			await tx.isPersisted.promise;
+		} catch (error) {
+			// 错误会被全局错误处理器捕获并显示
+			handleError(error, "创建文章失败");
+		}
 	};
 
 	return (

@@ -6,8 +6,10 @@ import {
 	Scripts,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
+import { ErrorToast } from "../components/ErrorToast";
 import Header from "../components/Header";
 import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
+import { ErrorHandlerProvider } from "../lib/error-handler";
 import appCss from "../styles.css?url";
 
 interface MyRouterContext {
@@ -37,6 +39,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 	}),
 
 	shellComponent: RootDocument,
+	notFoundComponent: () => <div>Not Found</div>,
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
@@ -46,20 +49,23 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body>
-				<Header />
-				{children}
-				<TanStackDevtools
-					config={{
-						position: "bottom-right",
-					}}
-					plugins={[
-						{
-							name: "Tanstack Router",
-							render: <TanStackRouterDevtoolsPanel />,
-						},
-						TanStackQueryDevtools,
-					]}
-				/>
+				<ErrorHandlerProvider>
+					<Header />
+					{children}
+					<ErrorToast />
+					<TanStackDevtools
+						config={{
+							position: "bottom-right",
+						}}
+						plugins={[
+							{
+								name: "Tanstack Router",
+								render: <TanStackRouterDevtoolsPanel />,
+							},
+							TanStackQueryDevtools,
+						]}
+					/>
+				</ErrorHandlerProvider>
 				<Scripts />
 			</body>
 		</html>

@@ -91,7 +91,7 @@ export function RoleSwitcher() {
 					</div>
 				)}
 				<span className="font-medium">当前: {displayName}</span>
-				<svg
+				<svg aria-hidden="true"
 					className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
 					fill="none"
 					stroke="currentColor"
@@ -121,7 +121,7 @@ export function RoleSwitcher() {
 						}`}
 					>
 						<div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-gray-600">
-							<svg
+							<svg aria-hidden="true"
 								className="w-5 h-5"
 								fill="none"
 								stroke="currentColor"
@@ -140,7 +140,7 @@ export function RoleSwitcher() {
 							<div className="text-xs text-gray-500">游客模式</div>
 						</div>
 						{!currentUser?.userId && (
-							<svg
+							<svg aria-hidden="true"
 								className="w-5 h-5 text-blue-600"
 								fill="currentColor"
 								viewBox="0 0 20 20"
@@ -186,7 +186,7 @@ export function RoleSwitcher() {
 								</div>
 							</div>
 							{currentUser?.userId === user.id && (
-								<svg
+								<svg aria-hidden="true"
 									className="w-5 h-5 text-blue-600 flex-shrink-0"
 									fill="currentColor"
 									viewBox="0 0 20 20"

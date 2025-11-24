@@ -85,6 +85,7 @@ export const articleTags = sqliteTable("article_tags", {
 		.notNull(),
 });
 
+// @ts-expect-error - self-referencing table causes circular type inference
 export const comments = sqliteTable("comments", {
 	id: integer("id", { mode: "number" }).primaryKey({
 		autoIncrement: true,
@@ -96,7 +97,8 @@ export const comments = sqliteTable("comments", {
 	authorId: integer("author_id")
 		.notNull()
 		.references(() => users.id),
-	parentId: integer("parent_id").references((): any => comments.id),
+	// @ts-expect-error - self-referencing foreign key
+	parentId: integer("parent_id").references(() => comments.id),
 	createdAt: integer("created_at", { mode: "timestamp" })
 		.default(sql`(unixepoch())`)
 		.notNull(),

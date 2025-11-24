@@ -1,23 +1,34 @@
+import { eq, useLiveQuery } from "@tanstack/react-db";
 import { MutationDialog } from "@/components/shared";
 import { categoriesCollection } from "@/db/collections/categories.collection";
-import type { InsertCategory, SelectCategory } from "@/db/schemas-zod";
+import type { InsertCategory } from "@/db/schemas-zod";
 import { CategoryForm } from "./CategoryForm";
 
 interface EditCategoryDialogProps {
-	category: SelectCategory;
+	categoryId: number;
 	trigger: React.ReactNode;
 }
 
 export function EditCategoryDialog({
-	category,
+	categoryId,
 	trigger,
 }: EditCategoryDialogProps) {
+	// 从 collection 获取完整的分类数据
+	const { data: categories } = useLiveQuery((q) =>
+		q
+			.from({ category: categoriesCollection })
+			.where(({ category }) => eq(category.id, categoryId))
+			.select(({ category }) => category)
+	);
+
+	const category = categories?.[0];
+
 	const handleSubmit = (
 		values: Partial<InsertCategory>,
 		onClose: () => void,
 	) => {
 		// Update with optimistic updates - UI updates immediately!
-		categoriesCollection.update(category.id, (draft) => {
+		categoriesCollection.update(categoryId, (draft) => {
 			if (values.name) draft.name = values.name;
 			if (values.slug) draft.slug = values.slug;
 			if (values.description !== undefined)
@@ -28,6 +39,11 @@ export function EditCategoryDialog({
 		// If mutation fails, TanStack DB will automatically rollback
 		onClose();
 	};
+
+	// 如果分类还在加载,不显示对话框触发器
+	if (!category) {
+		return null;
+	}
 
 	return (
 		<MutationDialog

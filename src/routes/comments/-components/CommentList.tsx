@@ -11,7 +11,7 @@ export function CommentList() {
 	return (
 		<div className="space-y-4">
 			{comments.map((comment) => (
-				<CommentCard key={comment.id} comment={comment} />
+				<CommentCard key={`comment-${comment.id}`} comment={comment} />
 			))}
 		</div>
 	);

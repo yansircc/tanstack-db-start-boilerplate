@@ -31,8 +31,8 @@ export function ArticleList() {
 							{isAuthor && (
 								<div className="flex gap-2 flex-shrink-0">
 									<EditArticleDialog
-										article={article}
-										authorId={userId!}
+										articleId={article.id}
+										authorId={userId ?? 0}
 										categories={categories ?? []}
 										trigger={
 											<Button size="sm" variant="outline">
@@ -41,7 +41,7 @@ export function ArticleList() {
 										}
 									/>
 									<DeleteArticleDialog
-										article={article}
+										articleId={article.id}
 										trigger={
 											<Button size="sm" variant="destructive">
 												删除

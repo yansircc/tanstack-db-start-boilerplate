@@ -24,7 +24,7 @@ export function CategoryCard({ category }: CategoryCardProps) {
 
 				<div className="flex gap-2 flex-shrink-0">
 					<EditCategoryDialog
-						category={category}
+						categoryId={category.id}
 						trigger={
 							<Button size="sm" variant="outline">
 								编辑
@@ -32,7 +32,7 @@ export function CategoryCard({ category }: CategoryCardProps) {
 						}
 					/>
 					<DeleteCategoryDialog
-						category={category}
+						categoryId={category.id}
 						trigger={
 							<Button size="sm" variant="destructive">
 								删除

@@ -20,7 +20,7 @@ function RouteComponent() {
 				<h1 className="text-3xl font-bold">文章列表</h1>
 				{isLoggedIn ? (
 					<CreateArticleDialog
-						authorId={userId!}
+						authorId={userId ?? 0}
 						categories={categories ?? []}
 						trigger={<Button>创建文章</Button>}
 					/>

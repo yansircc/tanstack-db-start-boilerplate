@@ -1,5 +1,6 @@
 import { ConfirmDialog } from "@/components/shared";
 import { commentsCollection } from "@/db/collections/comments.collection";
+import { useErrorHandler } from "@/lib/error-handler";
 import type { SelectComment } from "@/db/schemas-zod";
 
 interface DeleteCommentDialogProps {
@@ -11,10 +12,15 @@ export function DeleteCommentDialog({
 	comment,
 	trigger,
 }: DeleteCommentDialogProps) {
-	const handleDelete = () => {
-		// Delete with optimistic updates - UI updates immediately!
-		commentsCollection.delete(comment.id);
-		// If mutation fails, TanStack DB will automatically rollback
+	const { handleError } = useErrorHandler();
+
+	const handleDelete = async () => {
+		try {
+			const tx = commentsCollection.delete(comment.id);
+			await tx.isPersisted.promise;
+		} catch (error) {
+			handleError(error, "删除评论失败");
+		}
 	};
 
 	return (

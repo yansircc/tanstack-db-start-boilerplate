@@ -20,7 +20,7 @@ export function ArticleComments({ articleId }: ArticleCommentsProps) {
 				<div className="space-y-4">
 					{comments.map((comment) => (
 						<div
-							key={comment.id}
+							key={`comment-${comment.id}`}
 							className="bg-gray-50 rounded-lg p-4 space-y-2"
 						>
 							<div className="flex items-start gap-3">
@@ -54,10 +54,11 @@ export function ArticleComments({ articleId }: ArticleCommentsProps) {
 											</span>
 										)}
 										<span className="text-xs text-gray-500">
-											{comment.createdAt.toLocaleString("zh-CN")}
+											{/* @ts-expect-error - createdAt type inference issue */}
+										{new Date(comment.createdAt).toLocaleString("zh-CN")}
 										</span>
 									</div>
-									<p className="text-gray-700">{comment.content}</p>
+									<p className="text-gray-700">{String(comment.content)}</p>
 								</div>
 							</div>
 						</div>

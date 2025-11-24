@@ -1,27 +1,38 @@
+import { eq, useLiveQuery } from "@tanstack/react-db";
 import { MutationDialog } from "@/components/shared";
 import { articlesCollection } from "@/db/collections/articles.collection";
-import type { InsertArticle, SelectArticle } from "@/db/schemas-zod";
+import type { InsertArticle } from "@/db/schemas-zod";
 import { ArticleForm } from "./ArticleForm";
 
 interface EditArticleDialogProps {
-	article: SelectArticle;
+	articleId: number;
 	trigger: React.ReactNode;
 	authorId: number;
 	categories: Array<{ id: number; name: string }>;
 }
 
 export function EditArticleDialog({
-	article,
+	articleId,
 	trigger,
 	authorId,
 	categories,
 }: EditArticleDialogProps) {
+	// 从 collection 获取完整的文章数据
+	const { data: articles } = useLiveQuery((q) =>
+		q
+			.from({ article: articlesCollection })
+			.where(({ article }) => eq(article.id, articleId))
+			.select(({ article }) => article)
+	);
+
+	const article = articles?.[0];
+
 	const handleSubmit = (
 		values: Partial<InsertArticle>,
 		onClose: () => void,
 	) => {
 		// Update with optimistic updates - UI updates immediately!
-		articlesCollection.update(article.id, (draft) => {
+		articlesCollection.update(articleId, (draft) => {
 			if (values.title) draft.title = values.title;
 			if (values.slug) draft.slug = values.slug;
 			if (values.content) draft.content = values.content;
@@ -36,6 +47,11 @@ export function EditArticleDialog({
 		// If mutation fails, TanStack DB will automatically rollback
 		onClose();
 	};
+
+	// 如果文章还在加载,不显示对话框触发器
+	if (!article) {
+		return null;
+	}
 
 	return (
 		<MutationDialog

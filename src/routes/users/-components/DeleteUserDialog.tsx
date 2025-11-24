@@ -1,5 +1,6 @@
 import { ConfirmDialog } from "@/components/shared";
 import { usersCollection } from "@/db/collections/users.collection";
+import { useErrorHandler } from "@/lib/error-handler";
 import type { SelectUser } from "@/db/schemas-zod";
 
 interface DeleteUserDialogProps {
@@ -8,10 +9,22 @@ interface DeleteUserDialogProps {
 }
 
 export function DeleteUserDialog({ user, trigger }: DeleteUserDialogProps) {
-	const handleDelete = () => {
-		// Delete with optimistic updates - UI updates immediately!
-		usersCollection.delete(user.id);
-		// If mutation fails, TanStack DB will automatically rollback
+	const { handleError } = useErrorHandler();
+
+	const handleDelete = async () => {
+		try {
+			const tx = usersCollection.delete(user.id);
+			await tx.isPersisted.promise;
+		} catch (error) {
+			if (error instanceof Error && error.message.includes("FOREIGN KEY")) {
+				handleError(
+					new Error("该用户有关联数据(如文章、评论等),请先处理这些数据后再删除用户"),
+					"删除用户失败",
+				);
+			} else {
+				handleError(error, "删除用户失败");
+			}
+		}
 	};
 
 	return (

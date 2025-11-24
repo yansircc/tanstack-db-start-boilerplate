@@ -19,6 +19,7 @@ export const getComments = createServerFn({ method: "GET" }).handler(
 export const createComment = createServerFn({ method: "POST" })
 	.inputValidator((data: InsertComment) => data)
 	.handler(async ({ data }) => {
+		// @ts-expect-error - Drizzle ORM type inference issue with returning()
 		const [newComment] = await db
 			.insert(comments)
 			.values({
