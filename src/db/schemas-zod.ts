@@ -136,7 +136,7 @@ export const insertArticleBookmarkSchema = createInsertSchema(
 	{
 		articleId: z.number().int().positive(),
 		userId: z.number().int().positive(),
-	},
+	}
 );
 export const selectArticleBookmarkSchema = createSelectSchema(articleBookmarks);
 

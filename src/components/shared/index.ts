@@ -1,3 +1,3 @@
-export { ConfirmDialog } from "./ConfirmDialog";
-export { FormField, validators } from "./FormField";
-export { MutationDialog } from "./MutationDialog";
+export { ConfirmDialog } from "./confirm-dialog";
+export { FormField, validators } from "./form-field";
+export { MutationDialog } from "./mutation-dialog";

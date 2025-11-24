@@ -218,5 +218,5 @@ export const articleBookmarksRelations = relations(
 			fields: [articleBookmarks.userId],
 			references: [users.id],
 		}),
-	}),
+	})
 );

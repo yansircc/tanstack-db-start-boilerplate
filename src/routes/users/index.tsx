@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { UserPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { CreateUserDialog } from "./-components/CreateUserDialog";
-import { UserList } from "./-components/UserList";
+import { CreateUserDialog } from "./-components/create-user-dialog";
+import { UserList } from "./-components/user-list";
 
 export const Route = createFileRoute("/users/")({
 	ssr: false,
@@ -11,13 +11,13 @@ export const Route = createFileRoute("/users/")({
 
 function RouteComponent() {
 	return (
-		<div className="max-w-[1280px] mx-auto p-8 space-y-8">
-			<div className="flex items-end justify-between border-b-2 border-foreground pb-4">
+		<div className="mx-auto max-w-[1280px] space-y-8 p-8">
+			<div className="flex items-end justify-between border-foreground border-b-2 pb-4">
 				<div>
-					<h1 className="text-6xl font-bold tracking-tight uppercase font-mono">
+					<h1 className="font-bold font-mono text-6xl uppercase tracking-tight">
 						Users
 					</h1>
-					<p className="text-lg text-muted-foreground font-mono mt-2">
+					<p className="mt-2 font-mono text-lg text-muted-foreground">
 						Community members and authors.
 					</p>
 				</div>

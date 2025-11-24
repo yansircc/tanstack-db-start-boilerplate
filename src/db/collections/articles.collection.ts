@@ -25,9 +25,7 @@ export const articlesCollection = createCollection(
 	queryCollectionOptions({
 		schema: selectArticleSchema,
 		queryKey: ["articles"],
-		queryFn: async () => {
-			return await getArticles();
-		},
+		queryFn: async () => await getArticles(),
 		queryClient,
 		getKey: (item) => item.id,
 
@@ -36,8 +34,8 @@ export const articlesCollection = createCollection(
 			// Persist all insert mutations to the backend
 			await Promise.all(
 				transaction.mutations.map((mutation) =>
-					createArticle({ data: mutation.modified }),
-				),
+					createArticle({ data: mutation.modified })
+				)
 			);
 			// QueryCollection automatically refetches after handler completes
 		},
@@ -53,7 +51,7 @@ export const articlesCollection = createCollection(
 							changes: mutation.changes,
 						},
 					});
-				}),
+				})
 			);
 			// QueryCollection automatically refetches after handler completes
 		},
@@ -64,9 +62,9 @@ export const articlesCollection = createCollection(
 				transaction.mutations.map((mutation) => {
 					const original = mutation.original as SelectArticle;
 					return deleteArticle({ data: { id: original.id } });
-				}),
+				})
 			);
 			// QueryCollection automatically refetches after handler completes
 		},
-	}),
+	})
 );

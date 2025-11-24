@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import { useCurrentUser } from "@/hooks/useCurrentUser";
-import { ArticleList } from "./-components/ArticleList";
-import { CreateArticleDialog } from "./-components/CreateArticleDialog";
-import { useCategoriesSimpleQuery } from "./-hooks/useCategoriesSimpleQuery";
+import { useCurrentUser } from "@/hooks/use-current-user";
+import { ArticleList } from "./-components/article-list";
+import { CreateArticleDialog } from "./-components/create-article-dialog";
+import { useCategoriesSimpleQuery } from "./-hooks/use-categories-simple-query";
 
 export const Route = createFileRoute("/articles/")({
 	ssr: false,
@@ -15,13 +15,13 @@ function RouteComponent() {
 	const { data: categories } = useCategoriesSimpleQuery();
 
 	return (
-		<div className="max-w-[1280px] mx-auto p-8 space-y-8">
-			<div className="flex items-end justify-between border-b-2 border-foreground pb-4">
+		<div className="mx-auto max-w-[1280px] space-y-8 p-8">
+			<div className="flex items-end justify-between border-foreground border-b-2 pb-4">
 				<div>
-					<h1 className="text-6xl font-bold tracking-tight uppercase font-mono">
+					<h1 className="font-bold font-mono text-6xl uppercase tracking-tight">
 						Articles
 					</h1>
-					<p className="text-lg text-muted-foreground font-mono mt-2">
+					<p className="mt-2 font-mono text-lg text-muted-foreground">
 						Browse and manage your articles.
 					</p>
 				</div>
@@ -32,7 +32,7 @@ function RouteComponent() {
 						trigger={<Button>Create Article</Button>}
 					/>
 				) : (
-					<Button disabled title="Login required" className="opacity-50">
+					<Button className="opacity-50" disabled title="Login required">
 						Login to Create
 					</Button>
 				)}

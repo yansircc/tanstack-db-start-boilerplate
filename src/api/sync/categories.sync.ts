@@ -1,14 +1,14 @@
 import { createServerFn } from "@tanstack/react-start";
 import { eq } from "drizzle-orm";
-import { db } from "../../db";
-import { categories } from "../../db/schema";
-import type { InsertCategory } from "../../db/schemas-zod";
+import { db } from "@/db";
+import { categories } from "@/db/schema";
+import type { InsertCategory } from "@/db/schemas-zod";
 
 export const getCategories = createServerFn({ method: "GET" }).handler(
 	async () => {
 		const items = await db.select().from(categories).all();
 		return items;
-	},
+	}
 );
 
 export const createCategory = createServerFn({ method: "POST" })
@@ -28,7 +28,7 @@ export const createCategory = createServerFn({ method: "POST" })
 
 export const updateCategory = createServerFn({ method: "POST" })
 	.inputValidator(
-		(data: { id: number; changes: Partial<InsertCategory> }) => data,
+		(data: { id: number; changes: Partial<InsertCategory> }) => data
 	)
 	.handler(async ({ data }) => {
 		const [updatedCategory] = await db

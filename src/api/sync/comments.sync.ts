@@ -1,8 +1,8 @@
 import { createServerFn } from "@tanstack/react-start";
 import { desc, eq } from "drizzle-orm";
-import { db } from "../../db";
-import { comments } from "../../db/schema";
-import type { InsertComment } from "../../db/schemas-zod";
+import { db } from "@/db";
+import { comments } from "@/db/schema";
+import type { InsertComment } from "@/db/schemas-zod";
 
 export const getComments = createServerFn({ method: "GET" }).handler(
 	async () => {
@@ -13,7 +13,7 @@ export const getComments = createServerFn({ method: "GET" }).handler(
 		// 移除 limit,获取所有评论以便准确统计
 
 		return items;
-	},
+	}
 );
 
 export const createComment = createServerFn({ method: "POST" })
@@ -35,7 +35,7 @@ export const createComment = createServerFn({ method: "POST" })
 
 export const updateComment = createServerFn({ method: "POST" })
 	.inputValidator(
-		(data: { id: number; changes: Partial<InsertComment> }) => data,
+		(data: { id: number; changes: Partial<InsertComment> }) => data
 	)
 	.handler(async ({ data }) => {
 		const [updatedComment] = await db

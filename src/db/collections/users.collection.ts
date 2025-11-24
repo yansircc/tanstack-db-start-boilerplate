@@ -13,9 +13,7 @@ export const usersCollection = createCollection(
 	queryCollectionOptions({
 		schema: selectUserSchema,
 		queryKey: ["users"],
-		queryFn: async () => {
-			return await getUsers();
-		},
+		queryFn: async () => await getUsers(),
 		queryClient,
 		getKey: (item) => item.id,
 
@@ -24,8 +22,8 @@ export const usersCollection = createCollection(
 			// Persist all insert mutations to the backend
 			await Promise.all(
 				transaction.mutations.map((mutation) =>
-					createUser({ data: mutation.modified }),
-				),
+					createUser({ data: mutation.modified })
+				)
 			);
 			// QueryCollection automatically refetches after handler completes
 		},
@@ -41,7 +39,7 @@ export const usersCollection = createCollection(
 							changes: mutation.changes,
 						},
 					});
-				}),
+				})
 			);
 			// QueryCollection automatically refetches after handler completes
 		},
@@ -52,9 +50,9 @@ export const usersCollection = createCollection(
 				transaction.mutations.map((mutation) => {
 					const original = mutation.original as SelectUser;
 					return deleteUser({ data: { id: original.id } });
-				}),
+				})
 			);
 			// QueryCollection automatically refetches after handler completes
 		},
-	}),
+	})
 );

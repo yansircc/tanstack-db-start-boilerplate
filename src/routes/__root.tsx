@@ -6,15 +6,15 @@ import {
 	Scripts,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-import { ErrorToast } from "../components/ErrorToast";
-import Header from "../components/Header";
+import { ErrorToast } from "../components/error-toast";
+import Header from "../components/header";
 import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
 import { ErrorHandlerProvider } from "../lib/error-handler";
 import appCss from "../styles.css?url";
 
-interface MyRouterContext {
+type MyRouterContext = {
 	queryClient: QueryClient;
-}
+};
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
 	head: () => ({

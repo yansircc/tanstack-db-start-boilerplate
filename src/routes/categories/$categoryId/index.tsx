@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { CategoryArticles } from "./-components/CategoryArticles";
-import { CategoryHeader } from "./-components/CategoryHeader";
+import { CategoryArticles } from "./-components/category-articles";
+import { CategoryHeader } from "./-components/category-header";
 
 export const Route = createFileRoute("/categories/$categoryId/")({
 	ssr: false,
@@ -12,7 +12,7 @@ function RouteComponent() {
 	const categoryIdNum = Number(categoryId);
 
 	return (
-		<div className="max-w-[1280px] mx-auto p-8 space-y-8">
+		<div className="mx-auto max-w-[1280px] space-y-8 p-8">
 			<CategoryHeader categoryId={categoryIdNum} />
 			<CategoryArticles categoryId={categoryIdNum} />
 		</div>

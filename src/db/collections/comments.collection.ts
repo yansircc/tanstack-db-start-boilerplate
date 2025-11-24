@@ -13,9 +13,7 @@ export const commentsCollection = createCollection(
 	queryCollectionOptions({
 		schema: selectCommentSchema,
 		queryKey: ["comments"],
-		queryFn: async () => {
-			return await getComments();
-		},
+		queryFn: async () => await getComments(),
 		queryClient,
 		getKey: (item) => item.id,
 
@@ -24,8 +22,8 @@ export const commentsCollection = createCollection(
 			// Persist all insert mutations to the backend
 			await Promise.all(
 				transaction.mutations.map((mutation) =>
-					createComment({ data: mutation.modified }),
-				),
+					createComment({ data: mutation.modified })
+				)
 			);
 			// QueryCollection automatically refetches after handler completes
 		},
@@ -41,7 +39,7 @@ export const commentsCollection = createCollection(
 							changes: mutation.changes,
 						},
 					});
-				}),
+				})
 			);
 			// QueryCollection automatically refetches after handler completes
 		},
@@ -52,9 +50,9 @@ export const commentsCollection = createCollection(
 				transaction.mutations.map((mutation) => {
 					const original = mutation.original as SelectComment;
 					return deleteComment({ data: { id: original.id } });
-				}),
+				})
 			);
 			// QueryCollection automatically refetches after handler completes
 		},
-	}),
+	})
 );

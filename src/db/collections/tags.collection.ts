@@ -8,9 +8,7 @@ export const tagsCollection = createCollection(
 	queryCollectionOptions({
 		schema: selectTagSchema,
 		queryKey: ["tags"],
-		queryFn: async () => {
-			return await getTags();
-		},
+		queryFn: async () => await getTags(),
 		queryClient,
 		getKey: (item) => item.id,
 
@@ -19,8 +17,8 @@ export const tagsCollection = createCollection(
 			// Persist all insert mutations to the backend
 			await Promise.all(
 				transaction.mutations.map((mutation) =>
-					createTag({ data: mutation.modified }),
-				),
+					createTag({ data: mutation.modified })
+				)
 			);
 			// QueryCollection automatically refetches after handler completes
 		},
@@ -36,7 +34,7 @@ export const tagsCollection = createCollection(
 							changes: mutation.changes,
 						},
 					});
-				}),
+				})
 			);
 			// QueryCollection automatically refetches after handler completes
 		},
@@ -47,9 +45,9 @@ export const tagsCollection = createCollection(
 				transaction.mutations.map((mutation) => {
 					const original = mutation.original as SelectTag;
 					return deleteTag({ data: { id: original.id } });
-				}),
+				})
 			);
 			// QueryCollection automatically refetches after handler completes
 		},
-	}),
+	})
 );

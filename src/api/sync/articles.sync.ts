@@ -1,8 +1,8 @@
 import { createServerFn } from "@tanstack/react-start";
 import { desc, eq } from "drizzle-orm";
-import { db } from "../../db";
-import { articles } from "../../db/schema";
-import type { InsertArticle } from "../../db/schemas-zod";
+import { db } from "@/db";
+import { articles } from "@/db/schema";
+import type { InsertArticle } from "@/db/schemas-zod";
 
 // Server function to fetch all articles
 export const getArticles = createServerFn({ method: "GET" }).handler(
@@ -14,7 +14,7 @@ export const getArticles = createServerFn({ method: "GET" }).handler(
 			.all();
 
 		return items;
-	},
+	}
 );
 
 export const createArticle = createServerFn({ method: "POST" })
@@ -40,7 +40,7 @@ export const createArticle = createServerFn({ method: "POST" })
 
 export const updateArticle = createServerFn({ method: "POST" })
 	.inputValidator(
-		(data: { id: number; changes: Partial<InsertArticle> }) => data,
+		(data: { id: number; changes: Partial<InsertArticle> }) => data
 	)
 	.handler(async ({ data }) => {
 		const [updatedArticle] = await db

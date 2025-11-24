@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { TagArticles } from "./-components/TagArticles";
-import { TagHeader } from "./-components/TagHeader";
+import { TagArticles } from "./-components/tag-articles";
+import { TagHeader } from "./-components/tag-header";
 
 export const Route = createFileRoute("/tags/$tagId/")({
 	ssr: false,
@@ -12,7 +12,7 @@ function RouteComponent() {
 	const tagIdNum = Number(tagId);
 
 	return (
-		<div className="max-w-[1280px] mx-auto p-8 space-y-8">
+		<div className="mx-auto max-w-[1280px] space-y-8 p-8">
 			<TagHeader tagId={tagIdNum} />
 			<TagArticles tagId={tagIdNum} />
 		</div>

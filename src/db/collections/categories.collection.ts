@@ -13,9 +13,7 @@ export const categoriesCollection = createCollection(
 	queryCollectionOptions({
 		schema: selectCategorySchema,
 		queryKey: ["categories"],
-		queryFn: async () => {
-			return await getCategories();
-		},
+		queryFn: async () => await getCategories(),
 		queryClient,
 		getKey: (item) => item.id,
 
@@ -24,8 +22,8 @@ export const categoriesCollection = createCollection(
 			// Persist all insert mutations to the backend
 			await Promise.all(
 				transaction.mutations.map((mutation) =>
-					createCategory({ data: mutation.modified }),
-				),
+					createCategory({ data: mutation.modified })
+				)
 			);
 			// QueryCollection automatically refetches after handler completes
 		},
@@ -41,7 +39,7 @@ export const categoriesCollection = createCollection(
 							changes: mutation.changes,
 						},
 					});
-				}),
+				})
 			);
 			// QueryCollection automatically refetches after handler completes
 		},
@@ -52,9 +50,9 @@ export const categoriesCollection = createCollection(
 				transaction.mutations.map((mutation) => {
 					const original = mutation.original as SelectCategory;
 					return deleteCategory({ data: { id: original.id } });
-				}),
+				})
 			);
 			// QueryCollection automatically refetches after handler completes
 		},
-	}),
+	})
 );

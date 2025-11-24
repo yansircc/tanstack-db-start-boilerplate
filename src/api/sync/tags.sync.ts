@@ -1,10 +1,10 @@
 import { createServerFn } from "@tanstack/react-start";
 import { eq } from "drizzle-orm";
-import { db } from "../../db";
-import { tags } from "../../db/schema";
-import type { InsertTag } from "../../db/schemas-zod";
+import { db } from "@/db";
+import { tags } from "@/db/schema";
+import type { InsertTag } from "@/db/schemas-zod";
 
-export const getTags = createServerFn({ method: "GET" }).handler(async () => {
+export const getTags = createServerFn({ method: "GET" }).handler(() => {
 	const items = db.select().from(tags).all();
 	return items;
 });
