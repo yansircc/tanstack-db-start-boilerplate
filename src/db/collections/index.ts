@@ -3,6 +3,8 @@
 // 导出 collections
 export { articlesCollection } from "./articles.collection";
 export { articleTagsCollection } from "./articleTags.collection";
+export { articleLikesCollection } from "./articleLikes.collection";
+export { articleBookmarksCollection } from "./articleBookmarks.collection";
 export { categoriesCollection } from "./categories.collection";
 export { commentsCollection } from "./comments.collection";
 export { tagsCollection } from "./tags.collection";

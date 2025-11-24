@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import type { ArticleWithRelations } from "./types";
+import { ArticleStats } from "./ArticleStats";
 
 interface ArticleCardProps {
 	article: ArticleWithRelations;
@@ -53,6 +54,9 @@ export function ArticleCard({ article }: ArticleCardProps) {
 				)}
 
 				<span>阅读 {article.viewCount}</span>
+
+				{/* 点赞和收藏统计 */}
+				<ArticleStats articleId={article.id} />
 
 				<time className="ml-auto">
 					{article.createdAt.toLocaleDateString("zh-CN")}

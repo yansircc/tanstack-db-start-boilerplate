@@ -1,5 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useArticleDetailQuery } from "../../-hooks/useArticleDetailQuery";
+import { ArticleLikeButton } from "./ArticleLikeButton";
+import { ArticleBookmarkButton } from "./ArticleBookmarkButton";
 
 interface ArticleHeaderProps {
 	articleId: number;
@@ -70,6 +72,12 @@ export function ArticleHeader({ articleId }: ArticleHeaderProps) {
 				{article.updatedAt.getTime() !== article.createdAt.getTime() && (
 					<span>更新于 {article.updatedAt.toLocaleString("zh-CN")}</span>
 				)}
+			</div>
+
+			{/* 点赞和收藏按钮 */}
+			<div className="flex items-center gap-3 pt-4 border-t border-gray-200">
+				<ArticleLikeButton articleId={articleId} />
+				<ArticleBookmarkButton articleId={articleId} />
 			</div>
 		</div>
 	);
