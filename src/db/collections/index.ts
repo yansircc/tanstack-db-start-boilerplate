@@ -2,6 +2,7 @@
 
 // 导出 collections
 export { articlesCollection } from "./articles.collection";
+export { articleTagsCollection } from "./articleTags.collection";
 export { categoriesCollection } from "./categories.collection";
 export { commentsCollection } from "./comments.collection";
 export { tagsCollection } from "./tags.collection";

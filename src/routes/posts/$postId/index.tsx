@@ -1,11 +1,7 @@
-import { eq, useLiveQuery } from "@tanstack/react-db";
 import { createFileRoute } from "@tanstack/react-router";
-import {
-	articlesCollection,
-	categoriesCollection,
-	commentsCollection,
-	usersCollection,
-} from "../../../db/collections";
+import { ArticleComments } from "./-components/ArticleComments";
+import { ArticleContent } from "./-components/ArticleContent";
+import { ArticleHeader } from "./-components/ArticleHeader";
 
 export const Route = createFileRoute("/posts/$postId/")({
 	ssr: false,
@@ -16,187 +12,14 @@ function RouteComponent() {
 	const { postId } = Route.useParams();
 	const postIdNum = Number(postId);
 
-	// Get article with author and category using findOne
-	const { data: article } = useLiveQuery((q) =>
-		q
-			.from({ article: articlesCollection })
-			.join(
-				{ user: usersCollection },
-				({ article, user }) => eq(article.authorId, user.id),
-				"left",
-			)
-			.join(
-				{ category: categoriesCollection },
-				({ article, category }) => eq(article.categoryId, category.id),
-				"left",
-			)
-			.where(({ article }) => eq(article.id, postIdNum))
-			.select(({ article, user, category }) => ({
-				id: article.id,
-				title: article.title,
-				slug: article.slug,
-				content: article.content,
-				excerpt: article.excerpt,
-				coverImage: article.coverImage,
-				viewCount: article.viewCount,
-				createdAt: article.createdAt,
-				updatedAt: article.updatedAt,
-				author: user,
-				category: category,
-			}))
-			.findOne(),
-	);
-
-	// Get comments for this article
-	const { data: comments } = useLiveQuery((q) =>
-		q
-			.from({ comment: commentsCollection })
-			.join(
-				{ user: usersCollection },
-				({ comment, user }) => eq(comment.authorId, user.id),
-				"left",
-			)
-			.where(({ comment }) => eq(comment.articleId, postIdNum))
-			.orderBy(({ comment }) => comment.createdAt, "asc")
-			.select(({ comment, user }) => ({
-				id: comment.id,
-				content: comment.content,
-				createdAt: comment.createdAt,
-				parentId: comment.parentId,
-				author: user,
-			})),
-	);
-
-	if (!article) {
-		return (
-			<div className="max-w-4xl mx-auto p-6">
-				<div className="text-center text-gray-500">文章不存在</div>
-			</div>
-		);
-	}
-
 	return (
 		<div className="max-w-4xl mx-auto p-6 space-y-6">
-			{/* Article Header */}
 			<article className="space-y-6">
-				<div className="space-y-4">
-					<h1 className="text-4xl font-bold text-gray-900">{article.title}</h1>
-
-					<div className="flex items-center gap-4 text-sm text-gray-600">
-						{article.author && (
-							<div className="flex items-center gap-2">
-								{article.author.avatar ? (
-									<img
-										src={article.author.avatar}
-										alt={article.author.displayName}
-										className="w-10 h-10 rounded-full"
-									/>
-								) : (
-									<div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
-										<span className="text-lg text-gray-500">
-											{article.author.displayName[0].toUpperCase()}
-										</span>
-									</div>
-								)}
-								<div>
-									<div className="font-medium text-gray-900">
-										{article.author.displayName}
-									</div>
-									<div className="text-xs text-gray-500">
-										@{article.author.username}
-									</div>
-								</div>
-							</div>
-						)}
-
-						<div className="flex items-center gap-3 ml-auto">
-							{article.category && (
-								<span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
-									{article.category.name}
-								</span>
-							)}
-							<span className="text-gray-500">
-								阅读 {article.viewCount}
-							</span>
-						</div>
-					</div>
-
-					<div className="flex items-center gap-4 text-xs text-gray-500 border-t border-gray-200 pt-4">
-						<span>
-							发布于 {article.createdAt.toLocaleString("zh-CN")}
-						</span>
-						{article.updatedAt.getTime() !== article.createdAt.getTime() && (
-							<span>
-								更新于 {article.updatedAt.toLocaleString("zh-CN")}
-							</span>
-						)}
-					</div>
-				</div>
-
-				{/* Cover Image */}
-				{article.coverImage && (
-					<img
-						src={article.coverImage}
-						alt={article.title}
-						className="w-full h-64 object-cover rounded-lg"
-					/>
-				)}
-
-				{/* Content */}
-				<div className="prose prose-lg max-w-none">
-					<div className="whitespace-pre-wrap text-gray-800 leading-relaxed">
-						{article.content}
-					</div>
-				</div>
+				<ArticleHeader postId={postIdNum} />
+				<ArticleContent postId={postIdNum} />
 			</article>
 
-			{/* Comments Section */}
-			<div className="border-t border-gray-200 pt-6 space-y-4">
-				<h2 className="text-2xl font-bold text-gray-900">
-					评论 {comments?.length ? `(${comments.length})` : ""}
-				</h2>
-
-				{!comments || comments.length === 0 ? (
-					<p className="text-gray-500">暂无评论</p>
-				) : (
-					<div className="space-y-4">
-						{comments.map((comment) => (
-							<div
-								key={comment.id}
-								className="bg-gray-50 rounded-lg p-4 space-y-2"
-							>
-								<div className="flex items-start gap-3">
-									{comment.author?.avatar ? (
-										<img
-											src={comment.author.avatar}
-											alt={comment.author.displayName}
-											className="w-8 h-8 rounded-full"
-										/>
-									) : (
-										<div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center">
-											<span className="text-sm text-gray-600">
-												{comment.author?.displayName[0].toUpperCase()}
-											</span>
-										</div>
-									)}
-
-									<div className="flex-1">
-										<div className="flex items-center gap-2 mb-1">
-											<span className="font-semibold text-gray-900">
-												{comment.author?.displayName}
-											</span>
-											<span className="text-xs text-gray-500">
-												{comment.createdAt.toLocaleString("zh-CN")}
-											</span>
-										</div>
-										<p className="text-gray-700">{comment.content}</p>
-									</div>
-								</div>
-							</div>
-						))}
-					</div>
-				)}
-			</div>
+			<ArticleComments postId={postIdNum} />
 		</div>
 	);
 }

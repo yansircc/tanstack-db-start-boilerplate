@@ -27,7 +27,7 @@ export function TopAuthorsCard() {
 							) : (
 								<div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
 									<span className="text-sm text-gray-500">
-										{author.authorName[0].toUpperCase()}
+										{author.authorName?.[0]?.toUpperCase() || "?"}
 									</span>
 								</div>
 							)}

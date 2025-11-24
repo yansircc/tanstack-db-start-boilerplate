@@ -17,6 +17,7 @@ import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as CommentsIndexRouteImport } from './routes/comments/index'
 import { Route as CategoriesIndexRouteImport } from './routes/categories/index'
 import { Route as UsersUserIdIndexRouteImport } from './routes/users/$userId/index'
+import { Route as TagsTagIdIndexRouteImport } from './routes/tags/$tagId/index'
 import { Route as PostsPostIdIndexRouteImport } from './routes/posts/$postId/index'
 import { Route as CategoriesCategoryIdIndexRouteImport } from './routes/categories/$categoryId/index'
 
@@ -60,6 +61,11 @@ const UsersUserIdIndexRoute = UsersUserIdIndexRouteImport.update({
   path: '/users/$userId/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TagsTagIdIndexRoute = TagsTagIdIndexRouteImport.update({
+  id: '/tags/$tagId/',
+  path: '/tags/$tagId/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PostsPostIdIndexRoute = PostsPostIdIndexRouteImport.update({
   id: '/posts/$postId/',
   path: '/posts/$postId/',
@@ -82,6 +88,7 @@ export interface FileRoutesByFullPath {
   '/users': typeof UsersIndexRoute
   '/categories/$categoryId': typeof CategoriesCategoryIdIndexRoute
   '/posts/$postId': typeof PostsPostIdIndexRoute
+  '/tags/$tagId': typeof TagsTagIdIndexRoute
   '/users/$userId': typeof UsersUserIdIndexRoute
 }
 export interface FileRoutesByTo {
@@ -94,6 +101,7 @@ export interface FileRoutesByTo {
   '/users': typeof UsersIndexRoute
   '/categories/$categoryId': typeof CategoriesCategoryIdIndexRoute
   '/posts/$postId': typeof PostsPostIdIndexRoute
+  '/tags/$tagId': typeof TagsTagIdIndexRoute
   '/users/$userId': typeof UsersUserIdIndexRoute
 }
 export interface FileRoutesById {
@@ -107,6 +115,7 @@ export interface FileRoutesById {
   '/users/': typeof UsersIndexRoute
   '/categories/$categoryId/': typeof CategoriesCategoryIdIndexRoute
   '/posts/$postId/': typeof PostsPostIdIndexRoute
+  '/tags/$tagId/': typeof TagsTagIdIndexRoute
   '/users/$userId/': typeof UsersUserIdIndexRoute
 }
 export interface FileRouteTypes {
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/users'
     | '/categories/$categoryId'
     | '/posts/$postId'
+    | '/tags/$tagId'
     | '/users/$userId'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -133,6 +143,7 @@ export interface FileRouteTypes {
     | '/users'
     | '/categories/$categoryId'
     | '/posts/$postId'
+    | '/tags/$tagId'
     | '/users/$userId'
   id:
     | '__root__'
@@ -145,6 +156,7 @@ export interface FileRouteTypes {
     | '/users/'
     | '/categories/$categoryId/'
     | '/posts/$postId/'
+    | '/tags/$tagId/'
     | '/users/$userId/'
   fileRoutesById: FileRoutesById
 }
@@ -158,6 +170,7 @@ export interface RootRouteChildren {
   UsersIndexRoute: typeof UsersIndexRoute
   CategoriesCategoryIdIndexRoute: typeof CategoriesCategoryIdIndexRoute
   PostsPostIdIndexRoute: typeof PostsPostIdIndexRoute
+  TagsTagIdIndexRoute: typeof TagsTagIdIndexRoute
   UsersUserIdIndexRoute: typeof UsersUserIdIndexRoute
 }
 
@@ -219,6 +232,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UsersUserIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tags/$tagId/': {
+      id: '/tags/$tagId/'
+      path: '/tags/$tagId'
+      fullPath: '/tags/$tagId'
+      preLoaderRoute: typeof TagsTagIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/posts/$postId/': {
       id: '/posts/$postId/'
       path: '/posts/$postId'
@@ -246,6 +266,7 @@ const rootRouteChildren: RootRouteChildren = {
   UsersIndexRoute: UsersIndexRoute,
   CategoriesCategoryIdIndexRoute: CategoriesCategoryIdIndexRoute,
   PostsPostIdIndexRoute: PostsPostIdIndexRoute,
+  TagsTagIdIndexRoute: TagsTagIdIndexRoute,
   UsersUserIdIndexRoute: UsersUserIdIndexRoute,
 }
 export const routeTree = rootRouteImport

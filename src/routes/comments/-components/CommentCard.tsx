@@ -17,7 +17,7 @@ export function CommentCard({ comment }: CommentCardProps) {
 				) : (
 					<div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
 						<span className="text-lg text-gray-500">
-							{comment.author?.displayName[0].toUpperCase()}
+							{comment.author?.displayName?.[0]?.toUpperCase() || "?"}
 						</span>
 					</div>
 				)}
