@@ -1,11 +1,10 @@
-import { config } from 'dotenv'
+import Database from "better-sqlite3";
+import { config } from "dotenv";
+import { drizzle } from "drizzle-orm/better-sqlite3";
 
-import { drizzle } from 'drizzle-orm/better-sqlite3'
-import Database from 'better-sqlite3'
+import * as schema from "./schema.ts";
 
-import * as schema from './schema.ts'
+config();
 
-config()
-
-const sqlite = new Database(process.env.DATABASE_URL!)
-export const db = drizzle(sqlite, { schema })
+const sqlite = new Database(process.env.DATABASE_URL!);
+export const db = drizzle(sqlite, { schema });
