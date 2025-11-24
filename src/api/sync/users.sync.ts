@@ -4,10 +4,9 @@ import { db } from "@/db";
 import { users } from "@/db/schema";
 import type { InsertUser, UpdateUser } from "@/db/schemas-zod";
 
-export const getUsers = createServerFn({ method: "GET" }).handler(() => {
-	const items = db.select().from(users).all();
-	return items;
-});
+export const getUsers = createServerFn({ method: "GET" }).handler(() =>
+	db.select().from(users).all()
+);
 
 export const createUser = createServerFn({ method: "POST" })
 	.inputValidator((data: InsertUser) => data)

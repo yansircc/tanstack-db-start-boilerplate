@@ -5,16 +5,8 @@ import { articles } from "@/db/schema";
 import type { InsertArticle } from "@/db/schemas-zod";
 
 // Server function to fetch all articles
-export const getArticles = createServerFn({ method: "GET" }).handler(
-	async () => {
-		const items = await db
-			.select()
-			.from(articles)
-			.orderBy(desc(articles.createdAt))
-			.all();
-
-		return items;
-	}
+export const getArticles = createServerFn({ method: "GET" }).handler(() =>
+	db.select().from(articles).orderBy(desc(articles.createdAt)).all()
 );
 
 export const createArticle = createServerFn({ method: "POST" })

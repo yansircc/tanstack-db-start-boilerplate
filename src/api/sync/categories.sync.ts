@@ -4,11 +4,8 @@ import { db } from "@/db";
 import { categories } from "@/db/schema";
 import type { InsertCategory } from "@/db/schemas-zod";
 
-export const getCategories = createServerFn({ method: "GET" }).handler(
-	async () => {
-		const items = await db.select().from(categories).all();
-		return items;
-	}
+export const getCategories = createServerFn({ method: "GET" }).handler(() =>
+	db.select().from(categories).all()
 );
 
 export const createCategory = createServerFn({ method: "POST" })

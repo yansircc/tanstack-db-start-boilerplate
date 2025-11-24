@@ -4,16 +4,8 @@ import { db } from "@/db";
 import { comments } from "@/db/schema";
 import type { InsertComment } from "@/db/schemas-zod";
 
-export const getComments = createServerFn({ method: "GET" }).handler(
-	async () => {
-		const items = await db
-			.select()
-			.from(comments)
-			.orderBy(desc(comments.createdAt));
-		// 移除 limit,获取所有评论以便准确统计
-
-		return items;
-	}
+export const getComments = createServerFn({ method: "GET" }).handler(() =>
+	db.select().from(comments).orderBy(desc(comments.createdAt)).all()
 );
 
 export const createComment = createServerFn({ method: "POST" })

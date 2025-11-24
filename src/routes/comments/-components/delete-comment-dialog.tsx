@@ -1,12 +1,15 @@
 import { eq, useLiveQuery } from "@tanstack/react-db";
 import { ConfirmDialog } from "@/components/shared";
 import { commentsCollection } from "@/db/collections/comments.collection";
+import type { SelectComment } from "@/db/schemas-zod";
 import { useErrorHandler } from "@/lib/error-handler";
 
 type DeleteCommentDialogProps = {
 	commentId: number;
 	trigger: React.ReactNode;
 };
+
+type CommentPreview = Pick<SelectComment, "id" | "content">;
 
 export function DeleteCommentDialog({
 	commentId,
@@ -19,10 +22,13 @@ export function DeleteCommentDialog({
 		q
 			.from({ comment: commentsCollection })
 			.where(({ comment: c }) => eq(c.id, commentId))
-			.select(({ comment: c }) => ({
-				id: c.id,
-				content: c.content,
-			}))
+			.select(
+				({ comment: c }) =>
+					({
+						id: c.id,
+						content: c.content,
+					}) as CommentPreview
+			)
 	);
 
 	const comment = comments?.[0];

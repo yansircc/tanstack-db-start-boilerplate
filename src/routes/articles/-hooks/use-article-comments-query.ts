@@ -1,8 +1,16 @@
 import { eq, useLiveQuery } from "@tanstack/react-db";
 import { commentsCollection, usersCollection } from "@/db/collections";
+import type { SelectComment, SelectUser } from "@/db/schemas-zod";
+
+type ArticleCommentRecord = Pick<
+	SelectComment,
+	"id" | "content" | "createdAt" | "parentId"
+> & {
+	author?: SelectUser;
+};
 
 export function useArticleCommentsQuery(articleId: number) {
-	return useLiveQuery(
+	const query = useLiveQuery(
 		(q) =>
 			q
 				.from({ comment: commentsCollection })
@@ -20,4 +28,9 @@ export function useArticleCommentsQuery(articleId: number) {
 				})),
 		[articleId]
 	);
+
+	return {
+		...query,
+		data: query.data as ArticleCommentRecord[] | undefined,
+	};
 }

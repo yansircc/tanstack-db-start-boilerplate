@@ -6,7 +6,7 @@ import type { InsertArticleBookmark } from "@/db/schemas-zod";
 
 export const getArticleBookmarks = createServerFn({ method: "GET" }).handler(
 	async () => {
-		const items = await db.select().from(articleBookmarks).limit(500);
+		const items = await db.select().from(articleBookmarks).all();
 		return items;
 	}
 );

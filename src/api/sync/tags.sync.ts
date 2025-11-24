@@ -4,10 +4,9 @@ import { db } from "@/db";
 import { tags } from "@/db/schema";
 import type { InsertTag } from "@/db/schemas-zod";
 
-export const getTags = createServerFn({ method: "GET" }).handler(() => {
-	const items = db.select().from(tags).all();
-	return items;
-});
+export const getTags = createServerFn({ method: "GET" }).handler(() =>
+	db.select().from(tags).all()
+);
 
 export const createTag = createServerFn({ method: "POST" })
 	.inputValidator((data: InsertTag) => data)

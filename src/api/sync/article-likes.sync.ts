@@ -4,11 +4,8 @@ import { db } from "@/db";
 import { articleLikes } from "@/db/schema";
 import type { InsertArticleLike } from "@/db/schemas-zod";
 
-export const getArticleLikes = createServerFn({ method: "GET" }).handler(
-	async () => {
-		const items = await db.select().from(articleLikes).limit(500);
-		return items;
-	}
+export const getArticleLikes = createServerFn({ method: "GET" }).handler(() =>
+	db.select().from(articleLikes).all()
 );
 
 export const createArticleLike = createServerFn({ method: "POST" })
