@@ -9,7 +9,7 @@ export function useUserArticlesQuery(userId: number) {
 		(q) =>
 			q
 				.from({ article: articlesCollection })
-				.leftJoin({ category: categoriesCollection }, ({ article, category }) =>
+				.innerJoin({ category: categoriesCollection }, ({ article, category }) =>
 					eq(article.categoryId, category.id),
 				)
 				.where(({ article }) => eq(article.authorId, userId))

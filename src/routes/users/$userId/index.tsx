@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { UserArchivedArticles } from "./-components/UserArchivedArticles";
 import { UserDraftArticles } from "./-components/UserDraftArticles";
 import { UserProfileCard } from "./-components/UserProfileCard";
 import { UserPublishedArticles } from "./-components/UserPublishedArticles";
@@ -19,6 +20,7 @@ function RouteComponent() {
 			<UserStatsCards userId={userIdNum} />
 			<UserPublishedArticles userId={userIdNum} />
 			<UserDraftArticles userId={userIdNum} />
+			<UserArchivedArticles userId={userIdNum} />
 		</div>
 	);
 }

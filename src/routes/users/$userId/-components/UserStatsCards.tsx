@@ -10,9 +10,11 @@ export function UserStatsCards({ userId }: UserStatsCardsProps) {
 	const publishedArticles =
 		articles?.filter((a) => a.status === "published") ?? [];
 	const draftArticles = articles?.filter((a) => a.status === "draft") ?? [];
+	const archivedArticles =
+		articles?.filter((a) => a.status === "archived") ?? [];
 
 	return (
-		<div className="grid grid-cols-3 gap-4">
+		<div className="grid grid-cols-4 gap-4">
 			<div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-center">
 				<div className="text-3xl font-bold text-blue-600">
 					{articles?.length ?? 0}
@@ -30,6 +32,12 @@ export function UserStatsCards({ userId }: UserStatsCardsProps) {
 					{draftArticles.length}
 				</div>
 				<div className="text-sm text-gray-600">草稿</div>
+			</div>
+			<div className="bg-gray-50 border border-gray-200 rounded-lg p-4 text-center">
+				<div className="text-3xl font-bold text-gray-600">
+					{archivedArticles.length}
+				</div>
+				<div className="text-sm text-gray-600">已归档</div>
 			</div>
 		</div>
 	);
