@@ -14,8 +14,8 @@ export function RecentArticlesCard() {
 					{articles.map((article) => (
 						<Link
 							key={article.id}
-							to="/posts/$postId"
-							params={{ postId: String(article.id) }}
+							to="/articles/$articleId"
+							params={{ articleId: String(article.id) }}
 							className="flex items-center justify-between p-2 hover:bg-gray-50 rounded"
 						>
 							<div className="flex-1">

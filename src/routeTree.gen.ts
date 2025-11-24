@@ -12,14 +12,14 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as UsersIndexRouteImport } from './routes/users/index'
 import { Route as TagsIndexRouteImport } from './routes/tags/index'
-import { Route as PostsIndexRouteImport } from './routes/posts/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as CommentsIndexRouteImport } from './routes/comments/index'
 import { Route as CategoriesIndexRouteImport } from './routes/categories/index'
+import { Route as ArticlesIndexRouteImport } from './routes/articles/index'
 import { Route as UsersUserIdIndexRouteImport } from './routes/users/$userId/index'
 import { Route as TagsTagIdIndexRouteImport } from './routes/tags/$tagId/index'
-import { Route as PostsPostIdIndexRouteImport } from './routes/posts/$postId/index'
 import { Route as CategoriesCategoryIdIndexRouteImport } from './routes/categories/$categoryId/index'
+import { Route as ArticlesArticleIdIndexRouteImport } from './routes/articles/$articleId/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,11 +34,6 @@ const UsersIndexRoute = UsersIndexRouteImport.update({
 const TagsIndexRoute = TagsIndexRouteImport.update({
   id: '/tags/',
   path: '/tags/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PostsIndexRoute = PostsIndexRouteImport.update({
-  id: '/posts/',
-  path: '/posts/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardIndexRoute = DashboardIndexRouteImport.update({
@@ -56,6 +51,11 @@ const CategoriesIndexRoute = CategoriesIndexRouteImport.update({
   path: '/categories/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ArticlesIndexRoute = ArticlesIndexRouteImport.update({
+  id: '/articles/',
+  path: '/articles/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const UsersUserIdIndexRoute = UsersUserIdIndexRouteImport.update({
   id: '/users/$userId/',
   path: '/users/$userId/',
@@ -66,55 +66,55 @@ const TagsTagIdIndexRoute = TagsTagIdIndexRouteImport.update({
   path: '/tags/$tagId/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PostsPostIdIndexRoute = PostsPostIdIndexRouteImport.update({
-  id: '/posts/$postId/',
-  path: '/posts/$postId/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const CategoriesCategoryIdIndexRoute =
   CategoriesCategoryIdIndexRouteImport.update({
     id: '/categories/$categoryId/',
     path: '/categories/$categoryId/',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ArticlesArticleIdIndexRoute = ArticlesArticleIdIndexRouteImport.update({
+  id: '/articles/$articleId/',
+  path: '/articles/$articleId/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/articles': typeof ArticlesIndexRoute
   '/categories': typeof CategoriesIndexRoute
   '/comments': typeof CommentsIndexRoute
   '/dashboard': typeof DashboardIndexRoute
-  '/posts': typeof PostsIndexRoute
   '/tags': typeof TagsIndexRoute
   '/users': typeof UsersIndexRoute
+  '/articles/$articleId': typeof ArticlesArticleIdIndexRoute
   '/categories/$categoryId': typeof CategoriesCategoryIdIndexRoute
-  '/posts/$postId': typeof PostsPostIdIndexRoute
   '/tags/$tagId': typeof TagsTagIdIndexRoute
   '/users/$userId': typeof UsersUserIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/articles': typeof ArticlesIndexRoute
   '/categories': typeof CategoriesIndexRoute
   '/comments': typeof CommentsIndexRoute
   '/dashboard': typeof DashboardIndexRoute
-  '/posts': typeof PostsIndexRoute
   '/tags': typeof TagsIndexRoute
   '/users': typeof UsersIndexRoute
+  '/articles/$articleId': typeof ArticlesArticleIdIndexRoute
   '/categories/$categoryId': typeof CategoriesCategoryIdIndexRoute
-  '/posts/$postId': typeof PostsPostIdIndexRoute
   '/tags/$tagId': typeof TagsTagIdIndexRoute
   '/users/$userId': typeof UsersUserIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/articles/': typeof ArticlesIndexRoute
   '/categories/': typeof CategoriesIndexRoute
   '/comments/': typeof CommentsIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
-  '/posts/': typeof PostsIndexRoute
   '/tags/': typeof TagsIndexRoute
   '/users/': typeof UsersIndexRoute
+  '/articles/$articleId/': typeof ArticlesArticleIdIndexRoute
   '/categories/$categoryId/': typeof CategoriesCategoryIdIndexRoute
-  '/posts/$postId/': typeof PostsPostIdIndexRoute
   '/tags/$tagId/': typeof TagsTagIdIndexRoute
   '/users/$userId/': typeof UsersUserIdIndexRoute
 }
@@ -122,54 +122,54 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/articles'
     | '/categories'
     | '/comments'
     | '/dashboard'
-    | '/posts'
     | '/tags'
     | '/users'
+    | '/articles/$articleId'
     | '/categories/$categoryId'
-    | '/posts/$postId'
     | '/tags/$tagId'
     | '/users/$userId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/articles'
     | '/categories'
     | '/comments'
     | '/dashboard'
-    | '/posts'
     | '/tags'
     | '/users'
+    | '/articles/$articleId'
     | '/categories/$categoryId'
-    | '/posts/$postId'
     | '/tags/$tagId'
     | '/users/$userId'
   id:
     | '__root__'
     | '/'
+    | '/articles/'
     | '/categories/'
     | '/comments/'
     | '/dashboard/'
-    | '/posts/'
     | '/tags/'
     | '/users/'
+    | '/articles/$articleId/'
     | '/categories/$categoryId/'
-    | '/posts/$postId/'
     | '/tags/$tagId/'
     | '/users/$userId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ArticlesIndexRoute: typeof ArticlesIndexRoute
   CategoriesIndexRoute: typeof CategoriesIndexRoute
   CommentsIndexRoute: typeof CommentsIndexRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
-  PostsIndexRoute: typeof PostsIndexRoute
   TagsIndexRoute: typeof TagsIndexRoute
   UsersIndexRoute: typeof UsersIndexRoute
+  ArticlesArticleIdIndexRoute: typeof ArticlesArticleIdIndexRoute
   CategoriesCategoryIdIndexRoute: typeof CategoriesCategoryIdIndexRoute
-  PostsPostIdIndexRoute: typeof PostsPostIdIndexRoute
   TagsTagIdIndexRoute: typeof TagsTagIdIndexRoute
   UsersUserIdIndexRoute: typeof UsersUserIdIndexRoute
 }
@@ -197,13 +197,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TagsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/posts/': {
-      id: '/posts/'
-      path: '/posts'
-      fullPath: '/posts'
-      preLoaderRoute: typeof PostsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/dashboard/': {
       id: '/dashboard/'
       path: '/dashboard'
@@ -225,6 +218,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CategoriesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/articles/': {
+      id: '/articles/'
+      path: '/articles'
+      fullPath: '/articles'
+      preLoaderRoute: typeof ArticlesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/users/$userId/': {
       id: '/users/$userId/'
       path: '/users/$userId'
@@ -239,13 +239,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TagsTagIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/posts/$postId/': {
-      id: '/posts/$postId/'
-      path: '/posts/$postId'
-      fullPath: '/posts/$postId'
-      preLoaderRoute: typeof PostsPostIdIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/categories/$categoryId/': {
       id: '/categories/$categoryId/'
       path: '/categories/$categoryId'
@@ -253,19 +246,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CategoriesCategoryIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/articles/$articleId/': {
+      id: '/articles/$articleId/'
+      path: '/articles/$articleId'
+      fullPath: '/articles/$articleId'
+      preLoaderRoute: typeof ArticlesArticleIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ArticlesIndexRoute: ArticlesIndexRoute,
   CategoriesIndexRoute: CategoriesIndexRoute,
   CommentsIndexRoute: CommentsIndexRoute,
   DashboardIndexRoute: DashboardIndexRoute,
-  PostsIndexRoute: PostsIndexRoute,
   TagsIndexRoute: TagsIndexRoute,
   UsersIndexRoute: UsersIndexRoute,
+  ArticlesArticleIdIndexRoute: ArticlesArticleIdIndexRoute,
   CategoriesCategoryIdIndexRoute: CategoriesCategoryIdIndexRoute,
-  PostsPostIdIndexRoute: PostsPostIdIndexRoute,
   TagsTagIdIndexRoute: TagsTagIdIndexRoute,
   UsersUserIdIndexRoute: UsersUserIdIndexRoute,
 }

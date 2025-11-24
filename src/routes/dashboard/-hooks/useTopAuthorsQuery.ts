@@ -5,9 +5,8 @@ export function useTopAuthorsQuery() {
 	return useLiveQuery((q) =>
 		q
 			.from({ article: articlesCollection })
-			.innerJoin(
-				{ user: usersCollection },
-				({ article, user }) => eq(article.authorId, user.id),
+			.innerJoin({ user: usersCollection }, ({ article, user }) =>
+				eq(article.authorId, user.id),
 			)
 			.groupBy(({ user }) => [user.id, user.displayName, user.avatar])
 			.select(({ user, article }) => ({

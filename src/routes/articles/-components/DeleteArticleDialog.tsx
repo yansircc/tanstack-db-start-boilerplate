@@ -2,12 +2,15 @@ import { ConfirmDialog } from "@/components/shared";
 import { articlesCollection } from "@/db/collections/articles.collection";
 import type { SelectArticle } from "@/db/schemas-zod";
 
-interface DeletePostDialogProps {
+interface DeleteArticleDialogProps {
 	article: SelectArticle;
 	trigger: React.ReactNode;
 }
 
-export function DeletePostDialog({ article, trigger }: DeletePostDialogProps) {
+export function DeleteArticleDialog({
+	article,
+	trigger,
+}: DeleteArticleDialogProps) {
 	const handleDelete = () => {
 		// Delete with optimistic updates - UI updates immediately!
 		articlesCollection.delete(article.id);

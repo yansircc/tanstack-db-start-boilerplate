@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import type { InsertArticle, SelectArticle } from "@/db/schemas-zod";
 
-interface PostFormProps {
+interface ArticleFormProps {
 	article?: SelectArticle;
 	onSubmit: (values: Partial<InsertArticle>) => void;
 	onCancel?: () => void;
@@ -14,14 +14,14 @@ interface PostFormProps {
 	categories: Array<{ id: number; name: string }>;
 }
 
-export function PostForm({
+export function ArticleForm({
 	article,
 	onSubmit,
 	onCancel,
 	submitLabel = "提交",
 	authorId,
 	categories,
-}: PostFormProps) {
+}: ArticleFormProps) {
 	const form = useForm({
 		defaultValues: {
 			title: article?.title ?? "",

@@ -9,8 +9,8 @@ export function ArticleCard({ article }: ArticleCardProps) {
 	return (
 		<article className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition">
 			<Link
-				to="/posts/$postId"
-				params={{ postId: String(article.id) }}
+				to="/articles/$articleId"
+				params={{ articleId: String(article.id) }}
 				className="block"
 			>
 				<h2 className="text-xl font-semibold mb-2 hover:text-blue-600">

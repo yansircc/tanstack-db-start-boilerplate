@@ -40,8 +40,8 @@ export function CategoryArticles({ categoryId }: CategoryArticlesProps) {
 
 								<div className="flex-1">
 									<Link
-										to="/posts/$postId"
-										params={{ postId: String(article.id) }}
+										to="/articles/$articleId"
+										params={{ articleId: String(article.id) }}
 									>
 										<h3 className="text-xl font-semibold text-gray-900 mb-2 hover:text-blue-600">
 											{article.title}

@@ -2,19 +2,19 @@ import { MutationDialog } from "@/components/shared";
 import { Button } from "@/components/ui/button";
 import { articlesCollection } from "@/db/collections/articles.collection";
 import type { InsertArticle } from "@/db/schemas-zod";
-import { PostForm } from "./PostForm";
+import { ArticleForm } from "./ArticleForm";
 
-interface CreatePostDialogProps {
+interface CreateArticleDialogProps {
 	trigger?: React.ReactNode;
 	authorId: number;
 	categories: Array<{ id: number; name: string }>;
 }
 
-export function CreatePostDialog({
+export function CreateArticleDialog({
 	trigger,
 	authorId,
 	categories,
-}: CreatePostDialogProps) {
+}: CreateArticleDialogProps) {
 	const handleSubmit = (
 		values: Partial<InsertArticle>,
 		onClose: () => void,
@@ -62,7 +62,7 @@ export function CreatePostDialog({
 			description="填写下面的表单来创建一个新文章。所有标记 * 的字段都是必填的。"
 		>
 			{({ onClose }) => (
-				<PostForm
+				<ArticleForm
 					onSubmit={(values) => handleSubmit(values, onClose)}
 					onCancel={onClose}
 					submitLabel="创建"

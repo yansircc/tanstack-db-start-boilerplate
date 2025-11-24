@@ -2,11 +2,11 @@ import { Link } from "@tanstack/react-router";
 import { useArticleDetailQuery } from "../../-hooks/useArticleDetailQuery";
 
 interface ArticleHeaderProps {
-	postId: number;
+	articleId: number;
 }
 
-export function ArticleHeader({ postId }: ArticleHeaderProps) {
-	const { data: article } = useArticleDetailQuery(postId);
+export function ArticleHeader({ articleId }: ArticleHeaderProps) {
+	const { data: article } = useArticleDetailQuery(articleId);
 
 	if (!article) {
 		return (

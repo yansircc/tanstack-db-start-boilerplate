@@ -138,7 +138,10 @@ export function UserMutationExample() {
 			{/* Form inputs */}
 			<div className="space-y-4 mb-6">
 				<div>
-					<label htmlFor={usernameId} className="block text-sm font-medium mb-1">
+					<label
+						htmlFor={usernameId}
+						className="block text-sm font-medium mb-1"
+					>
 						Username (required)
 					</label>
 					<input
@@ -230,9 +233,7 @@ export function UserMutationExample() {
 						type="number"
 						value={selectedUserId || ""}
 						onChange={(e) =>
-							setSelectedUserId(
-								e.target.value ? Number(e.target.value) : null,
-							)
+							setSelectedUserId(e.target.value ? Number(e.target.value) : null)
 						}
 						className="w-full px-3 py-2 border rounded-md"
 						placeholder="1"

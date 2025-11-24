@@ -1,8 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { Edit, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { EditUserDialog } from "./EditUserDialog";
 import { DeleteUserDialog } from "./DeleteUserDialog";
+import { EditUserDialog } from "./EditUserDialog";
 import type { UserDisplay } from "./types";
 
 interface UserCardProps {

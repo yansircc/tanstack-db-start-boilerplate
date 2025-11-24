@@ -5,20 +5,18 @@ import {
 	usersCollection,
 } from "../../../db/collections";
 
-export function useArticleDetailQuery(postId: number) {
+export function useArticleDetailQuery(articleId: number) {
 	return useLiveQuery(
 		(q) =>
 			q
 				.from({ article: articlesCollection })
-				.leftJoin(
-					{ user: usersCollection },
-					({ article, user }) => eq(article.authorId, user.id),
+				.leftJoin({ user: usersCollection }, ({ article, user }) =>
+					eq(article.authorId, user.id),
 				)
-				.leftJoin(
-					{ category: categoriesCollection },
-					({ article, category }) => eq(article.categoryId, category.id),
+				.leftJoin({ category: categoriesCollection }, ({ article, category }) =>
+					eq(article.categoryId, category.id),
 				)
-				.where(({ article }) => eq(article.id, postId))
+				.where(({ article }) => eq(article.id, articleId))
 				.select(({ article, user, category }) => ({
 					id: article.id,
 					title: article.title,
@@ -33,6 +31,6 @@ export function useArticleDetailQuery(postId: number) {
 					category: category,
 				}))
 				.findOne(),
-		[postId],
+		[articleId],
 	);
 }

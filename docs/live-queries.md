@@ -880,7 +880,7 @@ const userPostComments = createLiveQueryCollection((q) =>
       eq(user.id, post.userId)
     )
     .join({ comment: commentsCollection }, ({ post, comment }) => 
-      eq(post.id, comment.postId)
+      eq(post.id, comment.articleId)
     )
     .select(({ user, post, comment }) => ({
       userName: user.name,
@@ -1799,7 +1799,7 @@ coalesce(user.displayName, user.name, 'Unknown')
 Count non-null values:
 ```ts
 count(user.id)        // Count all users
-count(user.postId)    // Count users with posts
+count(user.articleId)    // Count users with posts
 ```
 
 #### `sum(value)`

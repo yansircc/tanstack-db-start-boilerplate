@@ -2,11 +2,11 @@ import { Link } from "@tanstack/react-router";
 import { useArticleCommentsQuery } from "../../-hooks/useArticleCommentsQuery";
 
 interface ArticleCommentsProps {
-	postId: number;
+	articleId: number;
 }
 
-export function ArticleComments({ postId }: ArticleCommentsProps) {
-	const { data: comments } = useArticleCommentsQuery(postId);
+export function ArticleComments({ articleId }: ArticleCommentsProps) {
+	const { data: comments } = useArticleCommentsQuery(articleId);
 
 	return (
 		<div className="border-t border-gray-200 pt-6 space-y-4">

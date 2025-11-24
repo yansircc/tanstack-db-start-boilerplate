@@ -11,17 +11,14 @@ export function useTagArticlesQuery(tagId: number) {
 		(q) =>
 			q
 				.from({ articleTag: articleTagsCollection })
-				.innerJoin(
-					{ article: articlesCollection },
-					({ articleTag, article }) => eq(articleTag.articleId, article.id),
+				.innerJoin({ article: articlesCollection }, ({ articleTag, article }) =>
+					eq(articleTag.articleId, article.id),
 				)
-				.leftJoin(
-					{ user: usersCollection },
-					({ article, user }) => eq(article.authorId, user.id),
+				.leftJoin({ user: usersCollection }, ({ article, user }) =>
+					eq(article.authorId, user.id),
 				)
-				.leftJoin(
-					{ category: categoriesCollection },
-					({ article, category }) => eq(article.categoryId, category.id),
+				.leftJoin({ category: categoriesCollection }, ({ article, category }) =>
+					eq(article.categoryId, category.id),
 				)
 				.where(({ articleTag }) => eq(articleTag.tagId, tagId))
 				.where(({ article }) => eq(article.status, "published"))

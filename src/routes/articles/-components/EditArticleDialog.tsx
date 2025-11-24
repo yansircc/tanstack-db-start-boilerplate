@@ -1,21 +1,21 @@
 import { MutationDialog } from "@/components/shared";
 import { articlesCollection } from "@/db/collections/articles.collection";
 import type { InsertArticle, SelectArticle } from "@/db/schemas-zod";
-import { PostForm } from "./PostForm";
+import { ArticleForm } from "./ArticleForm";
 
-interface EditPostDialogProps {
+interface EditArticleDialogProps {
 	article: SelectArticle;
 	trigger: React.ReactNode;
 	authorId: number;
 	categories: Array<{ id: number; name: string }>;
 }
 
-export function EditPostDialog({
+export function EditArticleDialog({
 	article,
 	trigger,
 	authorId,
 	categories,
-}: EditPostDialogProps) {
+}: EditArticleDialogProps) {
 	const handleSubmit = (
 		values: Partial<InsertArticle>,
 		onClose: () => void,
@@ -44,7 +44,7 @@ export function EditPostDialog({
 			description="修改文章信息。"
 		>
 			{({ onClose }) => (
-				<PostForm
+				<ArticleForm
 					article={article}
 					onSubmit={(values) => handleSubmit(values, onClose)}
 					onCancel={onClose}

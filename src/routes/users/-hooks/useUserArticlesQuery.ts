@@ -9,9 +9,8 @@ export function useUserArticlesQuery(userId: number) {
 		(q) =>
 			q
 				.from({ article: articlesCollection })
-				.leftJoin(
-					{ category: categoriesCollection },
-					({ article, category }) => eq(article.categoryId, category.id),
+				.leftJoin({ category: categoriesCollection }, ({ article, category }) =>
+					eq(article.categoryId, category.id),
 				)
 				.where(({ article }) => eq(article.authorId, userId))
 				.orderBy(({ article }) => article.createdAt, "desc")

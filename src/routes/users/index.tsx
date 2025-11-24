@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { UserPlus } from "lucide-react";
-import { UserList } from "./-components/UserList";
-import { CreateUserDialog } from "./-components/CreateUserDialog";
 import { Button } from "@/components/ui/button";
+import { CreateUserDialog } from "./-components/CreateUserDialog";
+import { UserList } from "./-components/UserList";
 
 export const Route = createFileRoute("/users/")({
 	ssr: false,

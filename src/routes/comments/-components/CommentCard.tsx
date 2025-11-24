@@ -46,8 +46,8 @@ export function CommentCard({ comment }: CommentCardProps) {
 				<div className="text-sm text-gray-500 pl-13 border-l-2 border-gray-200 ml-13">
 					评论文章:{" "}
 					<Link
-						to="/posts/$postId"
-						params={{ postId: String(comment.article.id) }}
+						to="/articles/$articleId"
+						params={{ articleId: String(comment.article.id) }}
 						className="font-medium hover:text-blue-600"
 					>
 						{comment.article.title}

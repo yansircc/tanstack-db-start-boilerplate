@@ -8,9 +8,8 @@ export function useCategoryStatsQuery() {
 	return useLiveQuery((q) =>
 		q
 			.from({ category: categoriesCollection })
-			.leftJoin(
-				{ article: articlesCollection },
-				({ category, article }) => eq(category.id, article.categoryId),
+			.leftJoin({ article: articlesCollection }, ({ category, article }) =>
+				eq(category.id, article.categoryId),
 			)
 			.groupBy(({ category }) => [category.id, category.name])
 			.select(({ category, article }) => ({

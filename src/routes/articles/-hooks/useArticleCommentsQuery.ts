@@ -1,17 +1,13 @@
 import { eq, useLiveQuery } from "@tanstack/react-db";
-import {
-	commentsCollection,
-	usersCollection,
-} from "../../../db/collections";
+import { commentsCollection, usersCollection } from "../../../db/collections";
 
 export function useArticleCommentsQuery(articleId: number) {
 	return useLiveQuery(
 		(q) =>
 			q
 				.from({ comment: commentsCollection })
-				.leftJoin(
-					{ user: usersCollection },
-					({ comment, user }) => eq(comment.authorId, user.id),
+				.leftJoin({ user: usersCollection }, ({ comment, user }) =>
+					eq(comment.authorId, user.id),
 				)
 				.where(({ comment }) => eq(comment.articleId, articleId))
 				.orderBy(({ comment }) => comment.createdAt, "asc")

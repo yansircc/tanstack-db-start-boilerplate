@@ -3,23 +3,23 @@ import { ArticleComments } from "./-components/ArticleComments";
 import { ArticleContent } from "./-components/ArticleContent";
 import { ArticleHeader } from "./-components/ArticleHeader";
 
-export const Route = createFileRoute("/posts/$postId/")({
+export const Route = createFileRoute("/articles/$articleId/")({
 	ssr: false,
 	component: RouteComponent,
 });
 
 function RouteComponent() {
-	const { postId } = Route.useParams();
-	const postIdNum = Number(postId);
+	const { articleId } = Route.useParams();
+	const articleIdNum = Number(articleId);
 
 	return (
 		<div className="max-w-4xl mx-auto p-6 space-y-6">
 			<article className="space-y-6">
-				<ArticleHeader postId={postIdNum} />
-				<ArticleContent postId={postIdNum} />
+				<ArticleHeader articleId={articleIdNum} />
+				<ArticleContent articleId={articleIdNum} />
 			</article>
 
-			<ArticleComments postId={postIdNum} />
+			<ArticleComments articleId={articleIdNum} />
 		</div>
 	);
 }

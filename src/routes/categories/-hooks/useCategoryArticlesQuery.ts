@@ -1,17 +1,13 @@
 import { eq, useLiveQuery } from "@tanstack/react-db";
-import {
-	articlesCollection,
-	usersCollection,
-} from "../../../db/collections";
+import { articlesCollection, usersCollection } from "../../../db/collections";
 
 export function useCategoryArticlesQuery(categoryId: number) {
 	return useLiveQuery(
 		(q) =>
 			q
 				.from({ article: articlesCollection })
-				.leftJoin(
-					{ user: usersCollection },
-					({ article, user }) => eq(article.authorId, user.id),
+				.leftJoin({ user: usersCollection }, ({ article, user }) =>
+					eq(article.authorId, user.id),
 				)
 				.where(({ article }) => eq(article.categoryId, categoryId))
 				.where(({ article }) => eq(article.status, "published"))

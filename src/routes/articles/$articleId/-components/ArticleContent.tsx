@@ -1,11 +1,11 @@
 import { useArticleDetailQuery } from "../../-hooks/useArticleDetailQuery";
 
 interface ArticleContentProps {
-	postId: number;
+	articleId: number;
 }
 
-export function ArticleContent({ postId }: ArticleContentProps) {
-	const { data: article } = useArticleDetailQuery(postId);
+export function ArticleContent({ articleId }: ArticleContentProps) {
+	const { data: article } = useArticleDetailQuery(articleId);
 
 	if (!article) {
 		return null;

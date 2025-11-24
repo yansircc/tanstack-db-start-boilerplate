@@ -165,23 +165,23 @@ For more complex scenarios, use `createOptimisticAction` to create **intent-base
 ```tsx
 // Intent: "like this post"
 const likePost = createOptimisticAction<string>({
-  onMutate: (postId) => {
+  onMutate: (articleId) => {
     // Optimistic guess at the change
-    postCollection.update(postId, (draft) => {
+    postCollection.update(articleId, (draft) => {
       draft.likeCount += 1
       draft.likedByMe = true
     })
   },
-  mutationFn: async (postId) => {
+  mutationFn: async (articleId) => {
     // Send the intent to the server
-    await api.posts.like(postId)
+    await api.posts.like(articleId)
     // Server determines actual state changes
     await postCollection.utils.refetch()
   },
 })
 
 // Use it.
-likePost(postId)
+likePost(articleId)
 ```
 
 Use custom actions when:

@@ -29,15 +29,17 @@ export function UserDraftArticles({ userId }: UserDraftArticlesProps) {
 							</span>
 							<div className="flex-1">
 								<Link
-									to="/posts/$postId"
-									params={{ postId: String(article.id) }}
+									to="/articles/$articleId"
+									params={{ articleId: String(article.id) }}
 								>
 									<h3 className="text-lg font-semibold text-gray-900 hover:text-blue-600">
 										{article.title}
 									</h3>
 								</Link>
 								{article.excerpt && (
-									<p className="text-gray-600 text-sm mt-1">{article.excerpt}</p>
+									<p className="text-gray-600 text-sm mt-1">
+										{article.excerpt}
+									</p>
 								)}
 								<div className="text-xs text-gray-500 mt-2">
 									{article.createdAt.toLocaleDateString("zh-CN")}

@@ -5,9 +5,7 @@ interface UserPublishedArticlesProps {
 	userId: number;
 }
 
-export function UserPublishedArticles({
-	userId,
-}: UserPublishedArticlesProps) {
+export function UserPublishedArticles({ userId }: UserPublishedArticlesProps) {
 	const { data: articles } = useUserArticlesQuery(userId);
 
 	const publishedArticles =
@@ -27,8 +25,8 @@ export function UserPublishedArticles({
 							className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition"
 						>
 							<Link
-								to="/posts/$postId"
-								params={{ postId: String(article.id) }}
+								to="/articles/$articleId"
+								params={{ articleId: String(article.id) }}
 							>
 								<h3 className="text-lg font-semibold text-gray-900 mb-2 hover:text-blue-600">
 									{article.title}
