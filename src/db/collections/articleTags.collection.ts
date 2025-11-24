@@ -1,7 +1,7 @@
 import { queryCollectionOptions } from "@tanstack/query-db-collection";
 import { createCollection } from "@tanstack/react-db";
-import { getArticleTags } from "../../api/sync/articleTags.sync";
-import { queryClient } from "../../lib/query-client";
+import { getArticleTags } from "@/api/sync/articleTags.sync";
+import { queryClient } from "@/lib/query-client";
 import { selectArticleTagSchema } from "../schemas-zod";
 
 export const articleTagsCollection = createCollection(

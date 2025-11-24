@@ -1,8 +1,8 @@
 import { queryCollectionOptions } from "@tanstack/query-db-collection";
 import { createCollection } from "@tanstack/react-db";
+import { getArticles } from "@/api/sync/articles.sync";
 import { selectArticleSchema } from "@/db/schemas-zod";
-import { getArticles } from "../../api/sync/articles.sync";
-import { queryClient } from "../../lib/query-client";
+import { queryClient } from "@/lib/query-client";
 
 /**
  * Articles Collection
