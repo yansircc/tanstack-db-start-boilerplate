@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { RoleSwitcher } from "./RoleSwitcher";
 
 export default function Header() {
 	return (
@@ -6,6 +7,7 @@ export default function Header() {
 			<div className="max-w-6xl mx-auto px-6 py-4">
 				<div className="flex items-center justify-between mb-4">
 					<h1 className="text-2xl font-bold text-gray-900">TanStack DB Test</h1>
+					<RoleSwitcher />
 				</div>
 				<nav className="flex gap-4 text-sm">
 					<Link

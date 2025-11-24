@@ -7,3 +7,4 @@ export { categoriesCollection } from "./categories.collection";
 export { commentsCollection } from "./comments.collection";
 export { tagsCollection } from "./tags.collection";
 export { usersCollection } from "./users.collection";
+export { currentUserCollection } from "./currentUser.collection";
