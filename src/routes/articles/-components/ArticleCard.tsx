@@ -7,7 +7,7 @@ interface ArticleCardProps {
 
 export function ArticleCard({ article }: ArticleCardProps) {
 	return (
-		<article className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition">
+		<div className="flex-1">
 			<Link
 				to="/articles/$articleId"
 				params={{ articleId: String(article.id) }}
@@ -58,6 +58,6 @@ export function ArticleCard({ article }: ArticleCardProps) {
 					{article.createdAt.toLocaleDateString("zh-CN")}
 				</time>
 			</div>
-		</article>
+		</div>
 	);
 }
