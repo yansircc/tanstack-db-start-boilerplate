@@ -21,13 +21,7 @@ export function useArticleCommentsQuery(articleId: number) {
 					content: comment.content,
 					createdAt: comment.createdAt,
 					parentId: comment.parentId,
-					author: user
-						? {
-								id: user.id,
-								displayName: user.displayName,
-								avatar: user.avatar,
-							}
-						: undefined,
+					author: user,  // ✅ 直接返回 user (可能是 undefined)
 				})),
 		[articleId],
 	);

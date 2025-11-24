@@ -91,7 +91,7 @@ export function TagArticles({ tagId }: TagArticlesProps) {
 										<span>阅读 {article.viewCount}</span>
 
 										<time className="ml-auto">
-											{article.createdAt.toLocaleDateString("zh-CN")}
+											{article.createdAt?.toLocaleDateString("zh-CN")}
 										</time>
 									</div>
 								</div>

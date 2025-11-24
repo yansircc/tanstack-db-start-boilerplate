@@ -24,19 +24,8 @@ export function useCommentsQuery() {
 				id: comment.id,
 				content: comment.content,
 				createdAt: comment.createdAt,
-				author: user
-					? {
-							id: user.id,
-							displayName: user.displayName,
-							avatar: user.avatar,
-						}
-					: undefined,
-				article: article
-					? {
-							id: article.id,
-							title: article.title,
-						}
-					: undefined,
+				author: user,  // ✅ 直接返回,不用条件表达式
+				article: article,  // ✅ 直接返回,不用条件表达式
 			})),
 	);
 }

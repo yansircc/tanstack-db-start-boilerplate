@@ -19,10 +19,10 @@ export function CategoryHeader({ categoryId }: CategoryHeaderProps) {
 
 	const totalArticles = articles?.length ?? 0;
 	const totalViews =
-		articles?.reduce((sum, article) => sum + article.viewCount, 0) ?? 0;
+		articles?.reduce((sum, article) => sum + (article?.viewCount ?? 0), 0) ?? 0;
 
 	return (
-		<div className="bg-gradient-to-r from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-6 space-y-3">
+		<div className="bg-linear-to-r from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-6 space-y-3">
 			<div className="flex items-center gap-3">
 				<div className="bg-blue-500 text-white px-4 py-2 rounded-full text-lg font-bold">
 					{category.name[0].toUpperCase()}
@@ -43,7 +43,8 @@ export function CategoryHeader({ categoryId }: CategoryHeaderProps) {
 					篇文章
 				</div>
 				<div>
-					<span className="font-semibold text-gray-900">{totalViews}</span> 总阅读量
+					<span className="font-semibold text-gray-900">{totalViews}</span>{" "}
+					总阅读量
 				</div>
 				<div className="ml-auto text-xs text-gray-600">
 					创建于 {category.createdAt.toLocaleDateString("zh-CN")}
