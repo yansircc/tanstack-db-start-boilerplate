@@ -1,11 +1,9 @@
+import { useCategoriesQuery } from "../-hooks/useCategoriesQuery";
 import { CategoryCard } from "./CategoryCard";
-import type { CategoryWithCount } from "./types";
 
-interface CategoryListProps {
-	categories: CategoryWithCount[] | undefined;
-}
+export function CategoryList() {
+	const { data: categories } = useCategoriesQuery();
 
-export function CategoryList({ categories }: CategoryListProps) {
 	if (!categories || categories.length === 0) {
 		return <p className="text-gray-500">暂无分类</p>;
 	}

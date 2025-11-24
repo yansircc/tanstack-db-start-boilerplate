@@ -1,11 +1,9 @@
+import { useTagsQuery } from "../-hooks/useTagsQuery";
 import { TagBadge } from "./TagBadge";
-import type { TagDisplay } from "./types";
 
-interface TagListProps {
-	tags: TagDisplay[] | undefined;
-}
+export function TagList() {
+	const { data: tags } = useTagsQuery();
 
-export function TagList({ tags }: TagListProps) {
 	if (!tags || tags.length === 0) {
 		return <p className="text-gray-500">暂无标签</p>;
 	}

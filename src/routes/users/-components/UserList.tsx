@@ -1,11 +1,9 @@
+import { useUsersQuery } from "../-hooks/useUsersQuery";
 import { UserCard } from "./UserCard";
-import type { UserDisplay } from "./types";
 
-interface UserListProps {
-	users: UserDisplay[] | undefined;
-}
+export function UserList() {
+	const { data: users } = useUsersQuery();
 
-export function UserList({ users }: UserListProps) {
 	if (!users || users.length === 0) {
 		return <p className="text-gray-500">暂无用户</p>;
 	}

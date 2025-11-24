@@ -1,10 +1,8 @@
-import type { TopAuthor } from "./types";
+import { useTopAuthorsQuery } from "../-hooks/useTopAuthorsQuery";
 
-interface TopAuthorsCardProps {
-	authors: TopAuthor[] | undefined;
-}
+export function TopAuthorsCard() {
+	const { data: authors } = useTopAuthorsQuery();
 
-export function TopAuthorsCard({ authors }: TopAuthorsCardProps) {
 	return (
 		<div className="border border-gray-200 rounded-lg p-4">
 			<h2 className="text-xl font-semibold mb-4">热门作者</h2>

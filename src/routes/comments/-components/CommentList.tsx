@@ -1,11 +1,9 @@
+import { useCommentsQuery } from "../-hooks/useCommentsQuery";
 import { CommentCard } from "./CommentCard";
-import type { CommentWithRelations } from "./types";
 
-interface CommentListProps {
-	comments: CommentWithRelations[] | undefined;
-}
+export function CommentList() {
+	const { data: comments } = useCommentsQuery();
 
-export function CommentList({ comments }: CommentListProps) {
 	if (!comments || comments.length === 0) {
 		return <p className="text-gray-500">暂无评论</p>;
 	}

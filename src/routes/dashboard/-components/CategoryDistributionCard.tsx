@@ -1,12 +1,8 @@
-import type { CategoryStat } from "./types";
+import { useCategoryStatsQuery } from "../-hooks/useCategoryStatsQuery";
 
-interface CategoryDistributionCardProps {
-	categories: CategoryStat[] | undefined;
-}
+export function CategoryDistributionCard() {
+	const { data: categories } = useCategoryStatsQuery();
 
-export function CategoryDistributionCard({
-	categories,
-}: CategoryDistributionCardProps) {
 	return (
 		<div className="border border-gray-200 rounded-lg p-4">
 			<h2 className="text-xl font-semibold mb-4">分类分布</h2>

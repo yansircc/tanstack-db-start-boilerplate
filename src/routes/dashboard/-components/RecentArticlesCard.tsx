@@ -1,10 +1,8 @@
-import type { RecentArticle } from "./types";
+import { useRecentArticlesQuery } from "../-hooks/useRecentArticlesQuery";
 
-interface RecentArticlesCardProps {
-	articles: RecentArticle[] | undefined;
-}
+export function RecentArticlesCard() {
+	const { data: articles } = useRecentArticlesQuery();
 
-export function RecentArticlesCard({ articles }: RecentArticlesCardProps) {
 	return (
 		<div className="border border-gray-200 rounded-lg p-4">
 			<h2 className="text-xl font-semibold mb-4">最新文章</h2>

@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { UserList } from "./-components/UserList";
-import { useUsersQuery } from "./-hooks/useUsersQuery";
 
 export const Route = createFileRoute("/users/")({
 	ssr: false,
@@ -8,12 +7,10 @@ export const Route = createFileRoute("/users/")({
 });
 
 function RouteComponent() {
-	const { data: users } = useUsersQuery();
-
 	return (
 		<div className="max-w-4xl mx-auto p-6 space-y-6">
 			<h1 className="text-3xl font-bold">用户列表</h1>
-			<UserList users={users} />
+			<UserList />
 		</div>
 	);
 }

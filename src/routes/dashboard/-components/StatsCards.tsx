@@ -1,10 +1,7 @@
-import type { Stats } from "./types";
+import { useStatsQuery } from "../-hooks/useStatsQuery";
 
-interface StatsCardsProps {
-	stats: Stats | undefined;
-}
-
-export function StatsCards({ stats }: StatsCardsProps) {
+export function StatsCards() {
+	const { data: stats } = useStatsQuery();
 	const firstStat = Array.isArray(stats) ? stats[0] : stats;
 
 	return (
