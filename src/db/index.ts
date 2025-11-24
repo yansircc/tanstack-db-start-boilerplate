@@ -6,5 +6,5 @@ import * as schema from "./schema.ts";
 
 config();
 
-const sqlite = new Database(process.env.DATABASE_URL!);
+const sqlite = new Database(process.env.DATABASE_URL || "dev.db");
 export const db = drizzle(sqlite, { schema });
