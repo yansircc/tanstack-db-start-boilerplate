@@ -46,7 +46,9 @@ export function UserProfileCard({ userId }: UserProfileCardProps) {
 							<h1 className="text-4xl font-bold font-mono text-foreground uppercase tracking-tight">
 								{user.displayName}
 							</h1>
-							<p className="text-muted-foreground font-mono text-xl mt-1">@{user.username}</p>
+							<p className="text-muted-foreground font-mono text-xl mt-1">
+								@{user.username}
+							</p>
 						</div>
 						<div className="bg-muted px-3 py-1 rounded-sm border border-foreground/20 text-xs font-mono">
 							ID: {user.id}
@@ -61,16 +63,28 @@ export function UserProfileCard({ userId }: UserProfileCardProps) {
 
 					<div className="flex items-center gap-8 mt-6 pt-6 border-t-2 border-foreground/10">
 						<div className="flex flex-col">
-							<span className="text-xs font-mono font-bold uppercase text-muted-foreground">Articles</span>
-							<span className="text-2xl font-bold font-mono">{publishedCount}</span>
+							<span className="text-xs font-mono font-bold uppercase text-muted-foreground">
+								Articles
+							</span>
+							<span className="text-2xl font-bold font-mono">
+								{publishedCount}
+							</span>
 						</div>
 						<div className="flex flex-col">
-							<span className="text-xs font-mono font-bold uppercase text-muted-foreground">Comments</span>
-							<span className="text-2xl font-bold font-mono">{totalComments}</span>
+							<span className="text-xs font-mono font-bold uppercase text-muted-foreground">
+								Comments
+							</span>
+							<span className="text-2xl font-bold font-mono">
+								{totalComments}
+							</span>
 						</div>
 						<div className="flex flex-col ml-auto text-right">
-							<span className="text-xs font-mono font-bold uppercase text-muted-foreground">Member Since</span>
-							<span className="text-lg font-mono">{user.createdAt.toLocaleDateString("zh-CN")}</span>
+							<span className="text-xs font-mono font-bold uppercase text-muted-foreground">
+								Member Since
+							</span>
+							<span className="text-lg font-mono">
+								{user.createdAt.toLocaleDateString("zh-CN")}
+							</span>
 						</div>
 					</div>
 				</div>

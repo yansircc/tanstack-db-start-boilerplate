@@ -45,9 +45,11 @@ export function DeleteCommentDialog({
 					确定要删除这条评论吗？此操作无法撤销。
 					{comment && (
 						<div className="mt-2 text-sm text-muted-foreground">
-							"{comment.content.length > 50
+							"
+							{comment.content.length > 50
 								? `${comment.content.substring(0, 50)}...`
-								: comment.content}"
+								: comment.content}
+							"
 						</div>
 					)}
 				</>

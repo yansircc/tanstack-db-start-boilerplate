@@ -22,7 +22,7 @@ export function EditArticleDialog({
 		q
 			.from({ article: articlesCollection })
 			.where(({ article }) => eq(article.id, articleId))
-			.select(({ article }) => article)
+			.select(({ article }) => article),
 	);
 
 	const article = articles?.[0];

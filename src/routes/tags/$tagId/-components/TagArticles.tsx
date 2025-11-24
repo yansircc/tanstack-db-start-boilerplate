@@ -24,7 +24,9 @@ export function TagArticles({ tagId }: TagArticlesProps) {
 			</div>
 
 			{!articles || articles.length === 0 ? (
-				<div className="text-muted-foreground font-mono">No articles found in this tag.</div>
+				<div className="text-muted-foreground font-mono">
+					No articles found in this tag.
+				</div>
 			) : (
 				<div className="space-y-4">
 					{articles.map((article) => (
@@ -92,7 +94,9 @@ export function TagArticles({ tagId }: TagArticlesProps) {
 											</Link>
 										)}
 
-										<span className="ml-auto">{article.createdAt?.toLocaleDateString("zh-CN")}</span>
+										<span className="ml-auto">
+											{article.createdAt?.toLocaleDateString("zh-CN")}
+										</span>
 									</div>
 								</div>
 							</div>

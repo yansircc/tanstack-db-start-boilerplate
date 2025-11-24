@@ -12,7 +12,9 @@ export function ArticleHeader({ articleId }: ArticleHeaderProps) {
 
 	if (!article) {
 		return (
-			<div className="text-center text-muted-foreground font-mono uppercase py-12">Article not found</div>
+			<div className="text-center text-muted-foreground font-mono uppercase py-12">
+				Article not found
+			</div>
 		);
 	}
 

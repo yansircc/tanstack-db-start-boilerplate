@@ -35,7 +35,9 @@ export function ArticleCard({ article }: ArticleCardProps) {
 				</h2>
 
 				{article.excerpt && (
-					<p className="text-muted-foreground mb-4 line-clamp-2">{article.excerpt}</p>
+					<p className="text-muted-foreground mb-4 line-clamp-2">
+						{article.excerpt}
+					</p>
 				)}
 			</Link>
 
@@ -67,7 +69,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
 						<span>READS:</span>
 						<span className="font-bold">{article.viewCount}</span>
 					</span>
-					
+
 					{/* 点赞和收藏统计 */}
 					<ArticleStats articleId={article.id} />
 				</div>

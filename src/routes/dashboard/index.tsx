@@ -16,7 +16,9 @@ function RouteComponent() {
 	return (
 		<div className="max-w-[1280px] mx-auto p-8 space-y-12">
 			<div className="flex items-end justify-between border-b-2 border-foreground pb-4">
-				<h1 className="text-6xl font-bold tracking-tight uppercase font-mono">Dashboard</h1>
+				<h1 className="text-6xl font-bold tracking-tight uppercase font-mono">
+					Dashboard
+				</h1>
 				{isLoggedIn && (
 					<div className="flex items-center gap-2 text-base font-mono mb-2">
 						<span>USER:</span>
@@ -32,7 +34,7 @@ function RouteComponent() {
 				<div className="absolute top-0 right-0 bg-primary text-xs font-mono px-2 py-1 border-l-2 border-b-2 border-foreground">
 					STATUS: {isLoggedIn ? "ONLINE" : "GUEST"}
 				</div>
-				
+
 				{currentUser?.avatar ? (
 					<img
 						src={currentUser.avatar}
@@ -44,7 +46,7 @@ function RouteComponent() {
 						{displayName.charAt(0).toUpperCase()}
 					</div>
 				)}
-				
+
 				<div>
 					<h2 className="text-2xl font-bold font-mono uppercase mb-1">
 						{isLoggedIn ? "Welcome Back" : "Hello Guest"}

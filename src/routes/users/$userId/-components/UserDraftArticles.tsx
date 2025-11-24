@@ -20,7 +20,7 @@ export function UserDraftArticles({ userId }: UserDraftArticlesProps) {
 				<div className="w-2 h-2 rounded-full bg-yellow-500 border border-foreground"></div>
 				<h2 className="text-xl font-bold font-mono uppercase">Drafts</h2>
 			</div>
-			
+
 			<div className="space-y-3">
 				{draftArticles.map((article) => (
 					<div

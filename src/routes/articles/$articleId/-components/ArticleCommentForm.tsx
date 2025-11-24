@@ -71,8 +71,12 @@ export function ArticleCommentForm({ articleId }: ArticleCommentFormProps) {
 	if (!currentUser?.userId) {
 		return (
 			<div className="bg-secondary/30 border-2 border-foreground border-dashed rounded-sm p-6 text-center">
-				<p className="font-mono text-foreground font-bold mb-2">Login Required</p>
-				<p className="text-muted-foreground text-sm">Please select a user to post comments.</p>
+				<p className="font-mono text-foreground font-bold mb-2">
+					Login Required
+				</p>
+				<p className="text-muted-foreground text-sm">
+					Please select a user to post comments.
+				</p>
 			</div>
 		);
 	}
@@ -97,7 +101,9 @@ export function ArticleCommentForm({ articleId }: ArticleCommentFormProps) {
 					<p className="font-bold font-mono uppercase">
 						{currentUser.displayName}
 					</p>
-					<p className="text-xs text-muted-foreground font-mono">Posting a comment...</p>
+					<p className="text-xs text-muted-foreground font-mono">
+						Posting a comment...
+					</p>
 				</div>
 			</div>
 

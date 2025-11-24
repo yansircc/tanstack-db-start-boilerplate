@@ -10,9 +10,11 @@ export function CategoryDistributionCard() {
 				<h2 className="text-lg font-mono font-bold uppercase">Distribution</h2>
 				<div className="w-3 h-3 border-2 border-foreground bg-accent"></div>
 			</div>
-			
+
 			{!categories || categories.length === 0 ? (
-				<div className="p-8 text-center text-muted-foreground font-mono">NO DATA FOUND</div>
+				<div className="p-8 text-center text-muted-foreground font-mono">
+					NO DATA FOUND
+				</div>
 			) : (
 				<div className="p-4 space-y-3 flex-1">
 					{categories.map((cat, i) => (
@@ -35,7 +37,12 @@ export function CategoryDistributionCard() {
 									className="h-full absolute top-0 left-0 border-r-2 border-foreground transition-all duration-500 ease-out"
 									style={{
 										width: `${Math.min((cat.articleCount / (categories[0]?.articleCount || 1)) * 100, 100)}%`,
-										backgroundColor: i % 3 === 0 ? 'var(--primary)' : i % 3 === 1 ? 'var(--secondary)' : 'var(--accent)'
+										backgroundColor:
+											i % 3 === 0
+												? "var(--primary)"
+												: i % 3 === 1
+													? "var(--secondary)"
+													: "var(--accent)",
 									}}
 								/>
 							</div>

@@ -31,8 +31,10 @@ export function CategoryHeader({ categoryId }: CategoryHeaderProps) {
 					<h1 className="text-5xl font-bold font-mono text-foreground uppercase tracking-tight">
 						{category.name}
 					</h1>
-					<p className="text-muted-foreground font-mono text-lg mt-1">#{category.slug}</p>
-					
+					<p className="text-muted-foreground font-mono text-lg mt-1">
+						#{category.slug}
+					</p>
+
 					{category.description && (
 						<p className="text-foreground text-lg mt-4 leading-relaxed max-w-2xl border-l-4 border-primary pl-4">
 							{category.description}
@@ -43,16 +45,24 @@ export function CategoryHeader({ categoryId }: CategoryHeaderProps) {
 
 			<div className="flex items-center gap-8 border-t-2 border-foreground/10 pt-6 mt-6">
 				<div className="flex flex-col">
-					<span className="text-xs font-mono font-bold uppercase text-muted-foreground">Articles</span>
+					<span className="text-xs font-mono font-bold uppercase text-muted-foreground">
+						Articles
+					</span>
 					<span className="text-2xl font-bold font-mono">{totalArticles}</span>
 				</div>
 				<div className="flex flex-col">
-					<span className="text-xs font-mono font-bold uppercase text-muted-foreground">Total Views</span>
+					<span className="text-xs font-mono font-bold uppercase text-muted-foreground">
+						Total Views
+					</span>
 					<span className="text-2xl font-bold font-mono">{totalViews}</span>
 				</div>
 				<div className="flex flex-col ml-auto text-right">
-					<span className="text-xs font-mono font-bold uppercase text-muted-foreground">Created</span>
-					<span className="text-lg font-mono">{category.createdAt.toLocaleDateString("zh-CN")}</span>
+					<span className="text-xs font-mono font-bold uppercase text-muted-foreground">
+						Created
+					</span>
+					<span className="text-lg font-mono">
+						{category.createdAt.toLocaleDateString("zh-CN")}
+					</span>
 				</div>
 			</div>
 		</div>

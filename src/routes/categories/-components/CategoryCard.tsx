@@ -14,7 +14,9 @@ export function CategoryCard({ category }: CategoryCardProps) {
 	const bgClass = colors[category.id % colors.length];
 
 	return (
-		<div className={`border-2 border-foreground rounded-sm p-6 ${bgClass} hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_var(--foreground)] transition-all duration-200 flex flex-col h-full group`}>
+		<div
+			className={`border-2 border-foreground rounded-sm p-6 ${bgClass} hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_var(--foreground)] transition-all duration-200 flex flex-col h-full group`}
+		>
 			<div className="flex items-start justify-between gap-4 mb-4">
 				<Link
 					to="/categories/$categoryId"
@@ -47,7 +49,9 @@ export function CategoryCard({ category }: CategoryCardProps) {
 			</div>
 
 			{category.description && (
-				<p className="text-sm text-foreground/80 mb-6 flex-1 line-clamp-3">{category.description}</p>
+				<p className="text-sm text-foreground/80 mb-6 flex-1 line-clamp-3">
+					{category.description}
+				</p>
 			)}
 
 			<div className="flex items-center justify-between text-xs font-mono border-t-2 border-foreground/10 pt-3 mt-auto">

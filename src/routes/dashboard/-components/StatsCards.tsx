@@ -45,7 +45,12 @@ function StatCard({
 	label,
 	value,
 	color,
-}: { to: string; label: string; value: number; color: string }) {
+}: {
+	to: string;
+	label: string;
+	value: number;
+	color: string;
+}) {
 	return (
 		<Link
 			to={to}

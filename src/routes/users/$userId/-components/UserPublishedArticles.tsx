@@ -15,11 +15,15 @@ export function UserPublishedArticles({ userId }: UserPublishedArticlesProps) {
 		<div className="space-y-4">
 			<div className="flex items-center gap-2 border-b-2 border-foreground pb-2">
 				<div className="w-2 h-2 rounded-full bg-green-500 border border-foreground"></div>
-				<h2 className="text-xl font-bold font-mono uppercase">Published Articles</h2>
+				<h2 className="text-xl font-bold font-mono uppercase">
+					Published Articles
+				</h2>
 			</div>
 
 			{publishedArticles.length === 0 ? (
-				<div className="text-sm text-muted-foreground font-mono">No published articles.</div>
+				<div className="text-sm text-muted-foreground font-mono">
+					No published articles.
+				</div>
 			) : (
 				<div className="space-y-3">
 					{publishedArticles.map((article) => (
@@ -38,7 +42,9 @@ export function UserPublishedArticles({ userId }: UserPublishedArticlesProps) {
 							</Link>
 
 							{article.excerpt && (
-								<p className="text-muted-foreground text-sm mb-3 line-clamp-2">{article.excerpt}</p>
+								<p className="text-muted-foreground text-sm mb-3 line-clamp-2">
+									{article.excerpt}
+								</p>
 							)}
 
 							<div className="flex items-center gap-4 text-xs font-mono text-muted-foreground">

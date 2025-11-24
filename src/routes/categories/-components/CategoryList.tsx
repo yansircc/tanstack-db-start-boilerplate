@@ -7,7 +7,9 @@ export function CategoryList() {
 	if (!categories || categories.length === 0) {
 		return (
 			<div className="border-2 border-foreground border-dashed rounded-sm p-12 text-center">
-				<p className="text-muted-foreground font-mono text-lg uppercase">No categories found.</p>
+				<p className="text-muted-foreground font-mono text-lg uppercase">
+					No categories found.
+				</p>
 			</div>
 		);
 	}

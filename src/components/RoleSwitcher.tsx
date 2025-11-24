@@ -90,8 +90,11 @@ export function RoleSwitcher() {
 						{displayName.charAt(0).toUpperCase()}
 					</div>
 				)}
-				<span className="font-mono font-bold uppercase text-xs">Role: {displayName}</span>
-				<svg aria-hidden="true"
+				<span className="font-mono font-bold uppercase text-xs">
+					Role: {displayName}
+				</span>
+				<svg
+					aria-hidden="true"
 					className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
 					fill="none"
 					stroke="currentColor"
@@ -121,7 +124,8 @@ export function RoleSwitcher() {
 						}`}
 					>
 						<div className="w-8 h-8 rounded-sm bg-muted border border-foreground flex items-center justify-center text-foreground">
-							<svg aria-hidden="true"
+							<svg
+								aria-hidden="true"
 								className="w-5 h-5"
 								fill="none"
 								stroke="currentColor"
@@ -136,8 +140,12 @@ export function RoleSwitcher() {
 							</svg>
 						</div>
 						<div className="flex-1 min-w-0">
-							<div className="font-bold text-sm text-foreground font-mono">Guest Mode</div>
-							<div className="text-xs text-muted-foreground">Read-only access</div>
+							<div className="font-bold text-sm text-foreground font-mono">
+								Guest Mode
+							</div>
+							<div className="text-xs text-muted-foreground">
+								Read-only access
+							</div>
 						</div>
 						{!currentUser?.userId && (
 							<div className="w-2 h-2 rounded-full bg-green-500 border border-foreground"></div>

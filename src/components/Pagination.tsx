@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface PaginationProps {
 	currentPage: number;
@@ -75,9 +75,12 @@ export function Pagination({
 				<ChevronLeft className="w-4 h-4" />
 			</Button>
 
-			{getPageNumbers().map((page, index) =>
+			{getPageNumbers().map((page) =>
 				page === "..." ? (
-					<span key={`ellipsis-${index}`} className="px-2 text-gray-500">
+					<span
+						key={`ellipsis-${Math.random()}`}
+						className="px-2 text-gray-500"
+					>
 						...
 					</span>
 				) : (

@@ -21,7 +21,9 @@ export function CommentList() {
 	if (!comments || comments.length === 0) {
 		return (
 			<div className="border-2 border-foreground border-dashed rounded-sm p-12 text-center">
-				<p className="text-muted-foreground font-mono text-lg uppercase">No comments found.</p>
+				<p className="text-muted-foreground font-mono text-lg uppercase">
+					No comments found.
+				</p>
 			</div>
 		);
 	}

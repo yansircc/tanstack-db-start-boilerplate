@@ -75,7 +75,9 @@ export function ArticleComments({ articleId }: ArticleCommentsProps) {
 												{new Date(comment.createdAt).toLocaleString("zh-CN")}
 											</span>
 										</div>
-										<p className="text-foreground leading-relaxed whitespace-pre-wrap">{String(comment.content)}</p>
+										<p className="text-foreground leading-relaxed whitespace-pre-wrap">
+											{String(comment.content)}
+										</p>
 									</div>
 
 									{isAuthor && (
@@ -83,7 +85,11 @@ export function ArticleComments({ articleId }: ArticleCommentsProps) {
 											<EditCommentDialog
 												commentId={comment.id}
 												trigger={
-													<Button size="sm" variant="outline" className="h-7 px-2 bg-white">
+													<Button
+														size="sm"
+														variant="outline"
+														className="h-7 px-2 bg-white"
+													>
 														Edit
 													</Button>
 												}
@@ -91,7 +97,11 @@ export function ArticleComments({ articleId }: ArticleCommentsProps) {
 											<DeleteCommentDialog
 												commentId={comment.id}
 												trigger={
-													<Button size="sm" variant="destructive" className="h-7 px-2">
+													<Button
+														size="sm"
+														variant="destructive"
+														className="h-7 px-2"
+													>
 														Del
 													</Button>
 												}

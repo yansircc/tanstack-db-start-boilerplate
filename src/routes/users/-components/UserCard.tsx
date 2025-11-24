@@ -36,14 +36,16 @@ export function UserCard({ user }: UserCardProps) {
 						<h3 className="text-xl font-bold truncate font-mono uppercase group-hover:text-primary transition-colors">
 							{user.displayName}
 						</h3>
-						<p className="text-sm font-mono text-muted-foreground">@{user.username}</p>
-						
+						<p className="text-sm font-mono text-muted-foreground">
+							@{user.username}
+						</p>
+
 						{user.bio && (
 							<p className="text-sm text-foreground/80 mt-3 line-clamp-2 leading-relaxed">
 								{user.bio}
 							</p>
 						)}
-						
+
 						<div className="mt-4 pt-4 border-t-2 border-foreground/10 flex items-center justify-between">
 							<p className="text-xs font-mono text-muted-foreground">
 								JOINED: {user.createdAt.toLocaleDateString("zh-CN")}

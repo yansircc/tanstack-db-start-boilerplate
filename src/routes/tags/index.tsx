@@ -13,8 +13,12 @@ function RouteComponent() {
 		<div className="max-w-[1280px] mx-auto p-8 space-y-8">
 			<div className="flex items-end justify-between border-b-2 border-foreground pb-4">
 				<div>
-					<h1 className="text-6xl font-bold tracking-tight uppercase font-mono">Tags</h1>
-					<p className="text-lg text-muted-foreground font-mono mt-2">Manage and view all content tags.</p>
+					<h1 className="text-6xl font-bold tracking-tight uppercase font-mono">
+						Tags
+					</h1>
+					<p className="text-lg text-muted-foreground font-mono mt-2">
+						Manage and view all content tags.
+					</p>
 				</div>
 				<CreateTagDialog trigger={<Button>Create Tag</Button>} />
 			</div>

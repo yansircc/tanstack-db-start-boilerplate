@@ -12,7 +12,9 @@ export function TagHeader({ tagId }: TagHeaderProps) {
 	if (!tag) {
 		return (
 			<div className="border-2 border-foreground border-dashed rounded-sm p-12 text-center">
-				<div className="text-muted-foreground font-mono uppercase">Tag not found</div>
+				<div className="text-muted-foreground font-mono uppercase">
+					Tag not found
+				</div>
 			</div>
 		);
 	}
@@ -32,18 +34,24 @@ export function TagHeader({ tagId }: TagHeaderProps) {
 						<h1 className="text-5xl font-bold font-mono text-foreground uppercase tracking-tight">
 							{tag.name}
 						</h1>
-						<p className="text-muted-foreground font-mono mt-1 text-lg">slug: {tag.slug}</p>
+						<p className="text-muted-foreground font-mono mt-1 text-lg">
+							slug: {tag.slug}
+						</p>
 					</div>
 				</div>
 			</div>
 
 			<div className="flex items-center gap-8 border-t-2 border-foreground/10 pt-6 mt-6">
 				<div className="flex flex-col">
-					<span className="text-xs font-mono font-bold uppercase text-muted-foreground">Articles</span>
+					<span className="text-xs font-mono font-bold uppercase text-muted-foreground">
+						Articles
+					</span>
 					<span className="text-2xl font-bold font-mono">{totalArticles}</span>
 				</div>
 				<div className="flex flex-col">
-					<span className="text-xs font-mono font-bold uppercase text-muted-foreground">Total Views</span>
+					<span className="text-xs font-mono font-bold uppercase text-muted-foreground">
+						Total Views
+					</span>
 					<span className="text-2xl font-bold font-mono">{totalViews}</span>
 				</div>
 			</div>

@@ -1,5 +1,8 @@
 import { useLiveQuery, eq } from "@tanstack/react-db";
-import { articleLikesCollection, articleBookmarksCollection } from "@/db/collections";
+import {
+	articleLikesCollection,
+	articleBookmarksCollection,
+} from "@/db/collections";
 import { Heart, Bookmark } from "lucide-react";
 
 interface ArticleStatsProps {

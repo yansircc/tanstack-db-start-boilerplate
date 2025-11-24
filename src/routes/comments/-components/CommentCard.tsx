@@ -46,7 +46,7 @@ export function CommentCard({ comment }: CommentCardProps) {
 								{comment.createdAt.toLocaleDateString("zh-CN")}
 							</span>
 						</div>
-						
+
 						{isAuthor && (
 							<div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
 								<EditCommentDialog
@@ -60,7 +60,11 @@ export function CommentCard({ comment }: CommentCardProps) {
 								<DeleteCommentDialog
 									commentId={comment.id}
 									trigger={
-										<Button size="sm" variant="destructive" className="h-7 px-2">
+										<Button
+											size="sm"
+											variant="destructive"
+											className="h-7 px-2"
+										>
 											Del
 										</Button>
 									}
@@ -68,14 +72,16 @@ export function CommentCard({ comment }: CommentCardProps) {
 							</div>
 						)}
 					</div>
-					
+
 					<div className="text-foreground leading-relaxed mb-4">
 						{comment.content}
 					</div>
 
 					{comment.article && (
 						<div className="flex items-center gap-2 text-sm bg-muted/50 p-2 rounded-sm border border-foreground/10">
-							<span className="font-mono text-xs uppercase text-muted-foreground">On Article:</span>
+							<span className="font-mono text-xs uppercase text-muted-foreground">
+								On Article:
+							</span>
 							<Link
 								to="/articles/$articleId"
 								params={{ articleId: String(comment.article.id) }}

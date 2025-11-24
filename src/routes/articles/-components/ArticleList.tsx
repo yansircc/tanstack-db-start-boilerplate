@@ -28,7 +28,9 @@ export function ArticleList() {
 	if (!articles || articles.length === 0) {
 		return (
 			<div className="border-2 border-foreground border-dashed rounded-sm p-12 text-center">
-				<p className="text-muted-foreground font-mono text-lg uppercase">No articles found.</p>
+				<p className="text-muted-foreground font-mono text-lg uppercase">
+					No articles found.
+				</p>
 			</div>
 		);
 	}
@@ -62,7 +64,11 @@ export function ArticleList() {
 										<DeleteArticleDialog
 											articleId={article.id}
 											trigger={
-												<Button size="sm" variant="destructive" className="w-full">
+												<Button
+													size="sm"
+													variant="destructive"
+													className="w-full"
+												>
 													Delete
 												</Button>
 											}

@@ -7,12 +7,18 @@ export function RecentArticlesCard() {
 	return (
 		<div className="border-2 border-foreground rounded-sm bg-white p-0 overflow-hidden">
 			<div className="bg-secondary p-4 border-b-2 border-foreground flex items-center justify-between">
-				<h2 className="text-lg font-mono font-bold uppercase text-foreground">Recent Updates</h2>
-				<div className="text-xs font-mono font-bold bg-white border border-foreground px-2 py-1 rounded-sm">LIVE</div>
+				<h2 className="text-lg font-mono font-bold uppercase text-foreground">
+					Recent Updates
+				</h2>
+				<div className="text-xs font-mono font-bold bg-white border border-foreground px-2 py-1 rounded-sm">
+					LIVE
+				</div>
 			</div>
-			
+
 			{!articles || articles.length === 0 ? (
-				<div className="p-8 text-center text-muted-foreground font-mono">NO DATA FOUND</div>
+				<div className="p-8 text-center text-muted-foreground font-mono">
+					NO DATA FOUND
+				</div>
 			) : (
 				<div>
 					{articles.map((article) => (
@@ -27,7 +33,9 @@ export function RecentArticlesCard() {
 									{article.title}
 								</div>
 								<div className="flex items-center gap-3 text-xs font-mono text-muted-foreground">
-									<span className="bg-foreground/5 px-1 rounded-sm">BY {article.authorName?.toUpperCase()}</span>
+									<span className="bg-foreground/5 px-1 rounded-sm">
+										BY {article.authorName?.toUpperCase()}
+									</span>
 									<span>{article.createdAt.toLocaleDateString("zh-CN")}</span>
 								</div>
 							</div>

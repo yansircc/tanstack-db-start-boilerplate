@@ -41,7 +41,8 @@ function NavLink({ to, children }: { to: string; children: React.ReactNode }) {
 			to={to}
 			className="px-4 py-2 rounded-sm font-mono text-sm font-bold uppercase transition-all duration-200 border-2 border-transparent hover:border-foreground hover:bg-muted"
 			activeProps={{
-				className: "bg-secondary border-foreground text-foreground shadow-[2px_2px_0px_0px_var(--foreground)]",
+				className:
+					"bg-secondary border-foreground text-foreground shadow-[2px_2px_0px_0px_var(--foreground)]",
 			}}
 		>
 			{children}

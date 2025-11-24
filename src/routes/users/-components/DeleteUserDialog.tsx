@@ -18,7 +18,9 @@ export function DeleteUserDialog({ user, trigger }: DeleteUserDialogProps) {
 		} catch (error) {
 			if (error instanceof Error && error.message.includes("FOREIGN KEY")) {
 				handleError(
-					new Error("该用户有关联数据(如文章、评论等),请先处理这些数据后再删除用户"),
+					new Error(
+						"该用户有关联数据(如文章、评论等),请先处理这些数据后再删除用户",
+					),
 					"删除用户失败",
 				);
 			} else {

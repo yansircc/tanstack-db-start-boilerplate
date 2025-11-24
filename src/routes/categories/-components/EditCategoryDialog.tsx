@@ -18,7 +18,7 @@ export function EditCategoryDialog({
 		q
 			.from({ category: categoriesCollection })
 			.where(({ category }) => eq(category.id, categoryId))
-			.select(({ category }) => category)
+			.select(({ category }) => category),
 	);
 
 	const category = categories?.[0];

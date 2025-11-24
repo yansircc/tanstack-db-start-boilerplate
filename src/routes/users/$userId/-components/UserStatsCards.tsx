@@ -39,11 +39,25 @@ export function UserStatsCards({ userId }: UserStatsCardsProps) {
 	);
 }
 
-function StatBox({ label, value, color }: { label: string; value: number; color: string }) {
+function StatBox({
+	label,
+	value,
+	color,
+}: {
+	label: string;
+	value: number;
+	color: string;
+}) {
 	return (
-		<div className={`${color} border-2 border-foreground rounded-sm p-4 text-center hover:-translate-y-1 transition-transform`}>
-			<div className="text-4xl font-bold font-mono text-foreground mb-1">{value}</div>
-			<div className="text-xs font-mono uppercase tracking-widest text-muted-foreground">{label}</div>
+		<div
+			className={`${color} border-2 border-foreground rounded-sm p-4 text-center hover:-translate-y-1 transition-transform`}
+		>
+			<div className="text-4xl font-bold font-mono text-foreground mb-1">
+				{value}
+			</div>
+			<div className="text-xs font-mono uppercase tracking-widest text-muted-foreground">
+				{label}
+			</div>
 		</div>
 	);
 }

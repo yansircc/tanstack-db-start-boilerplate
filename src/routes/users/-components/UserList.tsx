@@ -7,7 +7,9 @@ export function UserList() {
 	if (!users || users.length === 0) {
 		return (
 			<div className="border-2 border-foreground border-dashed rounded-sm p-12 text-center">
-				<p className="text-muted-foreground font-mono text-lg uppercase">No users found.</p>
+				<p className="text-muted-foreground font-mono text-lg uppercase">
+					No users found.
+				</p>
 			</div>
 		);
 	}

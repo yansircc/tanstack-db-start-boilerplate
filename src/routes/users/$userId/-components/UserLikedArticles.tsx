@@ -17,7 +17,9 @@ export function UserLikedArticles({ userId }: UserLikedArticlesProps) {
 		<div className="space-y-4">
 			<div className="flex items-center gap-2 border-b-2 border-foreground pb-2 text-destructive">
 				<Heart className="w-5 h-5 fill-current" />
-				<h2 className="text-xl font-bold font-mono uppercase text-foreground">Liked Articles</h2>
+				<h2 className="text-xl font-bold font-mono uppercase text-foreground">
+					Liked Articles
+				</h2>
 			</div>
 
 			<div className="space-y-3">
@@ -37,7 +39,9 @@ export function UserLikedArticles({ userId }: UserLikedArticlesProps) {
 						</Link>
 
 						{article.excerpt && (
-							<p className="text-muted-foreground text-sm mb-3 line-clamp-2">{article.excerpt}</p>
+							<p className="text-muted-foreground text-sm mb-3 line-clamp-2">
+								{article.excerpt}
+							</p>
 						)}
 
 						<div className="flex items-center gap-4 text-xs font-mono text-muted-foreground">

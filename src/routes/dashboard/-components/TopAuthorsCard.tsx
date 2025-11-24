@@ -13,9 +13,11 @@ export function TopAuthorsCard() {
 					<div className="w-2 h-2 rounded-full bg-foreground/20"></div>
 				</div>
 			</div>
-			
+
 			{!authors || authors.length === 0 ? (
-				<div className="p-8 text-center text-muted-foreground font-mono">NO DATA FOUND</div>
+				<div className="p-8 text-center text-muted-foreground font-mono">
+					NO DATA FOUND
+				</div>
 			) : (
 				<div className="p-4 space-y-2 flex-1">
 					{authors.map((author, index) => (
@@ -42,7 +44,9 @@ export function TopAuthorsCard() {
 								</div>
 							)}
 							<div className="flex-1 min-w-0">
-								<div className="font-bold truncate">{author.authorName || "Unknown"}</div>
+								<div className="font-bold truncate">
+									{author.authorName || "Unknown"}
+								</div>
 								<div className="text-xs font-mono text-muted-foreground">
 									{author.articleCount} ARTICLES
 								</div>
