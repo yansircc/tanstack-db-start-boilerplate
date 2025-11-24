@@ -5,7 +5,7 @@ import { tags } from "../../db/schema";
 import type { InsertTag } from "../../db/schemas-zod";
 
 export const getTags = createServerFn({ method: "GET" }).handler(async () => {
-	const items = await db.select().from(tags).limit(100);
+	const items = db.select().from(tags).all();
 	return items;
 });
 

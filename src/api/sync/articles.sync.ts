@@ -11,7 +11,7 @@ export const getArticles = createServerFn({ method: "GET" }).handler(
 			.select()
 			.from(articles)
 			.orderBy(desc(articles.createdAt))
-			.limit(100);
+			.all();
 
 		return items;
 	},

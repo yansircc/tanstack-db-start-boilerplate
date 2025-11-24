@@ -5,7 +5,7 @@ import { users } from "../../db/schema";
 import type { InsertUser, UpdateUser } from "../../db/schemas-zod";
 
 export const getUsers = createServerFn({ method: "GET" }).handler(async () => {
-	const items = await db.select().from(users).limit(100);
+	const items = db.select().from(users).all();
 	return items;
 });
 

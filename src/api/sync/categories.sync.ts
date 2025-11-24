@@ -6,7 +6,7 @@ import type { InsertCategory } from "../../db/schemas-zod";
 
 export const getCategories = createServerFn({ method: "GET" }).handler(
 	async () => {
-		const items = await db.select().from(categories).limit(100);
+		const items = await db.select().from(categories).all();
 		return items;
 	},
 );

@@ -9,8 +9,8 @@ export const getComments = createServerFn({ method: "GET" }).handler(
 		const items = await db
 			.select()
 			.from(comments)
-			.orderBy(desc(comments.createdAt))
-			.limit(200);
+			.orderBy(desc(comments.createdAt));
+		// 移除 limit,获取所有评论以便准确统计
 
 		return items;
 	},

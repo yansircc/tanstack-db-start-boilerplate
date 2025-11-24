@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useArticleCommentsQuery } from "../../-hooks/useArticleCommentsQuery";
+import { ArticleCommentForm } from "./ArticleCommentForm";
 
 interface ArticleCommentsProps {
 	articleId: number;
@@ -9,13 +10,17 @@ export function ArticleComments({ articleId }: ArticleCommentsProps) {
 	const { data: comments } = useArticleCommentsQuery(articleId);
 
 	return (
-		<div className="border-t border-gray-200 pt-6 space-y-4">
+		<div className="border-t border-gray-200 pt-6 space-y-6">
 			<h2 className="text-2xl font-bold text-gray-900">
 				评论 {comments?.length ? `(${comments.length})` : ""}
 			</h2>
 
+			{/* 评论表单 */}
+			<ArticleCommentForm articleId={articleId} />
+
+			{/* 评论列表 */}
 			{!comments || comments.length === 0 ? (
-				<p className="text-gray-500">暂无评论</p>
+				<p className="text-gray-500">暂无评论，来发表第一条评论吧！</p>
 			) : (
 				<div className="space-y-4">
 					{comments.map((comment) => (
