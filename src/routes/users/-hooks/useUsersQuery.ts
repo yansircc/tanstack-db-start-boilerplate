@@ -14,6 +14,7 @@ export function useUsersQuery() {
 				avatar: user.avatar,
 				bio: user.bio,
 				createdAt: user.createdAt,
+				updatedAt: user.updatedAt,
 			})),
 	);
 }
