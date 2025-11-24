@@ -26,11 +26,15 @@ export function ArticleList() {
 	const totalCount = totalArticles?.length ?? 0;
 
 	if (!articles || articles.length === 0) {
-		return <p className="text-gray-500">暂无文章</p>;
+		return (
+			<div className="border-2 border-foreground border-dashed rounded-sm p-12 text-center">
+				<p className="text-muted-foreground font-mono text-lg uppercase">No articles found.</p>
+			</div>
+		);
 	}
 
 	return (
-		<div className="space-y-4">
+		<div className="space-y-6">
 			<div className="space-y-4">
 				{articles.map((article) => {
 					// 只有文章作者可以编辑和删除
@@ -39,27 +43,27 @@ export function ArticleList() {
 					return (
 						<div
 							key={article.id}
-							className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition"
+							className="border-2 border-foreground rounded-sm p-6 bg-white hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_var(--foreground)] transition-all duration-200 group"
 						>
-							<div className="flex items-start justify-between gap-4">
+							<div className="flex items-start justify-between gap-6">
 								<ArticleCard article={article} />
 								{isAuthor && (
-									<div className="flex gap-2 shrink-0">
+									<div className="flex flex-col gap-2 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
 										<EditArticleDialog
 											articleId={article.id}
 											authorId={userId ?? 0}
 											categories={categories ?? []}
 											trigger={
-												<Button size="sm" variant="outline">
-													编辑
+												<Button size="sm" variant="outline" className="w-full">
+													Edit
 												</Button>
 											}
 										/>
 										<DeleteArticleDialog
 											articleId={article.id}
 											trigger={
-												<Button size="sm" variant="destructive">
-													删除
+												<Button size="sm" variant="destructive" className="w-full">
+													Delete
 												</Button>
 											}
 										/>

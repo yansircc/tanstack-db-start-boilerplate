@@ -12,7 +12,7 @@ function RouteComponent() {
 	const categoryIdNum = Number(categoryId);
 
 	return (
-		<div className="max-w-4xl mx-auto p-6 space-y-6">
+		<div className="max-w-[1280px] mx-auto p-8 space-y-8">
 			<CategoryHeader categoryId={categoryIdNum} />
 			<CategoryArticles categoryId={categoryIdNum} />
 		</div>

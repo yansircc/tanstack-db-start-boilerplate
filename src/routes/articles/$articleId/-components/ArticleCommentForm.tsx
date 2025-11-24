@@ -70,35 +70,34 @@ export function ArticleCommentForm({ articleId }: ArticleCommentFormProps) {
 	// 如果没有选择用户，显示提示
 	if (!currentUser?.userId) {
 		return (
-			<div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-				<p className="text-yellow-800">
-					请先在右上角选择一个用户，才能发表评论
-				</p>
+			<div className="bg-secondary/30 border-2 border-foreground border-dashed rounded-sm p-6 text-center">
+				<p className="font-mono text-foreground font-bold mb-2">Login Required</p>
+				<p className="text-muted-foreground text-sm">Please select a user to post comments.</p>
 			</div>
 		);
 	}
 
 	return (
-		<div className="space-y-4">
-			<div className="flex items-center gap-3">
+		<div className="border-2 border-foreground rounded-sm p-6 bg-muted/20">
+			<div className="flex items-center gap-3 mb-4">
 				{currentUser.avatar ? (
 					<img
 						src={currentUser.avatar}
 						alt={currentUser.displayName || "用户"}
-						className="w-10 h-10 rounded-full"
+						className="w-10 h-10 rounded-sm border-2 border-foreground object-cover"
 					/>
 				) : (
-					<div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center">
-						<span className="text-sm text-gray-600">
+					<div className="w-10 h-10 rounded-sm border-2 border-foreground bg-white flex items-center justify-center">
+						<span className="text-sm font-bold font-mono">
 							{currentUser.displayName?.[0]?.toUpperCase() || "?"}
 						</span>
 					</div>
 				)}
 				<div>
-					<p className="font-semibold text-gray-900">
+					<p className="font-bold font-mono uppercase">
 						{currentUser.displayName}
 					</p>
-					<p className="text-sm text-gray-500">发表评论</p>
+					<p className="text-xs text-muted-foreground font-mono">Posting a comment...</p>
 				</div>
 			</div>
 
@@ -115,10 +114,10 @@ export function ArticleCommentForm({ articleId }: ArticleCommentFormProps) {
 					validators={{
 						onChange: ({ value }) => {
 							if (!value || value.trim().length < 1) {
-								return "评论内容不能为空";
+								return "Content is required";
 							}
 							if (value.length > 2000) {
-								return "评论内容不能超过 2000 个字符";
+								return "Max 2000 characters";
 							}
 							return undefined;
 						},
@@ -127,9 +126,9 @@ export function ArticleCommentForm({ articleId }: ArticleCommentFormProps) {
 					{(field) => (
 						<FormField
 							field={field}
-							label="评论内容"
+							label="YOUR COMMENT"
 							required
-							placeholder="写下你的评论..."
+							placeholder="Write something..."
 							inputType="textarea"
 							rows={4}
 						/>
@@ -142,7 +141,7 @@ export function ArticleCommentForm({ articleId }: ArticleCommentFormProps) {
 					>
 						{([canSubmit, isSubmitting]) => (
 							<Button type="submit" disabled={!canSubmit || isSubmitting}>
-								{isSubmitting ? "发表中..." : "发表评论"}
+								{isSubmitting ? "POSTING..." : "POST COMMENT"}
 							</Button>
 						)}
 					</form.Subscribe>

@@ -19,11 +19,15 @@ export function CommentList() {
 	const totalCount = totalComments?.length ?? 0;
 
 	if (!comments || comments.length === 0) {
-		return <p className="text-gray-500">暂无评论</p>;
+		return (
+			<div className="border-2 border-foreground border-dashed rounded-sm p-12 text-center">
+				<p className="text-muted-foreground font-mono text-lg uppercase">No comments found.</p>
+			</div>
+		);
 	}
 
 	return (
-		<div className="space-y-4">
+		<div className="space-y-6">
 			<div className="space-y-4">
 				{comments.map((comment) => (
 					<CommentCard key={`comment-${comment.id}`} comment={comment} />

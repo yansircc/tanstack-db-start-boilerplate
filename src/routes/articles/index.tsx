@@ -15,18 +15,21 @@ function RouteComponent() {
 	const { data: categories } = useCategoriesSimpleQuery();
 
 	return (
-		<div className="max-w-4xl mx-auto p-6 space-y-6">
-			<div className="flex items-center justify-between">
-				<h1 className="text-3xl font-bold">文章列表</h1>
+		<div className="max-w-[1280px] mx-auto p-8 space-y-8">
+			<div className="flex items-end justify-between border-b-2 border-foreground pb-4">
+				<div>
+					<h1 className="text-6xl font-bold tracking-tight uppercase font-mono">Articles</h1>
+					<p className="text-lg text-muted-foreground font-mono mt-2">Browse and manage your articles.</p>
+				</div>
 				{isLoggedIn ? (
 					<CreateArticleDialog
 						authorId={userId ?? 0}
 						categories={categories ?? []}
-						trigger={<Button>创建文章</Button>}
+						trigger={<Button>Create Article</Button>}
 					/>
 				) : (
-					<Button disabled title="请先登录">
-						创建文章
+					<Button disabled title="Login required" className="opacity-50">
+						Login to Create
 					</Button>
 				)}
 			</div>

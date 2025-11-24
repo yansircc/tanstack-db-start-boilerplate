@@ -15,61 +15,65 @@ export function TagArticles({ tagId }: TagArticlesProps) {
 	}
 
 	return (
-		<div className="space-y-4">
-			<h2 className="text-2xl font-bold text-gray-900">
-				标签 #{tag.name} 的文章
-			</h2>
+		<div className="space-y-6">
+			<div className="flex items-center gap-2 border-b-2 border-foreground pb-2">
+				<div className="w-3 h-3 bg-accent border border-foreground"></div>
+				<h2 className="text-xl font-bold font-mono uppercase">
+					Articles tagged with #{tag.name}
+				</h2>
+			</div>
 
 			{!articles || articles.length === 0 ? (
-				<p className="text-gray-500">该标签下暂无文章</p>
+				<div className="text-muted-foreground font-mono">No articles found in this tag.</div>
 			) : (
 				<div className="space-y-4">
 					{articles.map((article) => (
 						<div
 							key={article.id}
-							className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition space-y-3"
+							className="border-2 border-foreground rounded-sm p-4 hover:bg-muted/20 transition-all hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_var(--foreground)] bg-white group"
 						>
-							<div className="flex items-start gap-4">
+							<div className="flex items-start gap-6">
 								{article.coverImage && (
 									<img
 										src={article.coverImage}
 										alt={article.title}
-										className="w-32 h-24 object-cover rounded"
+										className="w-32 h-24 object-cover rounded-sm border-2 border-foreground"
 									/>
 								)}
 
-								<div className="flex-1">
+								<div className="flex-1 min-w-0">
 									<Link
 										to="/articles/$articleId"
 										params={{ articleId: String(article.id) }}
+										className="block"
 									>
-										<h3 className="text-xl font-semibold text-gray-900 mb-2 hover:text-blue-600">
+										<h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors truncate">
 											{article.title}
 										</h3>
 									</Link>
 
 									{article.excerpt && (
-										<p className="text-gray-600 text-sm mb-3">
+										<p className="text-muted-foreground text-sm mb-3 line-clamp-2">
 											{article.excerpt}
 										</p>
 									)}
 
-									<div className="flex items-center gap-4 text-sm text-gray-500">
+									<div className="flex items-center gap-4 text-xs font-mono text-muted-foreground">
 										{article.author && (
 											<Link
 												to="/users/$userId"
 												params={{ userId: String(article.author.id) }}
-												className="flex items-center gap-2 hover:text-blue-600"
+												className="flex items-center gap-2 hover:text-primary font-bold uppercase"
 											>
 												{article.author.avatar ? (
 													<img
 														src={article.author.avatar}
 														alt={article.author.displayName}
-														className="w-6 h-6 rounded-full"
+														className="w-5 h-5 rounded-sm border border-foreground object-cover"
 													/>
 												) : (
-													<div className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center">
-														<span className="text-xs text-gray-500">
+													<div className="w-5 h-5 rounded-sm bg-muted border border-foreground flex items-center justify-center">
+														<span className="text-[10px]">
 															{article.author.displayName[0].toUpperCase()}
 														</span>
 													</div>
@@ -82,17 +86,13 @@ export function TagArticles({ tagId }: TagArticlesProps) {
 											<Link
 												to="/categories/$categoryId"
 												params={{ categoryId: String(article.category.id) }}
-												className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs hover:bg-blue-200"
+												className="bg-secondary/50 px-2 py-0.5 rounded-sm border border-foreground/50 hover:bg-secondary hover:border-foreground transition-colors"
 											>
 												{article.category.name}
 											</Link>
 										)}
 
-										<span>阅读 {article.viewCount}</span>
-
-										<time className="ml-auto">
-											{article.createdAt?.toLocaleDateString("zh-CN")}
-										</time>
+										<span className="ml-auto">{article.createdAt?.toLocaleDateString("zh-CN")}</span>
 									</div>
 								</div>
 							</div>

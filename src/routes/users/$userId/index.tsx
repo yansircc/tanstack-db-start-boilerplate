@@ -17,14 +17,20 @@ function RouteComponent() {
 	const userIdNum = Number(userId);
 
 	return (
-		<div className="max-w-4xl mx-auto p-6 space-y-6">
+		<div className="max-w-[1280px] mx-auto p-8 space-y-8">
 			<UserProfileCard userId={userIdNum} />
 			<UserStatsCards userId={userIdNum} />
-			<UserPublishedArticles userId={userIdNum} />
-			<UserDraftArticles userId={userIdNum} />
-			<UserArchivedArticles userId={userIdNum} />
-			<UserLikedArticles userId={userIdNum} />
-			<UserBookmarkedArticles userId={userIdNum} />
+			<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+				<div className="space-y-8">
+					<UserPublishedArticles userId={userIdNum} />
+					<UserDraftArticles userId={userIdNum} />
+					<UserArchivedArticles userId={userIdNum} />
+				</div>
+				<div className="space-y-8">
+					<UserLikedArticles userId={userIdNum} />
+					<UserBookmarkedArticles userId={userIdNum} />
+				</div>
+			</div>
 		</div>
 	);
 }

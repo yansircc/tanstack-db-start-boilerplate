@@ -79,10 +79,10 @@ export function ArticleBookmarkButton({
 			size="sm"
 			onClick={handleToggleBookmark}
 			disabled={!currentUser?.userId}
-			className="gap-2"
+			className="gap-2 rounded-sm border-2 border-foreground"
 		>
 			<Bookmark className={`w-4 h-4 ${isBookmarked ? "fill-current" : ""}`} />
-			<span>{bookmarkCount}</span>
+			<span className="font-mono font-bold">{bookmarkCount}</span>
 		</Button>
 	);
 }

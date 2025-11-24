@@ -13,41 +13,45 @@ export function UserPublishedArticles({ userId }: UserPublishedArticlesProps) {
 
 	return (
 		<div className="space-y-4">
-			<h2 className="text-2xl font-bold text-gray-900">已发布的文章</h2>
+			<div className="flex items-center gap-2 border-b-2 border-foreground pb-2">
+				<div className="w-2 h-2 rounded-full bg-green-500 border border-foreground"></div>
+				<h2 className="text-xl font-bold font-mono uppercase">Published Articles</h2>
+			</div>
 
 			{publishedArticles.length === 0 ? (
-				<p className="text-gray-500">暂无已发布文章</p>
+				<div className="text-sm text-muted-foreground font-mono">No published articles.</div>
 			) : (
 				<div className="space-y-3">
 					{publishedArticles.map((article) => (
 						<div
 							key={article.id}
-							className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition"
+							className="border-2 border-foreground rounded-sm p-4 hover:bg-muted/30 transition-colors bg-white group"
 						>
 							<Link
 								to="/articles/$articleId"
 								params={{ articleId: String(article.id) }}
+								className="block"
 							>
-								<h3 className="text-lg font-semibold text-gray-900 mb-2 hover:text-blue-600">
+								<h3 className="text-lg font-bold font-mono mb-2 group-hover:text-primary transition-colors">
 									{article.title}
 								</h3>
 							</Link>
 
 							{article.excerpt && (
-								<p className="text-gray-600 text-sm mb-3">{article.excerpt}</p>
+								<p className="text-muted-foreground text-sm mb-3 line-clamp-2">{article.excerpt}</p>
 							)}
 
-							<div className="flex items-center gap-4 text-sm text-gray-500">
+							<div className="flex items-center gap-4 text-xs font-mono text-muted-foreground">
 								{article.category && (
 									<Link
 										to="/categories/$categoryId"
 										params={{ categoryId: String(article.category.id) }}
-										className="bg-gray-100 px-2 py-1 rounded hover:bg-gray-200"
+										className="bg-muted px-2 py-0.5 rounded-sm border border-foreground/30 hover:border-foreground transition-colors"
 									>
 										{article.category.name}
 									</Link>
 								)}
-								<span>阅读 {article.viewCount}</span>
+								<span>READS: {article.viewCount}</span>
 								<time className="ml-auto">
 									{article.createdAt.toLocaleDateString("zh-CN")}
 								</time>

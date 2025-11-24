@@ -11,8 +11,8 @@ export function TagHeader({ tagId }: TagHeaderProps) {
 
 	if (!tag) {
 		return (
-			<div className="max-w-4xl mx-auto p-6">
-				<div className="text-center text-gray-500">标签不存在</div>
+			<div className="border-2 border-foreground border-dashed rounded-sm p-12 text-center">
+				<div className="text-muted-foreground font-mono uppercase">Tag not found</div>
 			</div>
 		);
 	}
@@ -22,25 +22,29 @@ export function TagHeader({ tagId }: TagHeaderProps) {
 		articles?.reduce((sum, article) => sum + (article?.viewCount ?? 0), 0) ?? 0;
 
 	return (
-		<div className="bg-linear-to-r from-indigo-50 to-purple-50 border border-indigo-200 rounded-lg p-6 space-y-3">
-			<div className="flex items-center gap-3">
-				<div className="bg-indigo-500 text-white px-4 py-2 rounded-full text-lg font-bold">
-					#
-				</div>
-				<div className="flex-1">
-					<h1 className="text-3xl font-bold text-gray-900">#{tag.name}</h1>
-					<p className="text-gray-600 text-sm">{tag.slug}</p>
+		<div className="border-2 border-foreground rounded-sm p-8 bg-white shadow-[8px_8px_0px_0px_var(--foreground)]">
+			<div className="flex items-start justify-between">
+				<div className="flex items-start gap-4">
+					<div className="bg-primary text-primary-foreground border-2 border-foreground px-4 py-2 rounded-sm text-3xl font-bold font-mono">
+						#
+					</div>
+					<div>
+						<h1 className="text-5xl font-bold font-mono text-foreground uppercase tracking-tight">
+							{tag.name}
+						</h1>
+						<p className="text-muted-foreground font-mono mt-1 text-lg">slug: {tag.slug}</p>
+					</div>
 				</div>
 			</div>
 
-			<div className="flex items-center gap-6 text-sm border-t border-indigo-200 pt-3 mt-3">
-				<div>
-					<span className="font-semibold text-gray-900">{totalArticles}</span>{" "}
-					篇文章
+			<div className="flex items-center gap-8 border-t-2 border-foreground/10 pt-6 mt-6">
+				<div className="flex flex-col">
+					<span className="text-xs font-mono font-bold uppercase text-muted-foreground">Articles</span>
+					<span className="text-2xl font-bold font-mono">{totalArticles}</span>
 				</div>
-				<div>
-					<span className="font-semibold text-gray-900">{totalViews}</span>{" "}
-					总阅读量
+				<div className="flex flex-col">
+					<span className="text-xs font-mono font-bold uppercase text-muted-foreground">Total Views</span>
+					<span className="text-2xl font-bold font-mono">{totalViews}</span>
 				</div>
 			</div>
 		</div>

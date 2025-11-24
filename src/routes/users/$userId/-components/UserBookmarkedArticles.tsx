@@ -17,52 +17,43 @@ export function UserBookmarkedArticles({
 
 	return (
 		<div className="space-y-4">
-			<h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
-				<Bookmark className="w-6 h-6 text-blue-500 fill-current" />
-				收藏的文章
-			</h2>
+			<div className="flex items-center gap-2 border-b-2 border-foreground pb-2 text-primary">
+				<Bookmark className="w-5 h-5 fill-current" />
+				<h2 className="text-xl font-bold font-mono uppercase text-foreground">Bookmarks</h2>
+			</div>
 			<div className="space-y-3">
 				{articles.map((article) => (
 					<div
 						key={article.id}
-						className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition"
+						className="border-2 border-foreground rounded-sm p-4 hover:shadow-[4px_4px_0px_0px_var(--foreground)] hover:-translate-y-1 transition-all bg-white"
 					>
 						<Link
 							to="/articles/$articleId"
 							params={{ articleId: String(article.id) }}
+							className="block"
 						>
-							<h3 className="text-lg font-semibold text-gray-900 mb-2 hover:text-blue-600">
+							<h3 className="text-lg font-bold font-mono text-foreground mb-2 hover:text-primary transition-colors">
 								{article.title}
 							</h3>
 						</Link>
 
 						{article.excerpt && (
-							<p className="text-gray-600 text-sm mb-3">{article.excerpt}</p>
+							<p className="text-muted-foreground text-sm mb-3 line-clamp-2">{article.excerpt}</p>
 						)}
 
-						<div className="flex items-center gap-4 text-sm text-gray-500">
+						<div className="flex items-center gap-4 text-xs font-mono text-muted-foreground">
 							{article.author && (
 								<Link
 									to="/users/$userId"
 									params={{ userId: String(article.author.id) }}
-									className="hover:text-blue-600"
+									className="hover:text-primary font-bold uppercase"
 								>
 									{article.author.displayName}
 								</Link>
 							)}
-							{article.category && (
-								<Link
-									to="/categories/$categoryId"
-									params={{ categoryId: String(article.category.id) }}
-									className="bg-gray-100 px-2 py-1 rounded hover:bg-gray-200"
-								>
-									{article.category.name}
-								</Link>
-							)}
-							<span>阅读 {article.viewCount}</span>
-							<time className="ml-auto text-xs">
-								收藏于 {article.bookmarkedAt.toLocaleDateString("zh-CN")}
-							</time>
+							<span className="ml-auto">
+								Saved: {article.bookmarkedAt.toLocaleDateString("zh-CN")}
+							</span>
 						</div>
 					</div>
 				))}

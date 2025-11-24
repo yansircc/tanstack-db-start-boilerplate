@@ -75,10 +75,10 @@ export function ArticleLikeButton({ articleId }: ArticleLikeButtonProps) {
 			size="sm"
 			onClick={handleToggleLike}
 			disabled={!currentUser?.userId}
-			className="gap-2"
+			className="gap-2 rounded-sm border-2 border-foreground"
 		>
 			<Heart className={`w-4 h-4 ${isLiked ? "fill-current" : ""}`} />
-			<span>{likeCount}</span>
+			<span className="font-mono font-bold">{likeCount}</span>
 		</Button>
 	);
 }

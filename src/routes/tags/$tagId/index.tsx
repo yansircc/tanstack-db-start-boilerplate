@@ -12,7 +12,7 @@ function RouteComponent() {
 	const tagIdNum = Number(tagId);
 
 	return (
-		<div className="max-w-4xl mx-auto p-6 space-y-6">
+		<div className="max-w-[1280px] mx-auto p-8 space-y-8">
 			<TagHeader tagId={tagIdNum} />
 			<TagArticles tagId={tagIdNum} />
 		</div>

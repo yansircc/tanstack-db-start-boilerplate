@@ -15,30 +15,35 @@ export function UserStatsCards({ userId }: UserStatsCardsProps) {
 
 	return (
 		<div className="grid grid-cols-4 gap-4">
-			<div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-center">
-				<div className="text-3xl font-bold text-blue-600">
-					{articles?.length ?? 0}
-				</div>
-				<div className="text-sm text-gray-600">总文章数</div>
-			</div>
-			<div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
-				<div className="text-3xl font-bold text-green-600">
-					{publishedArticles.length}
-				</div>
-				<div className="text-sm text-gray-600">已发布</div>
-			</div>
-			<div className="bg-orange-50 border border-orange-200 rounded-lg p-4 text-center">
-				<div className="text-3xl font-bold text-orange-600">
-					{draftArticles.length}
-				</div>
-				<div className="text-sm text-gray-600">草稿</div>
-			</div>
-			<div className="bg-gray-50 border border-gray-200 rounded-lg p-4 text-center">
-				<div className="text-3xl font-bold text-gray-600">
-					{archivedArticles.length}
-				</div>
-				<div className="text-sm text-gray-600">已归档</div>
-			</div>
+			<StatBox
+				label="Total"
+				value={articles?.length ?? 0}
+				color="bg-primary/20"
+			/>
+			<StatBox
+				label="Published"
+				value={publishedArticles.length}
+				color="bg-secondary/40"
+			/>
+			<StatBox
+				label="Drafts"
+				value={draftArticles.length}
+				color="bg-accent/30"
+			/>
+			<StatBox
+				label="Archived"
+				value={archivedArticles.length}
+				color="bg-muted"
+			/>
+		</div>
+	);
+}
+
+function StatBox({ label, value, color }: { label: string; value: number; color: string }) {
+	return (
+		<div className={`${color} border-2 border-foreground rounded-sm p-4 text-center hover:-translate-y-1 transition-transform`}>
+			<div className="text-4xl font-bold font-mono text-foreground mb-1">{value}</div>
+			<div className="text-xs font-mono uppercase tracking-widest text-muted-foreground">{label}</div>
 		</div>
 	);
 }

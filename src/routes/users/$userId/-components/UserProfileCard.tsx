@@ -13,8 +13,8 @@ export function UserProfileCard({ userId }: UserProfileCardProps) {
 
 	if (!user) {
 		return (
-			<div className="max-w-4xl mx-auto p-6">
-				<div className="text-center text-gray-500">用户不存在</div>
+			<div className="border-2 border-foreground border-dashed rounded-sm p-12 text-center text-muted-foreground font-mono">
+				User not found
 			</div>
 		);
 	}
@@ -24,47 +24,53 @@ export function UserProfileCard({ userId }: UserProfileCardProps) {
 	const totalComments = comments?.length ?? 0;
 
 	return (
-		<div className="bg-white border border-gray-200 rounded-lg p-6 space-y-4">
-			<div className="flex items-start gap-6">
+		<div className="bg-white border-2 border-foreground rounded-sm p-8 shadow-[8px_8px_0px_0px_var(--foreground)]">
+			<div className="flex items-start gap-8">
 				{user.avatar ? (
 					<img
 						src={user.avatar}
 						alt={user.displayName}
-						className="w-24 h-24 rounded-full"
+						className="w-32 h-32 rounded-sm border-2 border-foreground object-cover bg-muted"
 					/>
 				) : (
-					<div className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center">
-						<span className="text-4xl text-gray-500">
+					<div className="w-32 h-32 rounded-sm border-2 border-foreground bg-secondary flex items-center justify-center shrink-0">
+						<span className="text-6xl font-bold font-mono text-foreground">
 							{user.displayName[0].toUpperCase()}
 						</span>
 					</div>
 				)}
 
 				<div className="flex-1">
-					<h1 className="text-3xl font-bold text-gray-900">
-						{user.displayName}
-					</h1>
-					<p className="text-gray-500 text-lg">@{user.username}</p>
+					<div className="flex items-center justify-between">
+						<div>
+							<h1 className="text-4xl font-bold font-mono text-foreground uppercase tracking-tight">
+								{user.displayName}
+							</h1>
+							<p className="text-muted-foreground font-mono text-xl mt-1">@{user.username}</p>
+						</div>
+						<div className="bg-muted px-3 py-1 rounded-sm border border-foreground/20 text-xs font-mono">
+							ID: {user.id}
+						</div>
+					</div>
 
 					{user.bio && (
-						<p className="text-gray-700 mt-3 leading-relaxed">{user.bio}</p>
+						<p className="text-foreground text-lg mt-4 leading-relaxed max-w-2xl border-l-4 border-accent pl-4">
+							{user.bio}
+						</p>
 					)}
 
-					<div className="flex items-center gap-6 mt-4 text-sm text-gray-600">
-						<div>
-							<span className="font-semibold text-gray-900">
-								{publishedCount}
-							</span>{" "}
-							篇已发布文章
+					<div className="flex items-center gap-8 mt-6 pt-6 border-t-2 border-foreground/10">
+						<div className="flex flex-col">
+							<span className="text-xs font-mono font-bold uppercase text-muted-foreground">Articles</span>
+							<span className="text-2xl font-bold font-mono">{publishedCount}</span>
 						</div>
-						<div>
-							<span className="font-semibold text-gray-900">
-								{totalComments}
-							</span>{" "}
-							条评论
+						<div className="flex flex-col">
+							<span className="text-xs font-mono font-bold uppercase text-muted-foreground">Comments</span>
+							<span className="text-2xl font-bold font-mono">{totalComments}</span>
 						</div>
-						<div className="ml-auto text-xs">
-							加入于 {user.createdAt.toLocaleDateString("zh-CN")}
+						<div className="flex flex-col ml-auto text-right">
+							<span className="text-xs font-mono font-bold uppercase text-muted-foreground">Member Since</span>
+							<span className="text-lg font-mono">{user.createdAt.toLocaleDateString("zh-CN")}</span>
 						</div>
 					</div>
 				</div>
