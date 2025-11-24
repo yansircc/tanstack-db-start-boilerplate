@@ -1,13 +1,21 @@
 import { Link } from "@tanstack/react-router";
 import { RoleSwitcher } from "./RoleSwitcher";
+import { useEffect, useState } from "react";
 
 export default function Header() {
+	// 只在客户端渲染 RoleSwitcher
+	const [isClient, setIsClient] = useState(false);
+
+	useEffect(() => {
+		setIsClient(true);
+	}, []);
+
 	return (
 		<header className="border-b border-gray-200 bg-white shadow-sm">
 			<div className="max-w-6xl mx-auto px-6 py-4">
 				<div className="flex items-center justify-between mb-4">
 					<h1 className="text-2xl font-bold text-gray-900">TanStack DB Test</h1>
-					<RoleSwitcher />
+					{isClient && <RoleSwitcher />}
 				</div>
 				<nav className="flex gap-4 text-sm">
 					<Link
