@@ -8,10 +8,9 @@ export function useRecentArticlesQuery() {
 	return useLiveQuery((q) =>
 		q
 			.from({ article: articlesCollection })
-			.join(
+			.leftJoin(
 				{ user: usersCollection },
 				({ article, user }) => eq(article.authorId, user.id),
-				"left",
 			)
 			.orderBy(({ article }) => article.createdAt, "desc")
 			.limit(5)

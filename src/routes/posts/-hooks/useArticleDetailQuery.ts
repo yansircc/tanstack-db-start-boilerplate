@@ -10,15 +10,13 @@ export function useArticleDetailQuery(postId: number) {
 		(q) =>
 			q
 				.from({ article: articlesCollection })
-				.join(
+				.leftJoin(
 					{ user: usersCollection },
 					({ article, user }) => eq(article.authorId, user.id),
-					"left",
 				)
-				.join(
+				.leftJoin(
 					{ category: categoriesCollection },
 					({ article, category }) => eq(article.categoryId, category.id),
-					"left",
 				)
 				.where(({ article }) => eq(article.id, postId))
 				.select(({ article, user, category }) => ({

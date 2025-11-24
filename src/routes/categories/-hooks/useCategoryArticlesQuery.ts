@@ -9,10 +9,9 @@ export function useCategoryArticlesQuery(categoryId: number) {
 		(q) =>
 			q
 				.from({ article: articlesCollection })
-				.join(
+				.leftJoin(
 					{ user: usersCollection },
 					({ article, user }) => eq(article.authorId, user.id),
-					"left",
 				)
 				.where(({ article }) => eq(article.categoryId, categoryId))
 				.where(({ article }) => eq(article.status, "published"))

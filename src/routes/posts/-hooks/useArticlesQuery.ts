@@ -9,15 +9,13 @@ export function useArticlesQuery() {
 	return useLiveQuery((q) =>
 		q
 			.from({ article: articlesCollection })
-			.join(
+			.leftJoin(
 				{ user: usersCollection },
 				({ article, user }) => eq(article.authorId, user.id),
-				"left",
 			)
-			.join(
+			.leftJoin(
 				{ category: categoriesCollection },
 				({ article, category }) => eq(article.categoryId, category.id),
-				"left",
 			)
 			.where(({ article }) => eq(article.status, "published"))
 			.orderBy(({ article }) => article.createdAt, "desc")

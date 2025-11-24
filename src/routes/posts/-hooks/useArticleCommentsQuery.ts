@@ -9,10 +9,9 @@ export function useArticleCommentsQuery(articleId: number) {
 		(q) =>
 			q
 				.from({ comment: commentsCollection })
-				.join(
+				.leftJoin(
 					{ user: usersCollection },
 					({ comment, user }) => eq(comment.authorId, user.id),
-					"left",
 				)
 				.where(({ comment }) => eq(comment.articleId, articleId))
 				.orderBy(({ comment }) => comment.createdAt, "asc")
@@ -21,7 +20,7 @@ export function useArticleCommentsQuery(articleId: number) {
 					content: comment.content,
 					createdAt: comment.createdAt,
 					parentId: comment.parentId,
-					author: user,  // ✅ 直接返回 user (可能是 undefined)
+					author: user,
 				})),
 		[articleId],
 	);

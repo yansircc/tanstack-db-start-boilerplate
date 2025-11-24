@@ -11,38 +11,32 @@ export function useTagArticlesQuery(tagId: number) {
 		(q) =>
 			q
 				.from({ articleTag: articleTagsCollection })
-				.join(
+				.innerJoin(
 					{ article: articlesCollection },
 					({ articleTag, article }) => eq(articleTag.articleId, article.id),
-					// Inner join - article 保证存在,但 TanStack DB 类型系统无法推断
 				)
-				.join(
+				.leftJoin(
 					{ user: usersCollection },
-					({ article, user }) => eq(article?.authorId, user.id),
-					"left",
+					({ article, user }) => eq(article.authorId, user.id),
 				)
-				.join(
+				.leftJoin(
 					{ category: categoriesCollection },
-					({ article, category }) => eq(article?.categoryId, category.id),
-					"left",
+					({ article, category }) => eq(article.categoryId, category.id),
 				)
 				.where(({ articleTag }) => eq(articleTag.tagId, tagId))
-				.where(({ article }) => eq(article?.status, "published"))
-				.orderBy(({ article }) => article?.createdAt, "desc")
-				.select(({ article, user, category }) => {
-					const a = article;
-					return {
-						id: a?.id,
-						title: a?.title,
-						slug: a?.slug,
-						excerpt: a?.excerpt,
-						coverImage: a?.coverImage,
-						viewCount: a?.viewCount,
-						createdAt: a?.createdAt,
-						author: user,
-						category: category,
-					};
-				}),
+				.where(({ article }) => eq(article.status, "published"))
+				.orderBy(({ article }) => article.createdAt, "desc")
+				.select(({ article, user, category }) => ({
+					id: article.id,
+					title: article.title,
+					slug: article.slug,
+					excerpt: article.excerpt,
+					coverImage: article.coverImage,
+					viewCount: article.viewCount,
+					createdAt: article.createdAt,
+					author: user,
+					category: category,
+				})),
 		[tagId],
 	);
 }

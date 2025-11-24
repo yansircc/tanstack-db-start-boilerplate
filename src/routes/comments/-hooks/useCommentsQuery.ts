@@ -9,23 +9,21 @@ export function useCommentsQuery() {
 	return useLiveQuery((q) =>
 		q
 			.from({ comment: commentsCollection })
-			.join(
+			.leftJoin(
 				{ user: usersCollection },
 				({ comment, user }) => eq(comment.authorId, user.id),
-				"left",
 			)
-			.join(
+			.leftJoin(
 				{ article: articlesCollection },
 				({ comment, article }) => eq(comment.articleId, article.id),
-				"left",
 			)
 			.orderBy(({ comment }) => comment.createdAt, "desc")
 			.select(({ comment, user, article }) => ({
 				id: comment.id,
 				content: comment.content,
 				createdAt: comment.createdAt,
-				author: user,  // ✅ 直接返回,不用条件表达式
-				article: article,  // ✅ 直接返回,不用条件表达式
+				author: user,
+				article: article,
 			})),
 	);
 }
